@@ -425,6 +425,7 @@ html[data-theme="dark"] .nav-link:hover {
 @media (prefers-reduced-motion: reduce) {
   .spec-face {
     position: relative !important;
+    opacity: 1 !important;
   }
   .spec-back {
     display: none;

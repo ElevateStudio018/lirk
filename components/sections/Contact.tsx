@@ -170,7 +170,7 @@ export default function Contact() {
                   <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
                   <div className="flex flex-col gap-3 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
                     <p className="text-sm text-ink-3">
-                      {status === "error" ? "Vi öppnade ditt mejlprogram i stället." : CONTACT.note}
+                      {status === "error" ? `Det gick inte att skicka. Mejla oss på ${LINKS.email}.` : CONTACT.note}
                     </p>
                     <button type="submit" className="btn btn-primary" disabled={status === "sending"}>
                       {status === "sending" ? "Skickar…" : CONTACT.submit}

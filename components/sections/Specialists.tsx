@@ -19,12 +19,15 @@ export default function Specialists() {
       const cards = gsap.utils.toArray<HTMLElement>(".spec-card");
       if (!ring) return;
 
-      // Fade cards by how much they face the viewer.
+      // Fade cards by how much they face the viewer. Opacity goes on the faces:
+      // on the card itself it would flatten the 3D context and show mirrored text.
+      const faces = cards.map((c) => Array.from(c.querySelectorAll<HTMLElement>(".spec-face")));
       const shade = () => {
         const angle = Number(gsap.getProperty(ring, "rotationY")) || 0;
         cards.forEach((c, i) => {
           const facing = Math.cos(((i * STEP + angle) * Math.PI) / 180);
-          c.style.opacity = String(0.12 + 0.88 * Math.max(0, facing) ** 2);
+          const opacity = String(0.12 + 0.88 * Math.max(0, facing) ** 2);
+          faces[i].forEach((f) => (f.style.opacity = opacity));
           c.style.pointerEvents = facing > 0.8 ? "auto" : "none";
         });
       };

@@ -55,7 +55,11 @@ export default function Experience() {
       if (!hash || hash === "#") return;
       e.preventDefault();
       scrollToHash(hash);
-      history.replaceState(null, "", hash === "#top" ? location.pathname : hash);
+      try {
+        history.replaceState(null, "", hash === "#top" ? location.pathname : hash);
+      } catch {
+        // Sandboxed frames may refuse history changes; scrolling already happened.
+      }
     };
     document.addEventListener("click", onClick);
 
