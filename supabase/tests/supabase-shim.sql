@@ -25,12 +25,16 @@ create table if not exists auth.users (
   raw_user_meta_data jsonb default '{}'::jsonb
 );
 
+-- Same definition as Supabase: legacy per-claim GUC or the JSON claims set by PostgREST.
 create or replace function auth.uid()
 returns uuid
 language sql
 stable
 as $$
-  select nullif(current_setting('request.jwt.claim.sub', true), '')::uuid
+  select coalesce(
+    nullif(current_setting('request.jwt.claim.sub', true), ''),
+    (nullif(current_setting('request.jwt.claims', true), '')::jsonb ->> 'sub')
+  )::uuid
 $$;
 
 create table if not exists storage.buckets (

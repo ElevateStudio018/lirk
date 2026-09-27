@@ -2,9 +2,11 @@
  * Mastery model
  * =============
  * Mastery is never taken from a single answer. Each topic's evidence history
- * (question_attempts) is folded into a Beta distribution:
+ * (question_attempts) is folded into a Beta distribution with a Jeffreys
+ * prior Beta(½, ½) – uninformative, but lets a few consistent answers move
+ * the estimate while `confidence` still reports how thin the evidence is:
  *
- *   alpha = 1 + Σ w·score        beta = 1 + Σ w·(1 − score)
+ *   alpha = ½ + Σ w·score        beta = ½ + Σ w·(1 − score)
  *   mastery    = alpha / (alpha + beta)
  *   confidence = n / (n + K)      where n = Σ w (effective evidence)
  *
@@ -54,6 +56,7 @@ export const QUESTION_TYPE_WEIGHT: Record<string, number> = {
 };
 
 export const CONFIDENCE_K = 2.5;
+const PRIOR = 0.5;
 const HALF_LIFE_DAYS = 21;
 const MIN_DECAY = 0.35;
 const SUCCESS = 0.7;
@@ -69,8 +72,8 @@ export function estimateMastery(evidence: Evidence[], now: Date = new Date()): M
     return { mastery: null, confidence: 0, pattern: "insufficient_evidence", evidenceCount: 0, effectiveEvidence: 0 };
   }
 
-  let alpha = 1;
-  let beta = 1;
+  let alpha = PRIOR;
+  let beta = PRIOR;
   let n = 0;
   for (const e of evidence) {
     const ageDays = Math.max(0, (now.getTime() - new Date(e.created_at).getTime()) / 86_400_000);

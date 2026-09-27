@@ -55,6 +55,41 @@ export function NewExamWizard() {
   const [error, setError] = useState<string | null>(null);
 
   const finalSubject = subject === "Annat" ? otherSubject.trim() : subject;
+  const [loadingDemo, setLoadingDemo] = useState(false);
+
+  /** Loads the bundled demo material (public/demo) as if the student had picked the files. */
+  const loadDemo = async () => {
+    setLoadingDemo(true);
+    setError(null);
+    try {
+      const math = finalSubject === "Matematik";
+      const dir = math ? "matematik-ekvationer" : "geografi-ak8";
+      const docs: Array<[string, PendingFile["category"]]> = math
+        ? [
+            ["planering-ekvationer.md", "planning"],
+            ["bedomning-ekvationer.md", "criteria"],
+          ]
+        : [
+            ["planering-klimatet.md", "planning"],
+            ["betygskriterier-klimatet.md", "criteria"],
+            ["genomgang-anteckningar.txt", "notes"],
+          ];
+      const loaded: PendingFile[] = [];
+      for (const [name, category] of docs) {
+        const res = await fetch(`/demo/${dir}/${name}`);
+        if (!res.ok) throw new Error("Kunde inte hämta exempelunderlaget.");
+        const blob = await res.blob();
+        loaded.push({ file: new File([blob], name, { type: name.endsWith(".md") ? "text/markdown" : "text/plain" }), category, key: `demo-${name}` });
+      }
+      const said = await fetch(`/demo/${dir}/lararen-sa.txt`);
+      if (said.ok) setTeacherSaid(await said.text());
+      setFiles((f) => [...f.filter((x) => !x.key.startsWith("demo-")), ...loaded]);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Kunde inte hämta exempelunderlaget.");
+    } finally {
+      setLoadingDemo(false);
+    }
+  };
   const daysLeft = examDate ? daysBetween(today, examDate) : null;
   const sessionsBeforeExam = useMemo(() => {
     if (!examDate || daysLeft === null || daysLeft <= 0) return 0;
@@ -279,9 +314,14 @@ export function NewExamWizard() {
             <Textarea id="teacher" value={teacherSaid} onChange={(e) => setTeacherSaid(e.target.value)} placeholder="T.ex. ”Ni ska kunna förklara skillnaden mellan väder och klimat”" className="min-h-24" />
           </div>
           {files.length === 0 && !pasted.trim() && !teacherSaid.trim() && (
-            <p className="flex items-start gap-2 text-sm text-muted">
-              <Info className="mt-0.5 size-4 shrink-0" /> Du kan också lägga till underlag senare, men analysen behöver minst ett material.
-            </p>
+            <div className="flex flex-col gap-3 rounded-lg bg-surface-muted p-4">
+              <p className="flex items-start gap-2 text-sm text-muted">
+                <Info className="mt-0.5 size-4 shrink-0" /> Du kan lägga till underlag senare, men analysen behöver minst ett material.
+              </p>
+              <Button variant="secondary" size="sm" className="self-start" onClick={loadDemo} loading={loadingDemo}>
+                Prova med exempelunderlag ({finalSubject === "Matematik" ? "Matematik: ekvationer" : "Geografi åk 8: klimatet"})
+              </Button>
+            </div>
           )}
         </div>
       ),

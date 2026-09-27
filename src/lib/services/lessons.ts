@@ -84,7 +84,7 @@ export async function getLessonView(db: DB, lessonId: string) {
     watchProgress: module.watch_progress,
     completed: Boolean(module.completed_at),
     scenes,
-    checkpoints: checkpoints.map(({ correct_index: _c, misconception_by_option: _m, explanation: _e, ...rest }) => rest) as PublicCheckpoint[],
+    checkpoints: checkpoints.map((c): PublicCheckpoint => ({ id: c.id, after_scene: c.after_scene, question: c.question, options: c.options, remedy_scenes: c.remedy_scenes })),
   };
 }
 

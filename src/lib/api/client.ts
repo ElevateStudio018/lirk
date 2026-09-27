@@ -42,3 +42,15 @@ export function errorMessage(err: unknown): string {
   if (err instanceof Error) return err.message;
   return "Något gick fel.";
 }
+
+export async function getJSON<T = unknown>(url: string): Promise<T> {
+  let res: Response;
+  try {
+    res = await fetch(url, { cache: "no-store" });
+  } catch {
+    throw new ApiError("Ingen anslutning. Kontrollera internet och försök igen.", "network", true, 0);
+  }
+  const data = await res.json().catch(() => null);
+  if (!res.ok) throw new ApiError(data?.error ?? "Något gick fel.", data?.code ?? "unknown", data?.retryable ?? true, res.status);
+  return data as T;
+}

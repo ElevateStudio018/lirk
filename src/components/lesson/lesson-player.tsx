@@ -83,8 +83,11 @@ export function LessonPlayer({ scenes, checkpoints, answerCheckpoint, onProgress
     [checkpoints, timings],
   );
   const answered = useRef(new Set<string>());
+  const [answeredIds, setAnsweredIds] = useState<string[]>([]);
   const phaseRef = useRef(phase);
-  phaseRef.current = phase;
+  useEffect(() => {
+    phaseRef.current = phase;
+  }, [phase]);
 
   const sceneIndex = sceneIndexAtFrame(timings, frame);
   const currentScene = scenes[sceneIndex];
@@ -141,7 +144,9 @@ export function LessonPlayer({ scenes, checkpoints, answerCheckpoint, onProgress
         p.pause();
         p.seekTo(next.frame);
         tts.current.cancel();
-        setPhase({ kind: "checkpoint", cp: next.cp, attempt: 1, result: null, pending: false, error: null });
+        const cpPhase: Phase = { kind: "checkpoint", cp: next.cp, attempt: 1, result: null, pending: false, error: null };
+        phaseRef.current = cpPhase;
+        setPhase(cpPhase);
       }
     };
     const onPlay = () => setPlaying(true);
@@ -241,6 +246,7 @@ export function LessonPlayer({ scenes, checkpoints, answerCheckpoint, onProgress
 
   const resumeMain = (cp: PlayerCheckpoint) => {
     answered.current.add(cp.id);
+    setAnsweredIds((ids) => [...ids, cp.id]);
     setPhase({ kind: "main" });
     requestAnimationFrame(() => {
       const p = playerRef.current;
@@ -421,7 +427,7 @@ export function LessonPlayer({ scenes, checkpoints, answerCheckpoint, onProgress
               <span
                 key={cp.id}
                 aria-hidden
-                className={cn("pointer-events-none absolute top-1/2 size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-surface", answered.current.has(cp.id) ? "bg-good" : "bg-brand")}
+                className={cn("pointer-events-none absolute top-1/2 size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-surface", answeredIds.includes(cp.id) ? "bg-good" : "bg-brand")}
                 style={{ left: `${(f / (totalFrames - 1)) * 100}%` }}
               />
             ))}

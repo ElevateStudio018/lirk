@@ -6,17 +6,7 @@ import type { Question } from "@/lib/domain/questions";
 import { generateStructured, STUDENT_VOICE, UNTRUSTED_MATERIAL_RULE } from "../client";
 import { materialsBlock, type PromptMaterial } from "../material-context";
 
-export const DIMENSIONS = ["correctness", "understanding", "method", "reasoning", "terminology", "completeness"] as const;
-export type Dimension = (typeof DIMENSIONS)[number];
-
-export const DIMENSION_LABELS: Record<Dimension, string> = {
-  correctness: "Korrekthet",
-  understanding: "Förståelse",
-  method: "Metod",
-  reasoning: "Resonemang",
-  terminology: "Begrepp",
-  completeness: "Fullständighet",
-};
+export { DIMENSIONS, DIMENSION_LABELS, type Dimension } from "../dimension-labels";
 
 const Level = z.enum(["strong", "ok", "weak", "missing", "not_applicable"]);
 export type Level = z.infer<typeof Level>;
@@ -111,7 +101,7 @@ ${hasCriteria
   ? `Betygskriterier finns i underlaget. Använd dem för criteria_statement. Formulera dig försiktigt: beskriv vilka kvaliteter svaren visar, t.ex. "De här svaren visar just nu huvudsakligen kvaliteter som ligger omkring…" eller "Underlaget ger stöd för…". Skriv aldrig att eleven kommer att få ett visst betyg.`
   : `Det finns INGA betygskriterier i underlaget. criteria_statement ska tydligt säga att bedömningen därför inte kan kopplas till betygssteg.`}
 - För frågor med fast rätt svar (deterministic_score angiven) är poängen redan bestämd – sätt score_fraction till den och kommentera bara metod/förståelse.
-- remediation_targets: 3–5 svagheter med störst betydelse, konkreta och åtgärdbara.
+- remediation_targets: 3–5 svagheter med störst betydelse, konkreta och åtgärdbara. Ange topic_key från frågorna.
 - top_fixes: exakt de tre viktigaste sakerna, viktigast först.
 ${UNTRUSTED_MATERIAL_RULE}
 ${STUDENT_VOICE}`,
@@ -126,7 +116,7 @@ ${materialsBlock(input.otherMaterials, 35_000)}
 Elevens svar:
 ${input.questions
   .map(
-    (q) => `<fråga id="${q.id}" poäng="${q.points}" område="${q.topicTitle}" typ="${q.question.type}"${
+    (q) => `<fråga id="${q.id}" poäng="${q.points}" område="${q.topicTitle}" topic_key="${q.question.topic_key}" typ="${q.question.type}"${
       q.deterministicScore !== null ? ` deterministic_score="${q.deterministicScore}"` : ""
     }>
 ${q.question.prompt}

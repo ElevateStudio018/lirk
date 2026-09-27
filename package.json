@@ -6,7 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "test:db": "bash scripts/test-db.sh",
+    "gen:types": "bash scripts/gen-types.sh",
+    "remotion:studio": "remotion studio src/remotion/index.ts",
+    "remotion:render": "remotion render src/remotion/index.ts",
+    "test:e2e": "bash scripts/test-e2e.sh"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.23",
