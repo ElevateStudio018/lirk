@@ -25,7 +25,8 @@ describe("next step – 'Vad ska jag göra idag?'", () => {
   it("walks the student through the whole loop", () => {
     expect(nextStep({ ...base, status: "collecting" }).kind).toBe("materials");
     expect(nextStep({ ...base, status: "collecting", readyMaterials: 2 }).kind).toBe("map");
-    expect(nextStep({ ...base, status: "map_ready" }).kind).toBe("diagnostic");
+    expect(nextStep({ ...base, status: "map_ready" }).kind).toBe("clarify");
+    expect(nextStep({ ...base, status: "map_ready", clarified: true }).kind).toBe("diagnostic");
     expect(nextStep({ ...base, status: "diagnosed" }).kind).toBe("plan");
     const s = nextStep({ ...base, status: "studying", nextSession: { id: "s1", title: "Förstå ekvationer", estimated_minutes: 22, scheduled_date: "2026-10-05", kind: "learn" } });
     expect(s).toMatchObject({ kind: "session", href: "/study/s1", minutes: 22, label: "Starta" });

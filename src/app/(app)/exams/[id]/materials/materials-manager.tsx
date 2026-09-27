@@ -190,8 +190,8 @@ export function MaterialsManager({
                             </Badge>
                           </div>
                           <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted">
-                            {m.type === "teacher_note" ? (
-                              <span>Det här har läraren sagt</span>
+                            {m.type === "teacher_note" || m.category === "student_answers" ? (
+                              <span>{m.category === "student_answers" ? "Dina svar på följdfrågorna" : "Det här har läraren sagt"}</span>
                             ) : (
                               <select
                                 defaultValue={m.category}

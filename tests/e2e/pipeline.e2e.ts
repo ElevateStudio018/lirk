@@ -16,6 +16,7 @@ vi.mock("@/lib/ai/client", async (importOriginal) => {
 
 const { processMaterial } = await import("@/lib/services/materials");
 const { generateKnowledgeMap } = await import("@/lib/services/knowledge-map");
+const { ensureClarifyingQuestions, getClarifyingQuestions, answerClarifying, completeClarifying } = await import("@/lib/services/clarify");
 const { ensureDiagnostic, getDiagnosticForStudent, answerDiagnostic, completeDiagnostic } = await import("@/lib/services/diagnostic");
 const { generatePlan, getActivePlan } = await import("@/lib/services/plan");
 const { prepareCurrentItem, completeItem, getSession } = await import("@/lib/services/sessions");
@@ -116,6 +117,28 @@ describe("Geografi åk 8 – växthuseffekt och klimatförändringar (full loop)
     const diagram = topics.find((t) => t.key === "diagram")!;
     expect(diagram.evidence_type).toBe("inferred");
     expect(diagram.inference_reason).toMatch(/kunde inte hittas ordagrant/);
+  });
+
+  it("följdfrågor: the AI asks about what is unclear and the answers refine the map", async () => {
+    expect((await getProjectOverview(dbA, projectId)).next.kind).toBe("clarify");
+    await ensureClarifyingQuestions(dbA, projectId);
+    const qs = await getClarifyingQuestions(dbA, projectId);
+    expect(qs.length).toBeGreaterThanOrEqual(3);
+    await answerClarifying(dbA, projectId, qs[0].id, "Kapitel 1–3. Kolets kretslopp är viktigt");
+    await answerClarifying(dbA, projectId, qs[1].id, "Det kommer inte på provet");
+    await answerClarifying(dbA, projectId, qs[2].id, null); // "Vet inte"
+    const result = await completeClarifying(dbA, projectId);
+
+    const topics = await getTopics(dbA, projectId);
+    expect(topics.find((t) => t.key === "diagram")).toBeUndefined(); // removed: "kommer inte på provet"
+    expect(topics.find((t) => t.key === "albedo")!.importance).toBe(5);
+    const added = topics.find((t) => t.key === "kolets_kretslopp")!;
+    expect(added.evidence_type).toBe("explicit");
+    expect((added.evidence as Array<{ verified: boolean }>)[0].verified).toBe(true);
+    expect(result.changes.map((c) => c.kind).sort()).toEqual(["added", "importance", "removed"]);
+    const { data: answers } = await dbA.from("source_materials").select("category, normalized_text").eq("project_id", projectId).eq("category", "student_answers");
+    expect(answers![0].normalized_text).toMatch(/Mitt svar: Kapitel 1–3/);
+    expect((await getProjectOverview(dbA, projectId)).next.kind).toBe("diagnostic");
   });
 
   it("diagnostic: 8–15 questions, no answer keys to the browser, summary instead of statistics", async () => {
@@ -259,7 +282,7 @@ describe("Geografi åk 8 – växthuseffekt och klimatförändringar (full loop)
     const { error } = await dbB.from("source_materials").insert({ project_id: projectId, type: "paste", extracted_text: "injected" });
     expect(error).not.toBeNull();
     const counts = await withPg(async (c) => (await c.query("select count(*)::int as n from public.source_materials where project_id = $1", [projectId])).rows[0].n);
-    expect(counts).toBe(4);
+    expect(counts).toBe(5); // 4 teacher materials + the student's own answers
   });
 });
 

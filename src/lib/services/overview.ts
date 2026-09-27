@@ -74,6 +74,7 @@ async function buildOverview(db: DB, project: Project) {
       processingMaterials: mats.filter((m) => m.processing_status === "processing" || m.processing_status === "uploaded").length,
       diagnosticAnswered: diag.filter((d) => d.answered_at).length,
       diagnosticTotal: diag.length,
+      clarified: Boolean(project.clarified_at),
       nextSession: next,
     }),
   };

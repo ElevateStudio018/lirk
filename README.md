@@ -8,7 +8,7 @@ bedömning kopplad till underlaget.
 Allt är byggt kring en enda fråga: **Vad ska jag göra idag?**
 
 ```
-Skapa prov → Underlag → Kunskapskarta → Diagnostiskt test → Studieplan
+Skapa prov → Underlag → Kunskapskarta → Följdfrågor → Diagnostiskt test → Studieplan
    → Pass (lektion med checkpoints → övningar → adaptiva steg) …
    → Övningsprov 1 → AI-bedömning → Riktad träning → Slutprov → Jämförelse
 ```
@@ -195,6 +195,7 @@ provförsök, så att svaren inte kan ändras och försöket inte kan öppnas ig
 | 2 | Auth + databas | ✅ E-post/lösenord och magisk länk, profiler, migration, RLS, genererade typer, RLS-test |
 | 3 | Skapa ett prov | ✅ Guide i sex steg, uppladdning, klistra in, "läraren har sagt", exempelunderlag |
 | 4 | Materialprocessor | ✅ Pipeline med status, PDF, text och vision, förhandsvisning av inläst text, tydliga fel |
+| 5b | Följdfrågor | ✅ AI:n frågar 3–6 saker om det som är oklart (kapitel, provform, betoning). Svaren sparas som eget underlag ("Dina svar") och justerar kartan: viktighet, borttagna och nya områden, med förklaring |
 | 5 | Kunskapskarta | ✅ Strukturerad output, explicit mot inferred i UI, citat med källa, verifiering |
 | 6 | Diagnostiskt test | ✅ 8–15 frågor, två frågor per viktigt område, mastery och säkerhet, kort sammanfattning |
 | 7 | Studieplan | ✅ Deterministisk, spacad repetition, de två sista passen, omplanering efter varje pass |

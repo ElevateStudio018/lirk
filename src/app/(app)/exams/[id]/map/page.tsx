@@ -10,7 +10,7 @@ export default async function MapPage({ params }: { params: Promise<{ id: string
   const { id } = await params;
   const { supabase } = await requireUser();
   const [{ data: project }, { data: topics }, { data: materials }] = await Promise.all([
-    supabase.from("study_projects").select("id, status, map_summary, map_warnings, has_grading_criteria").eq("id", id).single(),
+    supabase.from("study_projects").select("id, status, map_summary, map_warnings, has_grading_criteria, clarified_at").eq("id", id).single(),
     supabase.from("knowledge_topics").select("*").eq("project_id", id).order("sort_order"),
     supabase.from("source_materials").select("id, filename, category, type").eq("project_id", id),
   ]);
@@ -40,6 +40,7 @@ export default async function MapPage({ params }: { params: Promise<{ id: string
       summary={project?.map_summary ?? null}
       warnings={project?.map_warnings ?? []}
       hasCriteria={project?.has_grading_criteria ?? false}
+      clarified={Boolean(project?.clarified_at)}
       materials={Object.fromEntries((materials ?? []).map((m) => [m.id, { filename: m.filename ?? "Material", category: m.category }]))}
       topics={topics.map((t) => ({
         id: t.id,

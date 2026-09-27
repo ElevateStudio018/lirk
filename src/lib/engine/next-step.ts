@@ -22,6 +22,8 @@ export type NextStepInput = {
   processingMaterials: number;
   diagnosticAnswered: number;
   diagnosticTotal: number;
+  /** The student has answered (or skipped) the follow-up questions after the map. */
+  clarified?: boolean;
   nextSession: { id: string; title: string; estimated_minutes: number; scheduled_date: string; kind: string } | null;
 };
 
@@ -31,7 +33,7 @@ export type NextStep = {
   description: string;
   href: string;
   minutes: number | null;
-  kind: "materials" | "map" | "diagnostic" | "plan" | "session" | "report" | "done";
+  kind: "materials" | "map" | "clarify" | "diagnostic" | "plan" | "session" | "report" | "done";
 };
 
 export function nextStep(i: NextStepInput): NextStep {
@@ -66,6 +68,16 @@ export function nextStep(i: NextStepInput): NextStep {
         minutes: null,
       };
     case "map_ready":
+      if (!i.clarified) {
+        return {
+          kind: "clarify",
+          label: "Svara på frågorna",
+          title: "Några snabba frågor",
+          description: "Hjälp oss förstå vad som kommer på provet, så blir pluggandet mer träffsäkert.",
+          href: `${base}/clarify`,
+          minutes: 2,
+        };
+      }
       return {
         kind: "diagnostic",
         label: i.diagnosticAnswered > 0 ? "Fortsätt testet" : "Starta testet",

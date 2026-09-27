@@ -76,8 +76,10 @@ export async function generateKnowledgeMap(db: DB, projectId: string) {
       .eq("id", projectId);
     if (upErr) dbError(upErr, "knowledgeMap.project");
 
-    // A new map invalidates any diagnostic generated for the old one.
+    // A new map invalidates any diagnostic and follow-up questions made for the old one.
     await db.from("diagnostic_questions").delete().eq("project_id", projectId);
+    await db.from("clarifying_questions").delete().eq("project_id", projectId);
+    await db.from("study_projects").update({ clarified_at: null }).eq("id", projectId);
 
     return { topics: map.topics.length };
   } catch (err) {

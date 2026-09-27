@@ -34,6 +34,7 @@ const CATEGORY: Record<string, string> = {
   criteria: "Betygskriterier",
   notes: "Anteckningar",
   teacher_said: "Läraren sa",
+  student_answers: "Dina svar",
   other: "Material",
 };
 
@@ -65,9 +66,11 @@ export function TopicMap({
   summary,
   warnings,
   hasCriteria,
+  clarified,
   topics,
   materials,
 }: {
+  clarified: boolean;
   projectId: string;
   status: string;
   summary: string | null;
@@ -150,8 +153,11 @@ export function TopicMap({
 
       {status === "map_ready" && (
         <div className="sticky bottom-24 lg:bottom-6">
-          <Link href={`/exams/${projectId}/diagnostic`} className={cn(buttonVariants({ size: "lg", variant: "primary", block: true }), "shadow-lg")}>
-            Kolla vad du redan kan <ArrowRight />
+          <Link
+            href={clarified ? `/exams/${projectId}/diagnostic` : `/exams/${projectId}/clarify`}
+            className={cn(buttonVariants({ size: "lg", variant: "primary", block: true }), "shadow-lg")}
+          >
+            {clarified ? "Kolla vad du redan kan" : "Svara på några snabba frågor"} <ArrowRight />
           </Link>
         </div>
       )}

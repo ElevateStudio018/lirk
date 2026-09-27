@@ -130,6 +130,59 @@ export type Database = {
           },
         ];
       };
+      clarifying_questions: {
+        Row: {
+          id: string;
+          user_id: string;
+          project_id: string;
+          position: number;
+          question: string;
+          why: string;
+          options: string[];
+          allow_free_text: boolean;
+          topic_keys: string[];
+          answer: string | null;
+          answered_at: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id?: string;
+          project_id: string;
+          position: number;
+          question: string;
+          why: string;
+          options?: string[];
+          allow_free_text?: boolean;
+          topic_keys?: string[];
+          answer?: string | null;
+          answered_at?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          project_id?: string;
+          position?: number;
+          question?: string;
+          why?: string;
+          options?: string[];
+          allow_free_text?: boolean;
+          topic_keys?: string[];
+          answer?: string | null;
+          answered_at?: string | null;
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "clarifying_questions_project_id_fkey";
+            columns: ["project_id"];
+            isOneToOne: false;
+            referencedRelation: "study_projects";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       diagnostic_questions: {
         Row: {
           id: string;
@@ -880,6 +933,7 @@ export type Database = {
           has_grading_criteria: boolean;
           created_at: string;
           updated_at: string;
+          clarified_at: string | null;
         };
         Insert: {
           id?: string;
@@ -897,6 +951,7 @@ export type Database = {
           has_grading_criteria?: boolean;
           created_at?: string;
           updated_at?: string;
+          clarified_at?: string | null;
         };
         Update: {
           id?: string;
@@ -914,6 +969,7 @@ export type Database = {
           has_grading_criteria?: boolean;
           created_at?: string;
           updated_at?: string;
+          clarified_at?: string | null;
         };
         Relationships: [
         ];

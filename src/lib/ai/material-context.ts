@@ -13,6 +13,7 @@ export const CATEGORY_LABELS: Record<string, string> = {
   criteria: "Betygskriterier / kunskapskrav",
   notes: "Anteckningar / genomgång",
   teacher_said: "Det här har läraren sagt kommer på provet",
+  student_answers: "Elevens svar på följdfrågor om provet",
   other: "Övrigt material",
 };
 

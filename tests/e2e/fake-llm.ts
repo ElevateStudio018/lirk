@@ -124,13 +124,34 @@ function route(req: StructuredRequest<z.ZodType>): unknown {
 
     case "diagnostic_test": {
       const topics = parseTopics(req.user);
-      const questions = topics.flatMap((t, i) => {
-        const qs: unknown[] = [mcq(`d${i}a`, t.key, `Vilket påstående om ${t.title} stämmer? ${fresh()}`)];
-        if (t.importance >= 4) qs.push(explain(`d${i}b`, t.key, `Förklara ${t.title} med egna ord. ${fresh()}`));
-        return qs;
-      });
+      // One question per topic first (coverage), then a second one for important topics.
+      const questions: unknown[] = topics.map((t, i) => mcq(`d${i}a`, t.key, `Vilket påstående om ${t.title} stämmer? ${fresh()}`));
+      topics.forEach((t, i) => t.importance >= 4 && questions.push(explain(`d${i}b`, t.key, `Förklara ${t.title} med egna ord. ${fresh()}`)));
       while (questions.length < 8) questions.push(explain(`pad${questions.length}`, topics[0].key, `Beskriv ett exempel på ${topics[0].title}. ${fresh()}`, "reasoning"));
       return { questions: questions.slice(0, 15) };
+    }
+
+    case "clarifying_questions": {
+      const topics = parseTopics(req.user);
+      return {
+        questions: [
+          { question: "Vilka kapitel i boken ingår i provet?", why: "Då vet vi vad som ska tränas.", options: ["Kapitel 1–2", "Kapitel 1–3", "Hela boken"], allow_free_text: true, topic_keys: [] },
+          { question: `Har läraren sagt att ${topics.at(-1)!.title} är viktigt?`, why: "Det är osäkert i underlaget.", options: ["Ja", "Nej", "Det kommer inte på provet"], allow_free_text: false, topic_keys: [topics.at(-1)!.key] },
+          { question: "Får man använda miniräknare?", why: "Påverkar vilka uppgifter vi övar på.", options: ["Ja", "Nej"], allow_free_text: false, topic_keys: [] },
+        ],
+      };
+    }
+
+    case "map_refinement": {
+      const topics = parseTopics(req.user);
+      const answers = [...req.user.matchAll(/Svar: (.+)/g)].map((m) => m[1]);
+      const out = { summary: "Vi la till det du nämnde och tog bort det som inte ingår.", topic_updates: [] as unknown[], new_topics: [] as unknown[] };
+      if (answers.some((a) => a.includes("kommer inte på provet"))) out.topic_updates.push({ key: topics.at(-1)!.key, importance: 1, remove: true, reason: "Du sa att det inte kommer på provet." });
+      if (topics.some((t) => t.key === "albedo")) out.topic_updates.push({ key: "albedo", importance: 5, remove: false, reason: "Läraren har betonat det." });
+      const kretslopp = answers.find((a) => /kretslopp/i.test(a));
+      if (kretslopp)
+        out.new_topics.push({ key: "kolets_kretslopp", title: "Kolets kretslopp", description: "Hur kol rör sig mellan luft, hav, växter och berggrund.", importance: 4, difficulty: 3, assessment_dimension: "understanding", quote: kretslopp });
+      return out;
     }
 
     case "answer_grade": {
