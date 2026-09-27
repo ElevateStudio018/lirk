@@ -15,12 +15,36 @@ export function prettyMath(expr: string) {
     .replace(/ - /g, " − ");
 }
 
+/**
+ * "Nice" axis: steps of 1, 2 or 5 × 10ⁿ. Starts at 0 unless the data sits far
+ * from zero (e.g. CO₂ 280–420 ppm), where a zero baseline would hide the change.
+ */
+export function niceScale(dataMin: number, dataMax: number, targetTicks = 4) {
+  let lo = Math.min(dataMin, dataMax);
+  let hi = Math.max(dataMin, dataMax);
+  if (lo >= 0 && lo < hi * 0.5) lo = 0;
+  if (hi <= 0 && hi > lo * 0.5) hi = 0;
+  if (lo === hi) {
+    lo -= 1;
+    hi += 1;
+  }
+  const raw = (hi - lo) / targetTicks;
+  const mag = Math.pow(10, Math.floor(Math.log10(raw)));
+  const step = [1, 2, 5, 10].map((m) => m * mag).find((s) => s >= raw) ?? 10 * mag;
+  return { min: Math.floor(lo / step) * step, max: Math.ceil(hi / step) * step, step };
+}
+
+function formatTick(v: number) {
+  const r = Math.round(v * 1000) / 1000;
+  return String(r).replace(".", ",").replace("-", "−");
+}
+
 export function BigNumberScene({ scene }: { scene: SceneOf<"big-number"> }) {
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
   const { value, decimals, prefix, suffix, caption } = scene.visual;
   const count = progress(frame, 8, Math.min(50, durationInFrames * 0.4));
-  const shown = (value * count).toFixed(decimals).replace(".", ",");
+  const shown = (value * count).toFixed(decimals).replace(".", ",").replace("-", "−");
   const pulse = scene.animation === "pulse" ? 1 + Math.sin(Math.max(0, frame - 60) / 6) * 0.015 * (frame > 60 ? 1 : 0) : 1;
   const arc = 2 * Math.PI * 150;
   return (
@@ -117,13 +141,12 @@ export function GraphScene({ scene }: { scene: SceneOf<"graph"> }) {
   const pad = { l: 80, r: 30, t: 20, b: 60 };
   const xs = series[0].points.map((p) => p.x);
   const all = series.flatMap((s) => s.points.map((p) => p.y));
-  const minY = Math.min(0, ...all);
-  const maxY = Math.max(...all) * 1.1 || 1;
+  const { min: minY, max: maxY, step } = niceScale(Math.min(...all), Math.max(...all));
+  const ticks = Math.round((maxY - minY) / step);
   const sx = (i: number) => pad.l + ((W - pad.l - pad.r) * (kind === "bar" ? i + 0.5 : i)) / Math.max(1, kind === "bar" ? xs.length : xs.length - 1);
   const sy = (y: number) => H - pad.b - ((H - pad.t - pad.b) * (y - minY)) / (maxY - minY);
   const axes = progress(frame, 4, 16);
   const draw = progress(frame, 18, Math.min(70, durationInFrames * 0.5));
-  const ticks = 4;
   return (
     <SceneFrame scene={scene}>
       <div style={{ display: "flex", gap: 30, alignItems: "flex-start" }}>
@@ -134,7 +157,7 @@ export function GraphScene({ scene }: { scene: SceneOf<"graph"> }) {
               <g key={i} opacity={axes}>
                 <line x1={pad.l} x2={W - pad.r} y1={sy(v)} y2={sy(v)} stroke={theme.line} strokeWidth={1.5} />
                 <text x={pad.l - 12} y={sy(v) + 6} textAnchor="end" fontSize={18} fill={theme.muted} fontFamily={theme.font}>
-                  {Number.isInteger(v) ? v : v.toFixed(1).replace(".", ",")}
+                  {formatTick(v)}
                 </text>
               </g>
             );

@@ -8,7 +8,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { EmptyState } from "@/components/ui/empty-state";
 import { SectionHeader } from "@/components/ui/section-header";
-import { friendlyDate } from "@/lib/engine/dates";
+import { friendlyDate, todayISO } from "@/lib/engine/dates";
 import { listOverviews } from "@/lib/services/overview";
 import { requireUser } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
@@ -63,7 +63,7 @@ export default async function DashboardPage() {
         <p className={cn("mt-2 text-lg font-semibold", main.daysLeft <= 2 ? "text-brand" : "text-muted")}>{daysLeftText(main.daysLeft)}</p>
       </section>
 
-      <NextStepCard step={main.next} eyebrow={main.next.kind === "session" ? "Dagens pass" : "Nästa steg"} />
+      <NextStepCard step={main.next} eyebrow={main.next.kind === "session" && main.nextSession && main.nextSession.scheduled_date <= todayISO() ? "Dagens pass" : main.next.kind === "session" ? "Nästa pass" : "Nästa steg"} />
 
       {measuredTopics && (
         <section className="grid gap-6 md:grid-cols-[1fr_320px]">

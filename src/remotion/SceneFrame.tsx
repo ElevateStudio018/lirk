@@ -60,7 +60,19 @@ export function SceneFrame({
               )}
             </div>
           )}
-          <div style={{ flex: align === "center" ? undefined : 1, position: "relative", minHeight: 0 }}>{children}</div>
+          <div
+            style={{
+              flex: align === "center" ? undefined : 1,
+              position: "relative",
+              minHeight: 0,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              paddingBottom: align === "center" ? 0 : 24,
+            }}
+          >
+            {children}
+          </div>
         </div>
       </AbsoluteFill>
     </AbsoluteFill>

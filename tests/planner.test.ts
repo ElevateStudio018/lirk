@@ -78,7 +78,7 @@ describe("study plan engine", () => {
 
   it("is deterministic apart from generated item ids", () => {
     const topics = [T("a"), T("b"), T("c")];
-    const strip = (p: ReturnType<typeof planStudy>) => p.sessions.map((s) => ({ ...s, items: s.items.map(({ id: _id, ...rest }) => rest) }));
+    const strip = (p: ReturnType<typeof planStudy>) => p.sessions.map((s) => ({ ...s, items: s.items.map((i) => ({ ...i, id: "x" })) }));
     expect(strip(planStudy({ ...base, topics }))).toEqual(strip(planStudy({ ...base, topics })));
   });
 });

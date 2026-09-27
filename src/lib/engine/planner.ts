@@ -308,7 +308,7 @@ export function planStudy(input: PlannerInput): PlanResult {
     const title =
       bucket.length === 1
         ? `${first.part === 1 ? "Förstå" : "Fördjupa"} ${lowerFirst(main[0].title)}`
-        : joinTitles(main.map((t) => t.title));
+        : main.map((t) => t.title).join(" + ");
     sessions.push({
       scheduled_date: date,
       kind: "learn",

@@ -71,13 +71,14 @@ export function LessonPlayer({ scenes, checkpoints, answerCheckpoint, onProgress
     return () => provider.cancel();
   }, []);
 
-  // Frame at which each checkpoint triggers: the last frame of its scene.
+  // Frame at which each checkpoint triggers: the end of its scene.
   const cpFrames = useMemo(
     () =>
       checkpoints
         .map((cp) => {
           const t = timings[Math.min(cp.after_scene, timings.length - 1)];
-          return { cp, frame: t.from + t.frames - 1 };
+          // Pause just before the scene's exit transition so the content is still visible.
+          return { cp, frame: t.from + Math.max(1, t.frames - 12) };
         })
         .sort((a, b) => a.frame - b.frame),
     [checkpoints, timings],

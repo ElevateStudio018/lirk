@@ -3,6 +3,8 @@
  * Given a project's state, returns the single next action.
  */
 
+import { friendlyDate, todayISO } from "./dates";
+
 export type ProjectStatus =
   | "collecting"
   | "analyzing"
@@ -88,7 +90,10 @@ export function nextStep(i: NextStepInput): NextStep {
           kind: "session",
           label: "Starta",
           title: i.nextSession.title,
-          description: "Dagens pass",
+          description:
+            i.nextSession.scheduled_date <= todayISO()
+              ? "Dagens pass"
+              : `Planerat till ${friendlyDate(i.nextSession.scheduled_date).toLowerCase()} – du kan köra det redan nu.`,
           href: `/study/${i.nextSession.id}`,
           minutes: i.nextSession.estimated_minutes,
         };

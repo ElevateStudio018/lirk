@@ -250,7 +250,7 @@ export function MisconceptionScene({ scene }: { scene: SceneOf<"misconception"> 
       <div style={{ display: "flex", gap: 28 }}>
         <Card style={{ ...enter(frame, 6), flex: 1, background: theme.badSoft, border: "none", position: "relative" }}>
           <div style={{ fontSize: 20, fontWeight: 800, color: theme.bad, textTransform: "uppercase", letterSpacing: "0.06em" }}>Vanligt missförstånd</div>
-          <div style={{ fontSize: 32, color: theme.ink, marginTop: 12, lineHeight: 1.3, textDecoration: frame > 30 ? `line-through ${theme.bad}` : "none", textDecorationThickness: 3 }}>
+          <div style={{ fontSize: 32, color: theme.ink, marginTop: 12, lineHeight: 1.3, textDecorationLine: frame > 30 ? "line-through" : "none", textDecorationColor: theme.bad, textDecorationThickness: 3 }}>
             {scene.visual.wrong}
           </div>
           <div style={{ position: "absolute", right: 20, top: 16, transform: `scale(${stamp}) rotate(-12deg)`, width: 64, height: 64, borderRadius: 32, background: theme.bad, display: "grid", placeItems: "center" }}>

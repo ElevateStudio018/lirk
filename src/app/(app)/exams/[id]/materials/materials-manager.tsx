@@ -255,28 +255,6 @@ export function MaterialsManager({
 
       {!locked && (
         <section>
-          <SectionHeader title="Lägg till mer" description="Ju mer av lärarens riktiga underlag du lägger in, desto bättre kan studieplanen anpassas." />
-          <div className="flex flex-col gap-5">
-            <FileDrop files={files} onChange={setFiles} />
-            <div>
-              <Label htmlFor="pasted">Klistra in text</Label>
-              <Textarea id="pasted" value={pasted} onChange={(e) => setPasted(e.target.value)} placeholder="T.ex. planeringen från lärplattformen" />
-            </div>
-            <div>
-              <Label htmlFor="teacher">Det här har läraren sagt kommer på provet</Label>
-              <Textarea id="teacher" value={teacherSaid} onChange={(e) => setTeacherSaid(e.target.value)} className="min-h-24" placeholder="Skriv så ordagrant du minns" />
-            </div>
-            {hasNew && (
-              <Button onClick={addMaterials} loading={adding} size="lg" variant="secondary">
-                Lägg till
-              </Button>
-            )}
-          </div>
-        </section>
-      )}
-
-      {!locked && (
-        <section className="sticky bottom-24 z-10 lg:bottom-6">
           {analyzeError && (
             <Alert tone="error" className="mb-3" title="Analysen misslyckades">
               {analyzeError.message}
@@ -306,6 +284,28 @@ export function MaterialsManager({
               {!analyzing && <Sparkles />} {projectStatus === "map_ready" ? "Analysera igen" : "Analysera underlaget"}
             </Button>
           </Card>
+        </section>
+      )}
+
+      {!locked && (
+        <section>
+          <SectionHeader title="Lägg till mer" description="Ju mer av lärarens riktiga underlag du lägger in, desto bättre kan studieplanen anpassas." />
+          <div className="flex flex-col gap-5">
+            <FileDrop files={files} onChange={setFiles} />
+            <div>
+              <Label htmlFor="pasted">Klistra in text</Label>
+              <Textarea id="pasted" value={pasted} onChange={(e) => setPasted(e.target.value)} placeholder="T.ex. planeringen från lärplattformen" />
+            </div>
+            <div>
+              <Label htmlFor="teacher">Det här har läraren sagt kommer på provet</Label>
+              <Textarea id="teacher" value={teacherSaid} onChange={(e) => setTeacherSaid(e.target.value)} className="min-h-24" placeholder="Skriv så ordagrant du minns" />
+            </div>
+            {hasNew && (
+              <Button onClick={addMaterials} loading={adding} size="lg" variant="secondary">
+                Lägg till
+              </Button>
+            )}
+          </div>
         </section>
       )}
 

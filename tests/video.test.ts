@@ -66,3 +66,16 @@ describe("checkpoints", () => {
     expect(evaluateCheckpointLocally(plain, 1, 2).decision).toBe("insert_micro_lesson");
   });
 });
+
+import { niceScale, prettyMath } from "@/remotion/scenes/math-scenes";
+
+describe("scene helpers", () => {
+  it("nice axis scales", () => {
+    expect(niceScale(285, 421)).toEqual({ min: 250, max: 450, step: 50 });
+    expect(niceScale(2, 17)).toEqual({ min: 0, max: 20, step: 5 });
+    expect(niceScale(-4, 6).min).toBeLessThanOrEqual(-4);
+  });
+  it("pretty prints plain-text math", () => {
+    expect(prettyMath("2 * x^2 - 3")).toBe("2 · x² − 3");
+  });
+});
