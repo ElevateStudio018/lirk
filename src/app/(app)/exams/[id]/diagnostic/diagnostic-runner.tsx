@@ -88,7 +88,7 @@ export function DiagnosticRunner({
         )}
         {summary.needsHelp.length > 0 && (
           <Card>
-            <p className="flex items-center gap-2 font-semibold text-brand">
+            <p className="flex items-center gap-2 font-semibold text-ink">
               <Target className="size-5" /> Behöver mest hjälp med
             </p>
             <p className="mt-2 text-lg text-ink">{summary.needsHelp.join(", ")}</p>
@@ -111,7 +111,7 @@ export function DiagnosticRunner({
   if (questions.length === 0) {
     return (
       <div className="mx-auto flex max-w-xl flex-col gap-6">
-        <div className="grid size-14 place-items-center rounded-lg bg-brand-soft text-brand">
+        <div className="grid size-14 place-items-center rounded-lg bg-white/10 text-ink">
           <ClipboardCheck className="size-7" />
         </div>
         <h2 className="text-title font-bold text-ink">Kolla vad du redan kan</h2>

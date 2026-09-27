@@ -18,7 +18,7 @@ export function ReadinessCard({ readiness, className }: { readiness: Readiness; 
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className={cn("flex w-full items-center gap-5 rounded-card border border-border bg-surface p-5 text-left shadow-sm transition-shadow hover:shadow-md sm:p-6", className)}
+        className={cn("flex w-full items-center gap-5 glass rounded-card p-5 text-left transition-colors hover:bg-white/[0.08] sm:p-6", className)}
       >
         <ProgressRing
           value={readiness.score}
@@ -37,7 +37,7 @@ export function ReadinessCard({ readiness, className }: { readiness: Readiness; 
 
       <Modal open={open} onOpenChange={setOpen} title="Så här räknades detta ut" description="Provberedskapen är ingen gissning om ditt betyg. Den visar hur mycket av provets innehåll du har visat att du kan – just nu.">
         <div className="flex flex-col gap-5 text-sm">
-          <div className="rounded-lg bg-surface-muted p-4 font-mono text-[13px] leading-relaxed text-ink">
+          <div className="rounded-lg bg-white/[0.06] p-4 font-mono text-[13px] leading-relaxed text-ink">
             områdespoäng = kunskap × (0,6 + 0,4 × säkerhet) × minne
             <br />
             provberedskap = viktat snitt av områdespoängen

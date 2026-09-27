@@ -171,7 +171,7 @@ export function NewExamWizard() {
                 }}
                 className={cn(
                   "flex items-center gap-3 rounded-lg border px-4 py-4 text-left text-base font-semibold transition-all",
-                  subject === s ? "border-ink bg-surface shadow-md" : "border-border bg-surface hover:border-border-strong",
+                  subject === s ? "border-white/50 bg-white/[0.14]" : "border-white/10 bg-white/[0.05] hover:bg-white/[0.09]",
                 )}
               >
                 <span className="text-2xl" aria-hidden>
@@ -197,7 +197,7 @@ export function NewExamWizard() {
           <Input autoFocus value={title} onChange={(e) => setTitle(e.target.value)} placeholder="T.ex. Klimatprovet" maxLength={160} className="h-14 text-lg" onKeyDown={(e) => e.key === "Enter" && title.trim() && go(2)} />
           <div className="flex flex-wrap gap-2">
             {(TITLE_EXAMPLES[finalSubject] ?? []).map((ex) => (
-              <button key={ex} type="button" onClick={() => setTitle(ex)} className="rounded-full border border-border bg-surface px-3.5 py-1.5 text-sm font-medium text-muted hover:border-ink hover:text-ink">
+              <button key={ex} type="button" onClick={() => setTitle(ex)} className="rounded-full border border-white/10 bg-white/[0.05] px-3.5 py-1.5 text-sm font-medium text-muted hover:border-ink hover:text-ink">
                 {ex}
               </button>
             ))}
@@ -212,7 +212,7 @@ export function NewExamWizard() {
           <Input type="date" autoFocus min={today} value={examDate} onChange={(e) => setExamDate(e.target.value)} className="h-14 text-lg" aria-label="Provdatum" />
           <div className="flex flex-wrap gap-2">
             {[3, 7, 14, 21].map((d) => (
-              <button key={d} type="button" onClick={() => setExamDate(addDays(today, d))} className="rounded-full border border-border bg-surface px-3.5 py-1.5 text-sm font-medium text-muted hover:border-ink hover:text-ink">
+              <button key={d} type="button" onClick={() => setExamDate(addDays(today, d))} className="rounded-full border border-white/10 bg-white/[0.05] px-3.5 py-1.5 text-sm font-medium text-muted hover:border-ink hover:text-ink">
                 Om {d === 7 ? "en vecka" : d === 14 ? "två veckor" : d === 21 ? "tre veckor" : `${d} dagar`}
               </button>
             ))}
@@ -238,7 +238,7 @@ export function NewExamWizard() {
                     setMinutes(m);
                     setCustomMinutes(false);
                   }}
-                  className={cn("rounded-lg border py-4 text-lg font-bold transition-all", !customMinutes && minutes === m ? "border-ink bg-surface shadow-md" : "border-border bg-surface hover:border-border-strong")}
+                  className={cn("rounded-lg border py-4 text-lg font-bold transition-all", !customMinutes && minutes === m ? "border-white/50 bg-white/[0.14]" : "border-white/10 bg-white/[0.05] hover:bg-white/[0.09]")}
                 >
                   {m} min
                 </button>
@@ -246,7 +246,7 @@ export function NewExamWizard() {
               <button
                 type="button"
                 onClick={() => setCustomMinutes(true)}
-                className={cn("rounded-lg border py-4 text-base font-bold transition-all", customMinutes ? "border-ink bg-surface shadow-md" : "border-border bg-surface hover:border-border-strong")}
+                className={cn("rounded-lg border py-4 text-base font-bold transition-all", customMinutes ? "border-white/50 bg-white/[0.14]" : "border-white/10 bg-white/[0.05] hover:bg-white/[0.09]")}
               >
                 Egen tid
               </button>
@@ -262,7 +262,7 @@ export function NewExamWizard() {
             <p className="mb-3 text-muted">Vilket betyg siktar du på? (valfritt)</p>
             <div className="flex flex-wrap gap-2">
               {GRADES.map((g) => (
-                <button key={g} type="button" onClick={() => setGrade(grade === g ? null : g)} className={cn("size-12 rounded-full border text-base font-bold", grade === g ? "border-ink bg-primary text-on-primary" : "border-border bg-surface text-ink hover:border-border-strong")}>
+                <button key={g} type="button" onClick={() => setGrade(grade === g ? null : g)} className={cn("size-12 rounded-full border text-base font-bold", grade === g ? "border-white bg-white text-black" : "border-white/10 bg-white/[0.05] text-ink hover:bg-white/[0.09]")}>
                   {g}
                 </button>
               ))}
@@ -284,7 +284,7 @@ export function NewExamWizard() {
                   type="button"
                   aria-pressed={on}
                   onClick={() => setDays(on ? days.filter((x) => x !== d.value) : [...days, d.value])}
-                  className={cn("rounded-lg border py-4 text-sm font-bold transition-all", on ? "border-ink bg-primary text-on-primary" : "border-border bg-surface text-muted hover:border-border-strong")}
+                  className={cn("rounded-lg border py-4 text-sm font-bold transition-all", on ? "border-white bg-white text-black" : "border-white/10 bg-white/[0.05] text-muted hover:bg-white/[0.09]")}
                 >
                   {d.short}
                 </button>
@@ -314,7 +314,7 @@ export function NewExamWizard() {
             <Textarea id="teacher" value={teacherSaid} onChange={(e) => setTeacherSaid(e.target.value)} placeholder="T.ex. ”Ni ska kunna förklara skillnaden mellan väder och klimat”" className="min-h-24" />
           </div>
           {files.length === 0 && !pasted.trim() && !teacherSaid.trim() && (
-            <div className="flex flex-col gap-3 rounded-lg bg-surface-muted p-4">
+            <div className="flex flex-col gap-3 rounded-lg bg-white/[0.06] p-4">
               <p className="flex items-start gap-2 text-sm text-muted">
                 <Info className="mt-0.5 size-4 shrink-0" /> Du kan lägga till underlag senare, men analysen behöver minst ett material.
               </p>

@@ -69,7 +69,7 @@ export function ComparisonScene({ scene }: { scene: SceneOf<"comparison"> }) {
     <SceneFrame scene={scene}>
       <div style={{ display: "flex", gap: 28, alignItems: "stretch", position: "relative" }}>
         {side(left, -1, theme.info, theme.infoSoft, 6)}
-        <div style={{ position: "absolute", left: "50%", top: "50%", transform: `translate(-50%, -50%) scale(${vs})`, width: 64, height: 64, borderRadius: 32, background: theme.ink, color: "#fff", display: "grid", placeItems: "center", fontWeight: 800, fontSize: 22, zIndex: 2 }}>
+        <div style={{ position: "absolute", left: "50%", top: "50%", transform: `translate(-50%, -50%) scale(${vs})`, width: 64, height: 64, borderRadius: 32, background: theme.ink, color: theme.onBrand, display: "grid", placeItems: "center", fontWeight: 800, fontSize: 22, zIndex: 2 }}>
           vs
         </div>
         {side(right, 1, theme.brand, theme.brandSoft, 12)}
@@ -96,7 +96,7 @@ export function TimelineScene({ scene }: { scene: SceneOf<"timeline"> }) {
             const s = pop(frame, fps, at);
             return (
               <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "0 10px" }}>
-                <div style={{ width: 44, height: 44, borderRadius: 22, background: "#fff", border: `6px solid ${theme.brand}`, transform: `scale(${s})` }} />
+                <div style={{ width: 44, height: 44, borderRadius: 22, background: theme.bg, border: `6px solid ${theme.brand}`, transform: `scale(${s})` }} />
                 <div style={{ ...enter(frame, at + 4, 16), marginTop: 16 }}>
                   <div style={{ fontSize: 22, fontWeight: 800, color: theme.brand }}>{e.time}</div>
                   <div style={{ fontSize: 26, fontWeight: 700, color: theme.ink, marginTop: 6, lineHeight: 1.2 }}>
@@ -161,7 +161,7 @@ export function ProcessScene({ scene }: { scene: SceneOf<"process"> }) {
             <div key={i} style={{ display: "flex", alignItems: "center", flex: 1, minWidth: 0 }}>
               <Card style={{ flex: 1, opacity: p, transform: `translateY(${(1 - p) * 30}px)`, padding: "22px 20px", minHeight: 210 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
-                  <div style={{ width: 40, height: 40, borderRadius: 20, background: accents[i % accents.length], color: "#fff", display: "grid", placeItems: "center", fontWeight: 800, fontSize: 20 }}>{i + 1}</div>
+                  <div style={{ width: 40, height: 40, borderRadius: 20, background: accents[i % accents.length], color: theme.onBrand, display: "grid", placeItems: "center", fontWeight: 800, fontSize: 20 }}>{i + 1}</div>
                   {s.icon && <SceneIconView name={s.icon} size={28} color={accents[i % accents.length]} />}
                 </div>
                 <div style={{ fontSize: steps.length > 4 ? 22 : 26, fontWeight: 750, color: theme.ink, lineHeight: 1.2 }}>
@@ -262,7 +262,7 @@ export function MisconceptionScene({ scene }: { scene: SceneOf<"misconception"> 
             <Check size={24} strokeWidth={3} /> Så är det
           </div>
           <div style={{ fontSize: 32, color: theme.ink, marginTop: 12, lineHeight: 1.3 }}>
-            <Rich text={scene.visual.right} emphasis={scene.emphasis} start={52} color="#c8f0d8" />
+            <Rich text={scene.visual.right} emphasis={scene.emphasis} start={52} color="rgba(48,209,88,0.3)" />
           </div>
         </Card>
       </div>

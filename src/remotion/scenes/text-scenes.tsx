@@ -28,7 +28,7 @@ export function TitleScene({ scene }: { scene: SceneOf<"title"> }) {
               }}
             />
             <div style={{ width: 104, height: 104, borderRadius: 32, background: theme.brand, display: "grid", placeItems: "center" }}>
-              <SceneIconView name={scene.visual.icon} size={52} color="#fff" />
+              <SceneIconView name={scene.visual.icon} size={52} color={theme.onBrand} />
             </div>
           </div>
         )}
@@ -165,7 +165,7 @@ export function QuestionTransitionScene({ scene }: { scene: SceneOf<"question-tr
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: 28 }}>
         <div style={{ transform: `scale(${q}) rotate(${wobble}deg)` }}>
           <div style={{ width: 128, height: 128, borderRadius: "50%", background: theme.brand, display: "grid", placeItems: "center" }}>
-            <HelpCircle size={72} color="#fff" />
+            <HelpCircle size={72} color={theme.onBrand} />
           </div>
         </div>
         <div style={{ ...enter(frame, 10), fontSize: 26, fontWeight: 700, color: theme.brand, textTransform: "uppercase", letterSpacing: "0.08em" }}>{scene.headline}</div>

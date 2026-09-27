@@ -8,78 +8,60 @@
  * names (bg-surface, text-muted, rounded-card …), never raw hex values.
  */
 
-@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 :root {
-  /* surfaces */
-  --background: #fbfbfc;
-  --surface: #ffffff;
-  --surface-muted: #f4f5f7;
-  --surface-sunken: #eceef2;
-  --border: #e5e7eb;
-  --border-strong: #d4d7de;
+  color-scheme: dark;
+
+  /* surfaces – pure black canvas, graphite layers */
+  --background: #000000;
+  --surface: #111113;
+  --surface-muted: #1a1a1d;
+  --surface-sunken: #26262a;
+  --border: rgb(255 255 255 / 0.08);
+  --border-strong: rgb(255 255 255 / 0.16);
 
   /* text */
-  --ink: #0c0e13;
-  --text: #1a1d24;
-  --muted: #5d6472;
-  --subtle: #8b92a0;
+  --ink: #ffffff;
+  --text: #ededf0;
+  --muted: #9b9ba3;
+  --subtle: #66666e;
 
-  /* brand */
-  --brand: #ff5a36;
-  --brand-strong: #e8431f;
-  --brand-soft: #fff0eb;
-  --on-brand: #ffffff;
+  /* brand = monochrome (white on black) */
+  --brand: #ffffff;
+  --brand-strong: #ffffff;
+  --brand-soft: rgb(255 255 255 / 0.08);
+  --on-brand: #000000;
 
-  /* primary action = ink */
-  --primary: #0c0e13;
-  --primary-hover: #262a33;
-  --on-primary: #ffffff;
+  /* primary action = white pill */
+  --primary: #ffffff;
+  --primary-hover: #e4e4e7;
+  --on-primary: #000000;
 
-  /* status / mastery */
-  --good: #12a150;
-  --good-soft: #e7f7ee;
-  --warn: #d99a00;
-  --warn-soft: #fff6dc;
-  --bad: #e5484d;
-  --bad-soft: #fdecec;
-  --unknown: #9aa1ad;
-  --unknown-soft: #f0f1f4;
-  --info: #2f6fed;
-  --info-soft: #eaf1ff;
+  /* status / mastery (iOS dark system colors) */
+  --good: #30d158;
+  --good-soft: rgb(48 209 88 / 0.14);
+  --warn: #ffd60a;
+  --warn-soft: rgb(255 214 10 / 0.13);
+  --bad: #ff453a;
+  --bad-soft: rgb(255 69 58 / 0.14);
+  --unknown: #8e8e93;
+  --unknown-soft: rgb(142 142 147 / 0.16);
+  --info: #64a8ff;
+  --info-soft: rgb(10 132 255 / 0.16);
 
   /* elevation */
-  --shadow-sm: 0 1px 2px rgb(12 14 19 / 0.05);
-  --shadow-md: 0 1px 2px rgb(12 14 19 / 0.04), 0 4px 16px rgb(12 14 19 / 0.06);
-  --shadow-lg: 0 2px 4px rgb(12 14 19 / 0.04), 0 16px 40px rgb(12 14 19 / 0.1);
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-md: 0 8px 24px rgb(0 0 0 / 0.45);
+  --shadow-lg: 0 20px 60px rgb(0 0 0 / 0.6);
+
+  /* liquid glass */
+  --glass-bg: linear-gradient(145deg, rgb(255 255 255 / 0.09), rgb(255 255 255 / 0.03) 55%, rgb(255 255 255 / 0.05));
+  --glass-bg-strong: linear-gradient(145deg, rgb(255 255 255 / 0.16), rgb(255 255 255 / 0.05) 55%, rgb(255 255 255 / 0.08));
+  --glass-border: rgb(255 255 255 / 0.12);
+  --glass-edge: inset 0 1px 0 rgb(255 255 255 / 0.22), inset 0 -1px 0 rgb(255 255 255 / 0.05), inset 1px 0 0 rgb(255 255 255 / 0.06);
+  --glass-blur: blur(28px) saturate(170%);
 
   --nav-height: 64px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --background: #0b0c0f;
-    --surface: #141519;
-    --surface-muted: #1b1d22;
-    --surface-sunken: #22252b;
-    --border: #2a2d34;
-    --border-strong: #3a3e47;
-    --ink: #f6f7f9;
-    --text: #e8eaee;
-    --muted: #a0a7b4;
-    --subtle: #737a87;
-    --brand-soft: #2b1712;
-    --primary: #f6f7f9;
-    --primary-hover: #dfe2e7;
-    --on-primary: #0c0e13;
-    --good-soft: #0f2a1b;
-    --warn-soft: #2d2410;
-    --bad-soft: #2e1415;
-    --unknown-soft: #20232a;
-    --info-soft: #132040;
-    --shadow-md: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 16px rgb(0 0 0 / 0.3);
-    --shadow-lg: 0 2px 4px rgb(0 0 0 / 0.3), 0 16px 40px rgb(0 0 0 / 0.45);
-  }
 }
 
 @theme inline {
@@ -155,6 +137,7 @@ html {
 
 body {
   background: var(--background);
+  min-height: 100dvh;
   color: var(--text);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -162,8 +145,47 @@ body {
 }
 
 ::selection {
-  background: var(--brand-soft);
-  color: var(--ink);
+  background: rgb(255 255 255 / 0.25);
+  color: #fff;
+}
+
+/* Ambient light behind the glass: soft grey glows that make the blur visible. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60vmax 45vmax at 85% -10%, rgb(255 255 255 / 0.09), transparent 60%),
+    radial-gradient(50vmax 40vmax at -10% 35%, rgb(160 160 175 / 0.07), transparent 60%),
+    radial-gradient(55vmax 45vmax at 70% 110%, rgb(255 255 255 / 0.05), transparent 60%),
+    #000;
+}
+
+@utility glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-edge), 0 10px 40px rgb(0 0 0 / 0.45);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+}
+
+@utility glass-strong {
+  background: var(--glass-bg-strong);
+  border: 1px solid rgb(255 255 255 / 0.16);
+  box-shadow: var(--glass-edge), 0 20px 60px rgb(0 0 0 / 0.55);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  backdrop-filter: blur(40px) saturate(180%);
+}
+
+/* Opaque-enough glass for overlays (modals, sheets, nav) so text stays readable. */
+@utility glass-panel {
+  background: linear-gradient(160deg, rgb(44 44 48 / 0.78), rgb(18 18 20 / 0.82));
+  border: 1px solid rgb(255 255 255 / 0.12);
+  box-shadow: var(--glass-edge), 0 24px 70px rgb(0 0 0 / 0.6);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  backdrop-filter: blur(40px) saturate(180%);
 }
 
 :focus-visible {

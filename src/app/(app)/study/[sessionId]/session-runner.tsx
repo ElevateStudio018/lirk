@@ -96,7 +96,7 @@ export function SessionRunner({ session, project, nextSession }: Props) {
   const header = (
     <div className="sticky top-0 z-20 -mx-5 mb-6 border-b border-border bg-background/95 px-5 pb-3 pt-safe backdrop-blur sm:-mx-8 sm:px-8 lg:mx-0 lg:border-0 lg:bg-transparent lg:px-0">
       <div className="flex items-center gap-3 pt-3">
-        <Link href="/dashboard" className="grid size-10 shrink-0 place-items-center rounded-full text-muted hover:bg-surface-muted hover:text-ink" aria-label="Stäng passet">
+        <Link href="/dashboard" className="grid size-10 shrink-0 place-items-center rounded-full text-muted hover:bg-white/[0.07] hover:text-ink" aria-label="Stäng passet">
           <X className="size-5" />
         </Link>
         <div className="min-w-0 flex-1">
@@ -115,14 +115,14 @@ export function SessionRunner({ session, project, nextSession }: Props) {
         {header}
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col gap-6">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-brand">{session.estimated_minutes} min</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{session.estimated_minutes} min</p>
             <h1 className="mt-1 text-title font-bold text-ink">{session.title}</h1>
             <p className="mt-2 text-lg text-muted">{session.goal}</p>
           </div>
           <ol className="flex flex-col gap-2">
             {items.map((it, i) => (
-              <li key={it.id} className="flex items-center gap-3 rounded-lg border border-border bg-surface px-4 py-3">
-                <span className="grid size-7 shrink-0 place-items-center rounded-full bg-surface-muted text-xs font-bold text-muted">{i + 1}</span>
+              <li key={it.id} className="flex items-center gap-3 rounded-lg border border-white/10 bg-white/[0.05] px-4 py-3">
+                <span className="grid size-7 shrink-0 place-items-center rounded-full bg-white/[0.06] text-xs font-bold text-muted">{i + 1}</span>
                 <span className="flex-1 font-medium text-ink">{it.label}</span>
                 <span className="text-sm tabular-nums text-muted">{it.minutes} min</span>
               </li>
@@ -193,7 +193,7 @@ export function SessionRunner({ session, project, nextSession }: Props) {
         )}
       </AnimatePresence>
 
-      <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-brand">{ITEM_LABELS[current.kind]}</p>
+      <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted">{ITEM_LABELS[current.kind]}</p>
 
       {error && (
         <Alert
@@ -226,7 +226,7 @@ export function SessionRunner({ session, project, nextSession }: Props) {
       {ready && EXERCISE_KINDS.has(current.kind) && <ExerciseStep key={current.id} setId={ready.ref_id!} onDone={complete} completing={completing} />}
       {ready && (current.kind === "mock_exam" || current.kind === "final_exam") && (
         <Card className="flex flex-col gap-4">
-          <span className="grid size-12 place-items-center rounded-lg bg-brand-soft text-brand">
+          <span className="grid size-12 place-items-center rounded-lg bg-white/10 text-ink">
             <ClipboardList className="size-6" />
           </span>
           <h2 className="text-heading font-bold text-ink">{current.kind === "mock_exam" ? "Övningsprov" : "Slutprov"}</h2>

@@ -41,7 +41,7 @@ function Importance({ value }: { value: number }) {
   return (
     <span className="inline-flex gap-0.5" aria-label={`Viktighet ${value} av 5`}>
       {[1, 2, 3, 4, 5].map((i) => (
-        <span key={i} className={cn("h-1.5 w-3 rounded-full", i <= value ? "bg-ink" : "bg-surface-sunken")} />
+        <span key={i} className={cn("h-1.5 w-3 rounded-full", i <= value ? "bg-ink" : "bg-white/10")} />
       ))}
     </span>
   );
@@ -92,8 +92,8 @@ export function TopicMap({
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: Math.min(i * 0.04, 0.4), duration: 0.3 }}
       className={cn(
-        "group flex w-full flex-col gap-3 rounded-card border bg-surface p-5 text-left shadow-sm transition-[transform,box-shadow] hover:-translate-y-0.5 hover:shadow-md",
-        t.evidence_type === "inferred" ? "border-dashed border-border-strong" : "border-border",
+        "group flex w-full flex-col gap-3 glass rounded-card p-5 text-left transition-[transform,background-color] hover:-translate-y-0.5 hover:bg-white/[0.08]",
+        t.evidence_type === "inferred" && "border-dashed border-white/25",
         nested && "rounded-lg p-4",
       )}
     >
@@ -173,7 +173,7 @@ export function TopicMap({
                 <ul className="mt-3 flex flex-col gap-1.5">
                   {open.required_skills.map((s, i) => (
                     <li key={i} className="flex gap-2 text-sm text-text">
-                      <span className="mt-2 size-1.5 shrink-0 rounded-full bg-brand" /> {s}
+                      <span className="mt-2 size-1.5 shrink-0 rounded-full bg-white" /> {s}
                     </li>
                   ))}
                 </ul>
@@ -212,7 +212,7 @@ export function TopicMap({
                   {open.evidence.map((e, i) => {
                     const m = materials[e.source_material_id];
                     return (
-                      <li key={i} className="rounded-lg bg-surface-muted p-4">
+                      <li key={i} className="rounded-lg bg-white/[0.06] p-4">
                         <p className="flex gap-2 text-sm text-ink">
                           <Quote className="mt-0.5 size-4 shrink-0 text-subtle" /> <span>{e.quote}</span>
                         </p>

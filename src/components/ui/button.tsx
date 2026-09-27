@@ -9,19 +9,19 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-primary text-on-primary hover:bg-primary-hover shadow-sm",
-        brand: "bg-brand text-on-brand hover:bg-brand-strong shadow-sm",
-        secondary: "bg-surface text-ink border border-border hover:bg-surface-muted shadow-sm",
-        ghost: "text-ink hover:bg-surface-muted",
-        subtle: "bg-surface-muted text-ink hover:bg-surface-sunken",
+        primary: "bg-primary text-on-primary hover:bg-primary-hover shadow-[0_0_0_1px_rgb(255_255_255/0.2),0_8px_24px_rgb(255_255_255/0.08)]",
+        brand: "bg-primary text-on-primary hover:bg-primary-hover shadow-[0_0_0_1px_rgb(255_255_255/0.25),0_10px_30px_rgb(255_255_255/0.14)]",
+        secondary: "glass text-ink hover:bg-white/10",
+        ghost: "text-ink hover:bg-white/8",
+        subtle: "bg-white/8 text-ink hover:bg-white/12",
         danger: "bg-bad text-white hover:opacity-90",
         link: "text-info underline-offset-4 hover:underline px-0 h-auto",
       },
       size: {
-        sm: "h-9 rounded-sm px-3.5 text-sm",
-        md: "h-11 rounded-md px-5 text-[15px]",
-        lg: "h-14 rounded-lg px-7 text-base",
-        icon: "size-10 rounded-md",
+        sm: "h-9 rounded-full px-4 text-sm",
+        md: "h-11 rounded-full px-5 text-[15px]",
+        lg: "h-14 rounded-full px-7 text-base",
+        icon: "size-10 rounded-full",
       },
       block: { true: "w-full" },
     },

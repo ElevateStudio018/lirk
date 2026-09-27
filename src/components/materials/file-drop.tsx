@@ -37,10 +37,10 @@ export function FileDrop({ files, onChange }: { files: PendingFile[]; onChange: 
         }}
         className={cn(
           "flex flex-col items-center justify-center gap-3 rounded-card border-2 border-dashed px-6 py-10 text-center transition-colors",
-          drag ? "border-brand bg-brand-soft" : "border-border-strong bg-surface hover:border-ink",
+          drag ? "border-white/60 bg-white/10" : "border-white/15 bg-white/[0.04] hover:border-white/40 hover:bg-white/[0.07]",
         )}
       >
-        <span className="grid size-12 place-items-center rounded-full bg-surface-muted">
+        <span className="grid size-12 place-items-center rounded-full bg-white/[0.06]">
           <Upload className="size-6 text-ink" aria-hidden />
         </span>
         <span className="text-base font-semibold text-ink">Välj filer eller ta en bild</span>
@@ -60,13 +60,13 @@ export function FileDrop({ files, onChange }: { files: PendingFile[]; onChange: 
       {files.length > 0 && (
         <ul className="flex flex-col gap-2">
           {files.map((f) => (
-            <li key={f.key} className="flex items-center gap-3 rounded-lg border border-border bg-surface p-3">
+            <li key={f.key} className="flex items-center gap-3 rounded-lg border border-white/10 bg-white/[0.05] p-3">
               {f.file.type.startsWith("image/") ? <ImageIcon className="size-5 shrink-0 text-muted" /> : <FileText className="size-5 shrink-0 text-muted" />}
               <span className="min-w-0 flex-1 truncate text-sm font-medium text-ink">{f.file.name}</span>
               <select
                 value={f.category}
                 onChange={(e) => onChange(files.map((x) => (x.key === f.key ? { ...x, category: e.target.value as MaterialCategory } : x)))}
-                className="h-9 rounded-sm border border-border bg-surface px-2 text-sm text-ink"
+                className="h-9 rounded-sm border border-white/10 bg-white/[0.05] px-2 text-sm text-ink"
                 aria-label={`Typ av material för ${f.file.name}`}
               >
                 {CATEGORY_OPTIONS.map((c) => (
@@ -78,7 +78,7 @@ export function FileDrop({ files, onChange }: { files: PendingFile[]; onChange: 
               <button
                 type="button"
                 onClick={() => onChange(files.filter((x) => x.key !== f.key))}
-                className="grid size-8 place-items-center rounded-full text-muted hover:bg-surface-muted hover:text-ink"
+                className="grid size-8 place-items-center rounded-full text-muted hover:bg-white/[0.07] hover:text-ink"
                 aria-label={`Ta bort ${f.file.name}`}
               >
                 <X className="size-4" />

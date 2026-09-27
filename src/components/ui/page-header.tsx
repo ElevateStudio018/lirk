@@ -25,7 +25,7 @@ export function PageHeader({ title, eyebrow, description, back, actions, classNa
       )}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div className="flex flex-col gap-2">
-          {eyebrow && <p className="text-sm font-semibold uppercase tracking-wide text-brand">{eyebrow}</p>}
+          {eyebrow && <p className="text-sm font-semibold uppercase tracking-[0.12em] text-muted">{eyebrow}</p>}
           <h1 className="text-title font-bold text-ink sm:text-display">{title}</h1>
           {description && <p className="max-w-2xl text-body text-muted">{description}</p>}
         </div>

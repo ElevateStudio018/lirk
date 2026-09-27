@@ -53,10 +53,10 @@ export function QuestionInput({ question: q, value, onChange, disabled }: Props)
               onClick={() => onChange({ kind: "choice", choice: i })}
               className={cn(
                 "flex items-center gap-3 rounded-lg border px-4 py-3.5 text-left text-[15px] font-medium transition-all disabled:cursor-default",
-                choice === i ? "border-ink bg-surface shadow-md" : "border-border bg-surface hover:border-border-strong",
+                choice === i ? "border-white/50 bg-white/[0.14]" : "border-white/10 bg-white/[0.05] hover:bg-white/[0.09]",
               )}
             >
-              <span className={cn("grid size-6 shrink-0 place-items-center rounded-full border-2 text-xs font-bold", choice === i ? "border-ink bg-primary text-on-primary" : "border-border-strong text-muted")}>
+              <span className={cn("grid size-6 shrink-0 place-items-center rounded-full border-2 text-xs font-bold", choice === i ? "border-white bg-white text-black" : "border-border-strong text-muted")}>
                 {choice === i ? <Check className="size-3.5" /> : String.fromCharCode(65 + i)}
               </span>
               <span className="text-ink">{opt}</span>
@@ -95,14 +95,14 @@ export function QuestionInput({ question: q, value, onChange, disabled }: Props)
       return (
         <ol className="flex flex-col gap-2">
           {order.map((displayIdx, i) => (
-            <li key={displayIdx} className="flex items-center gap-2 rounded-lg border border-border bg-surface p-2 pl-4">
+            <li key={displayIdx} className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.05] p-2 pl-4">
               <span className="w-5 shrink-0 text-sm font-bold text-muted">{i + 1}</span>
               <span className="flex-1 text-[15px] text-ink">{q.steps[displayIdx]}</span>
               <div className="flex shrink-0 flex-col">
-                <button type="button" disabled={disabled || i === 0} onClick={() => move(i, -1)} className="grid size-8 place-items-center rounded-sm text-muted hover:bg-surface-muted disabled:opacity-30" aria-label="Flytta upp">
+                <button type="button" disabled={disabled || i === 0} onClick={() => move(i, -1)} className="grid size-8 place-items-center rounded-sm text-muted hover:bg-white/[0.07] disabled:opacity-30" aria-label="Flytta upp">
                   <ArrowUp className="size-4" />
                 </button>
-                <button type="button" disabled={disabled || i === order.length - 1} onClick={() => move(i, 1)} className="grid size-8 place-items-center rounded-sm text-muted hover:bg-surface-muted disabled:opacity-30" aria-label="Flytta ner">
+                <button type="button" disabled={disabled || i === order.length - 1} onClick={() => move(i, 1)} className="grid size-8 place-items-center rounded-sm text-muted hover:bg-white/[0.07] disabled:opacity-30" aria-label="Flytta ner">
                   <ArrowDown className="size-4" />
                 </button>
               </div>
@@ -117,7 +117,7 @@ export function QuestionInput({ question: q, value, onChange, disabled }: Props)
       return (
         <div className="flex flex-col gap-3">
           {q.left.map((l, i) => (
-            <div key={i} className="flex flex-col gap-1.5 rounded-lg border border-border bg-surface p-3 sm:flex-row sm:items-center sm:gap-4">
+            <div key={i} className="flex flex-col gap-1.5 rounded-lg border border-white/10 bg-white/[0.05] p-3 sm:flex-row sm:items-center sm:gap-4">
               <span className="font-semibold text-ink sm:w-2/5">{l}</span>
               <select
                 value={matches[i]}
@@ -127,7 +127,7 @@ export function QuestionInput({ question: q, value, onChange, disabled }: Props)
                   next[i] = Number(e.target.value);
                   onChange({ kind: "matches", matches: next });
                 }}
-                className="h-11 flex-1 rounded-md border border-border bg-surface px-3 text-[15px] text-ink"
+                className="h-11 flex-1 rounded-md border border-white/10 bg-white/[0.05] px-3 text-[15px] text-ink"
                 aria-label={`Välj vad som hör ihop med ${l}`}
               >
                 <option value={-1}>Välj…</option>
@@ -158,7 +158,7 @@ export function QuestionInput({ question: q, value, onChange, disabled }: Props)
                   onClick={() => onChange({ kind: "error_step", step: i, text })}
                   className={cn(
                     "flex w-full items-center gap-3 rounded-lg border px-4 py-3 text-left font-mono text-[15px] transition-all",
-                    step === i ? "border-bad bg-bad-soft" : "border-border bg-surface hover:border-border-strong",
+                    step === i ? "border-bad bg-bad-soft" : "border-white/10 bg-white/[0.05] hover:bg-white/[0.09]",
                   )}
                 >
                   <span className="w-5 shrink-0 font-sans text-sm font-bold text-muted">{i + 1}</span>

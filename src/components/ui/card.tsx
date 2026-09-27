@@ -12,12 +12,12 @@ export function Card({ className, tone = "default", padded = true, interactive =
     <div
       className={cn(
         "rounded-card",
-        tone === "default" && "bg-surface border border-border shadow-sm",
-        tone === "muted" && "bg-surface-muted",
-        tone === "brand" && "bg-brand-soft",
-        tone === "ink" && "bg-primary text-on-primary",
+        tone === "default" && "glass",
+        tone === "muted" && "border border-border bg-white/[0.04]",
+        tone === "brand" && "glass-strong",
+        tone === "ink" && "glass-strong",
         padded && "p-5 sm:p-6",
-        interactive && "transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-md",
+        interactive && "transition-[transform,background-color] duration-200 hover:-translate-y-0.5 hover:bg-white/[0.07] active:scale-[0.99]",
         className,
       )}
       {...props}

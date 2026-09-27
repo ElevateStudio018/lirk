@@ -18,7 +18,7 @@ const LEVEL: Record<Level, { label: string; className: string }> = {
   ok: { label: "Godtagbar", className: "bg-info-soft text-info" },
   weak: { label: "Svag", className: "bg-warn-soft text-warn" },
   missing: { label: "Saknas", className: "bg-bad-soft text-bad" },
-  not_applicable: { label: "–", className: "bg-surface-muted text-subtle" },
+  not_applicable: { label: "–", className: "bg-white/[0.06] text-subtle" },
 };
 
 type Props = {
@@ -41,7 +41,7 @@ export function ResultView({ exam, totalScore, maxScore, criteriaAvailable, over
       <header className="flex flex-col gap-6 sm:flex-row sm:items-center">
         <ProgressRing value={share} size={112} stroke={10} label={<span className="text-2xl font-bold tabular-nums text-ink">{Math.round(share * 100)}%</span>} aria-label="Andel poäng" />
         <div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-brand">{exam.kind === "mock1" ? "Övningsprov 1" : "Slutprov"} · analys</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{exam.kind === "mock1" ? "Övningsprov 1" : "Slutprov"} · analys</p>
           <h1 className="mt-1 text-title font-bold text-ink">
             {String(totalScore).replace(".", ",")} av {maxScore} poäng
           </h1>
@@ -72,7 +72,7 @@ export function ResultView({ exam, totalScore, maxScore, criteriaAvailable, over
           </ul>
         </Card>
         <Card>
-          <p className="flex items-center gap-2 font-semibold text-brand">
+          <p className="flex items-center gap-2 font-semibold text-ink">
             <TrendingUp className="size-5" /> Det här håller dig tillbaka
           </p>
           <ul className="mt-3 flex flex-col gap-2">
@@ -87,8 +87,8 @@ export function ResultView({ exam, totalScore, maxScore, criteriaAvailable, over
         <SectionHeader title="De tre viktigaste sakerna att fixa" />
         <ol className="flex flex-col gap-3">
           {overall.top_fixes.map((f, i) => (
-            <li key={i} className="flex gap-4 rounded-card border border-border bg-surface p-5">
-              <span className="grid size-9 shrink-0 place-items-center rounded-full bg-primary font-bold text-on-primary">{i + 1}</span>
+            <li key={i} className="flex gap-4 glass rounded-card p-5">
+              <span className="grid size-9 shrink-0 place-items-center rounded-full bg-white font-bold text-black">{i + 1}</span>
               <div>
                 <p className="font-semibold text-ink">{f.title}</p>
                 <p className="mt-1 text-muted">{f.description}</p>
@@ -101,12 +101,12 @@ export function ResultView({ exam, totalScore, maxScore, criteriaAvailable, over
       {exam.kind === "mock1" && targets.length > 0 && (
         <Card tone="ink" className="flex flex-col gap-4">
           <p className="flex items-center gap-2 font-semibold">
-            <Target className="size-5 text-brand" /> Din träning inför slutprovet
+            <Target className="size-5 text-ink" /> Din träning inför slutprovet
           </p>
           <ul className="flex flex-col gap-2">
             {targets.map((t) => (
               <li key={t.id} className="flex items-start gap-2">
-                <span className="mt-2 size-1.5 shrink-0 rounded-full bg-brand" />
+                <span className="mt-2 size-1.5 shrink-0 rounded-full bg-white" />
                 <span>
                   <strong>{t.title}</strong> <span className="opacity-70">– {t.description}</span>
                 </span>
@@ -132,7 +132,7 @@ export function ResultView({ exam, totalScore, maxScore, criteriaAvailable, over
           {perQuestion.map((p) => {
             const isOpen = open === p.question_id;
             return (
-              <li key={p.question_id} className="rounded-card border border-border bg-surface">
+              <li key={p.question_id} className="glass rounded-card">
                 <button type="button" onClick={() => setOpen(isOpen ? null : p.question_id)} className="flex w-full items-center gap-4 p-4 text-left sm:p-5" aria-expanded={isOpen}>
                   <span className="w-8 shrink-0 text-sm font-bold text-muted">{p.position + 1}</span>
                   <span className="min-w-0 flex-1">

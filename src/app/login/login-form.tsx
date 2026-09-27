@@ -17,7 +17,7 @@ export function LoginForm({ next, initialError }: { next?: string; initialError?
 
   return (
     <div className="w-full">
-      <div className="mb-6 grid grid-cols-2 gap-1 rounded-lg bg-surface-muted p-1" role="tablist">
+      <div className="glass mb-6 grid grid-cols-2 gap-1 rounded-full p-1" role="tablist">
         {(["signin", "signup"] as const).map((m) => (
           <button
             key={m}
@@ -26,8 +26,8 @@ export function LoginForm({ next, initialError }: { next?: string; initialError?
             aria-selected={mode === m}
             onClick={() => setMode(m)}
             className={cn(
-              "rounded-md py-2.5 text-sm font-semibold transition-colors",
-              mode === m ? "bg-surface text-ink shadow-sm" : "text-muted hover:text-ink",
+              "rounded-full py-2.5 text-sm font-semibold transition-colors",
+              mode === m ? "bg-white text-black" : "text-muted hover:text-ink",
             )}
           >
             {m === "signin" ? "Logga in" : "Skapa konto"}

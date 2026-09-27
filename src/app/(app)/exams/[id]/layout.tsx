@@ -17,7 +17,7 @@ export default async function ExamLayout({ children, params }: { children: React
         <ChevronLeft className="size-4" /> Mina prov
       </Link>
       <header className="mb-6">
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand">{project.subject}</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{project.subject}</p>
         <h1 className="mt-1 text-title font-bold text-ink sm:text-display">{project.title}</h1>
         <p className="mt-2 text-muted">
           {longDate(project.exam_date)} · {days < 0 ? "Provet har varit" : days === 0 ? "Idag" : `${days} dagar kvar`}

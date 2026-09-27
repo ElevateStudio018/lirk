@@ -81,7 +81,7 @@ function Highlighted({ text, highlight, p }: { text: string; highlight: string |
       {pretty.slice(0, idx)}
       <span style={{ position: "relative", display: "inline-block" }}>
         <span style={{ position: "absolute", left: -6, right: -6, top: "8%", bottom: "8%", borderRadius: 10, background: theme.brandSoft, border: `3px solid ${theme.brand}`, opacity: p, transform: `scale(${0.8 + p * 0.2})` }} />
-        <span style={{ position: "relative", color: p > 0.5 ? "#e8431f" : undefined }}>{h}</span>
+        <span style={{ position: "relative", color: p > 0.5 ? theme.ink : undefined }}>{h}</span>
       </span>
       {pretty.slice(idx + h.length)}
     </>
@@ -193,7 +193,7 @@ export function GraphScene({ scene }: { scene: SceneOf<"graph"> }) {
             return (
               <g key={si}>
                 <path d={d} fill="none" stroke={color} strokeWidth={6} strokeLinecap="round" strokeLinejoin="round" strokeDasharray={len} strokeDashoffset={len * (1 - draw)} />
-                {s.points.map((p, i) => (i <= visible ? <circle key={i} cx={sx(i)} cy={sy(p.y)} r={7} fill="#fff" stroke={color} strokeWidth={4} /> : null))}
+                {s.points.map((p, i) => (i <= visible ? <circle key={i} cx={sx(i)} cy={sy(p.y)} r={7} fill={theme.bg} stroke={color} strokeWidth={4} /> : null))}
               </g>
             );
           })}
@@ -231,7 +231,7 @@ export function ExampleScene({ scene }: { scene: SceneOf<"example"> }) {
             const d = staggerDelay(i, steps.length, 14, avail - 10);
             return (
               <div key={i} style={{ ...enter(frame, d, 20), display: "flex", gap: 16, alignItems: "baseline" }}>
-                <div style={{ width: 34, height: 34, flexShrink: 0, borderRadius: 17, background: theme.ink, color: "#fff", display: "grid", placeItems: "center", fontSize: 17, fontWeight: 800 }}>{i + 1}</div>
+                <div style={{ width: 34, height: 34, flexShrink: 0, borderRadius: 17, background: theme.ink, color: theme.onBrand, display: "grid", placeItems: "center", fontSize: 17, fontWeight: 800 }}>{i + 1}</div>
                 <div style={{ fontSize: steps.length > 4 ? 24 : 28, color: theme.ink, lineHeight: 1.35 }}>
                   <Rich text={prettyMath(s)} emphasis={scene.emphasis} start={d + 10} />
                 </div>

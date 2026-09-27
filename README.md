@@ -13,6 +13,14 @@ Skapa prov → Underlag → Kunskapskarta → Diagnostiskt test → Studieplan
    → Övningsprov 1 → AI-bedömning → Riktad träning → Slutprov → Jämförelse
 ```
 
+## Design
+
+Helt svart gränssnitt i stil med Days Since och Cal AI: svart bakgrund, grafitgrå nyanser, vita
+pill-knappar och "liquid glass"-ytor (halvgenomskinliga, blurrade kort med ljuskant). Dashboarden
+visar dagarna kvar som en enda stor siffra. Allt styrs av tokens och utilities i
+`src/app/globals.css`: `glass`, `glass-strong` och `glass-panel` för modaler, sheets och den
+flytande tabbaren. Videolektionerna (`src/remotion/theme.ts`) använder samma svarta glastema.
+
 ## Kom igång
 
 ```bash
@@ -210,7 +218,7 @@ provförsök, så att svaren inte kan ändras och försöket inte kan öppnas ig
   organisationer behöver en företagslicens.
 - **Renderad MP4** stöds via Remotion CLI, men appen spelar alltid upp lektioner live i spelaren.
   Det finns ingen server-rendering eller CDN för video.
-- **Mörkt läge** finns som tokens men är inte genomgånget sida för sida. Remotion-scenerna är alltid
-  ljusa.
+- **Ljust läge** finns inte. Appen är alltid mörk.
+- `backdrop-filter` (glaseffekten) kostar prestanda på äldre Android-enheter.
 - Tillgänglighet (skärmläsare i spelaren, tangentbordsnavigering i provet) är grundläggande men
   inte granskad med hjälpmedel.

@@ -18,10 +18,10 @@ export function ProgressBar({ value, className, indicatorClassName, size = "md",
       aria-valuemax={100}
       aria-valuenow={Math.round(v * 100)}
       aria-label={rest["aria-label"]}
-      className={cn("w-full overflow-hidden rounded-full bg-surface-sunken", size === "sm" ? "h-1.5" : "h-2.5", className)}
+      className={cn("w-full overflow-hidden rounded-full bg-white/10", size === "sm" ? "h-1.5" : "h-2.5", className)}
     >
       <div
-        className={cn("h-full rounded-full bg-brand transition-[width] duration-500 ease-out", indicatorClassName)}
+        className={cn("h-full rounded-full bg-white transition-[width] duration-500 ease-out", indicatorClassName)}
         style={{ width: `${v * 100}%` }}
       />
     </div>

@@ -89,7 +89,7 @@ function Backdrop() {
         style={{
           position: "absolute",
           inset: -40,
-          backgroundImage: `radial-gradient(${theme.line} 1.4px, transparent 1.4px)`,
+          backgroundImage: "radial-gradient(rgba(255,255,255,0.07) 1.4px, transparent 1.4px)",
           backgroundSize: "32px 32px",
           transform: `translate(${drift}px, ${drift / 2}px)`,
           opacity: 0.7,
@@ -103,9 +103,9 @@ function Backdrop() {
           right: -140 + Math.sin(frame / 60) * 20,
           top: -160 + Math.cos(frame / 70) * 20,
           borderRadius: "50%",
-          background: theme.brandSoft,
-          filter: "blur(10px)",
-          opacity: 0.8,
+          background: "radial-gradient(circle, rgba(255,255,255,0.18), rgba(255,255,255,0) 70%)",
+          filter: "blur(20px)",
+          opacity: 0.9,
         }}
       />
     </AbsoluteFill>
@@ -116,10 +116,12 @@ export function Card({ children, style }: { children: React.ReactNode; style?: R
   return (
     <div
       style={{
-        background: theme.surface,
+        // Liquid glass card
+        background: "linear-gradient(145deg, rgba(255,255,255,0.11), rgba(255,255,255,0.03) 55%, rgba(255,255,255,0.06))",
         border: `1.5px solid ${theme.line}`,
-        borderRadius: 24,
-        boxShadow: "0 2px 4px rgba(12,14,19,0.04), 0 16px 40px rgba(12,14,19,0.06)",
+        borderRadius: 28,
+        boxShadow: "inset 0 1.5px 0 rgba(255,255,255,0.25), inset 0 -1px 0 rgba(255,255,255,0.05), 0 20px 50px rgba(0,0,0,0.5)",
+        backdropFilter: "blur(24px) saturate(160%)",
         padding: "24px 28px",
         ...style,
       }}

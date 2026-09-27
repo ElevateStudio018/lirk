@@ -39,13 +39,13 @@ export default async function ExamOverviewPage({ params }: { params: Promise<{ i
                 href={j.href}
                 className={cn(
                   "flex items-center gap-3 rounded-lg border p-4 transition-colors",
-                  i === current ? "border-ink bg-surface shadow-sm" : "border-border bg-surface hover:bg-surface-muted",
+                  i === current ? "border-white/50 bg-white/[0.14]" : "border-white/10 bg-white/[0.05] hover:bg-white/[0.09]",
                 )}
               >
                 <span
                   className={cn(
                     "grid size-8 shrink-0 place-items-center rounded-full text-sm font-bold",
-                    j.done ? "bg-good text-white" : i === current ? "bg-primary text-on-primary" : "bg-surface-muted text-muted",
+                    j.done ? "bg-good text-white" : i === current ? "bg-white text-black" : "bg-white/[0.06] text-muted",
                   )}
                 >
                   {j.done ? <Check className="size-4" /> : i + 1}

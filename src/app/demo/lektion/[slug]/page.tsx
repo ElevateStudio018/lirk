@@ -34,7 +34,7 @@ export default async function DemoLessonPage({ params }: { params: Promise<{ slu
           Logga in
         </Link>
       </div>
-      <p className="text-sm font-semibold uppercase tracking-wide text-brand">Testlektion · {entry.subject}</p>
+      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Testlektion · {entry.subject}</p>
       <h1 className="mt-1 text-title font-bold text-ink sm:text-display">{entry.lesson.title}</h1>
       <p className="mb-8 mt-3 max-w-2xl text-muted">
         Lektionen är byggd helt från strukturerade scener (JSON) och renderas med React – samma format som AI:n skriver för dina egna lektioner. Svara
@@ -46,7 +46,7 @@ export default async function DemoLessonPage({ params }: { params: Promise<{ slu
           <Link
             key={s}
             href={`/demo/lektion/${s}`}
-            className={cn("rounded-full border px-4 py-2 text-sm font-semibold", s === slug ? "border-ink bg-primary text-on-primary" : "border-border bg-surface text-muted hover:text-ink")}
+            className={cn("rounded-full border px-4 py-2 text-sm font-semibold", s === slug ? "border-white bg-white text-black" : "border-white/10 bg-white/[0.05] text-muted hover:text-ink")}
           >
             {e.lesson.title}
           </Link>

@@ -19,19 +19,19 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
           <LoginForm next={next} initialError={error === "auth" ? "Inloggningslänken var ogiltig eller har gått ut. Försök igen." : undefined} />
         </div>
       </div>
-      <div className="hidden flex-col justify-center gap-10 bg-primary px-16 text-on-primary lg:flex">
+      <div className="hidden flex-col justify-center gap-6 px-16 lg:flex">
         {[
           { icon: BrainCircuit, title: "Vet exakt vad som kommer", text: "AI:n läser lärarens planering och betygskriterier och visar vad du behöver kunna." },
           { icon: CalendarCheck, title: "En plan som anpassar sig", text: "Varje dag vet du vad du ska göra – och planen ändras efter hur det går." },
           { icon: PlayCircle, title: "Korta visuella lektioner", text: "Förklaringar som rör sig, med frågor mitt i så att du hänger med." },
         ].map((f) => (
-          <div key={f.title} className="flex max-w-md gap-5">
-            <div className="grid size-12 shrink-0 place-items-center rounded-lg bg-white/10">
-              <f.icon className="size-6 text-brand" />
+          <div key={f.title} className="glass flex max-w-md gap-5 rounded-xl p-6">
+            <div className="grid size-12 shrink-0 place-items-center rounded-full bg-white/10">
+              <f.icon className="size-6 text-ink" />
             </div>
             <div>
-              <h2 className="text-lg font-semibold">{f.title}</h2>
-              <p className="mt-1 opacity-70">{f.text}</p>
+              <h2 className="text-lg font-semibold text-ink">{f.title}</h2>
+              <p className="mt-1 text-muted">{f.text}</p>
             </div>
           </div>
         ))}

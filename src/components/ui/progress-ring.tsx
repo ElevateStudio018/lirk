@@ -17,8 +17,8 @@ export function ProgressRing({
   size = 64,
   stroke = 6,
   className,
-  trackClassName = "stroke-surface-sunken",
-  indicatorClassName = "stroke-brand",
+  trackClassName = "stroke-white/10",
+  indicatorClassName = "stroke-white",
   label,
   ...rest
 }: ProgressRingProps) {

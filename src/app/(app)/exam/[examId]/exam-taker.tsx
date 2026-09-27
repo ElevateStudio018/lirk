@@ -112,7 +112,7 @@ export function ExamTaker({ exam, questions, attempt: initialAttempt }: Props) {
         <Link href={`/exams/${exam.projectId}`} className="mb-6 inline-flex items-center gap-1 text-sm font-medium text-muted hover:text-ink">
           <ArrowLeft className="size-4" /> Tillbaka
         </Link>
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand">{exam.kind === "mock1" ? "Övningsprov" : "Slutprov"}</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{exam.kind === "mock1" ? "Övningsprov" : "Slutprov"}</p>
         <h1 className="mt-1 text-title font-bold text-ink">{exam.title}</h1>
         <div className="mt-6 grid grid-cols-3 gap-3">
           {[
@@ -150,14 +150,14 @@ export function ExamTaker({ exam, questions, attempt: initialAttempt }: Props) {
     <div className="mx-auto max-w-2xl">
       <div className="sticky top-0 z-20 -mx-5 mb-6 border-b border-border bg-background/95 px-5 pb-3 pt-safe backdrop-blur sm:-mx-8 sm:px-8 lg:mx-0 lg:px-0">
         <div className="flex items-center gap-3 pt-3">
-          <Link href={`/exams/${exam.projectId}`} className="grid size-10 place-items-center rounded-full text-muted hover:bg-surface-muted" aria-label="Pausa och gå ut (svaren sparas)">
+          <Link href={`/exams/${exam.projectId}`} className="grid size-10 place-items-center rounded-full text-muted hover:bg-white/[0.07]" aria-label="Pausa och gå ut (svaren sparas)">
             <X className="size-5" />
           </Link>
           <p className="min-w-0 flex-1 truncate font-semibold text-ink">{exam.title}</p>
           <span className={cn("text-xs", saveState === "error" ? "text-bad" : "text-subtle")}>
             {saveState === "saving" ? "Sparar…" : saveState === "error" ? "Ej sparat" : "Sparat"}
           </span>
-          <span className={cn("rounded-full px-3 py-1 text-sm font-bold tabular-nums", remaining !== null && remaining <= 60 ? "bg-bad-soft text-bad" : "bg-surface-muted text-ink")}>
+          <span className={cn("rounded-full px-3 py-1 text-sm font-bold tabular-nums", remaining !== null && remaining <= 60 ? "bg-bad-soft text-bad" : "bg-white/[0.06] text-ink")}>
             {timeText}
           </span>
         </div>
@@ -173,7 +173,7 @@ export function ExamTaker({ exam, questions, attempt: initialAttempt }: Props) {
                 aria-current={i === index}
                 className={cn(
                   "grid size-9 shrink-0 place-items-center rounded-md text-sm font-bold",
-                  i === index ? "bg-primary text-on-primary" : done ? "bg-surface-sunken text-ink" : "border border-border text-muted",
+                  i === index ? "bg-white text-black" : done ? "bg-white/10 text-ink" : "border border-border text-muted",
                 )}
               >
                 {i + 1}

@@ -16,7 +16,7 @@ const ITEMS = [
 export function Sidebar() {
   const pathname = usePathname();
   return (
-    <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r border-border bg-surface px-4 py-6 lg:flex">
+    <aside className="glass fixed inset-y-3 left-3 z-30 hidden w-60 flex-col rounded-xl px-3 py-6 lg:flex">
       <Logo className="px-3" />
       <nav className="mt-10 flex flex-col gap-1" aria-label="Huvudmeny">
         {ITEMS.map((item) => {
@@ -27,11 +27,11 @@ export function Sidebar() {
               href={item.href}
               aria-current={active ? "page" : undefined}
               className={cn(
-                "flex items-center gap-3 rounded-md px-3 py-2.5 text-[15px] font-semibold transition-colors",
-                active ? "bg-surface-muted text-ink" : "text-muted hover:bg-surface-muted hover:text-ink",
+                "flex items-center gap-3 rounded-full px-4 py-2.5 text-[15px] font-semibold transition-colors",
+                active ? "bg-white text-black" : "text-muted hover:bg-white/8 hover:text-ink",
               )}
             >
-              <item.icon className={cn("size-5", active && "text-brand")} aria-hidden />
+              <item.icon className="size-5" aria-hidden />
               {item.label}
             </Link>
           );
@@ -47,10 +47,10 @@ export function BottomNav() {
   if (pathname.startsWith("/exam/") || pathname.startsWith("/study/")) return null;
   return (
     <nav
-      className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-surface/95 pb-safe backdrop-blur lg:hidden"
+      className="fixed inset-x-0 bottom-0 z-30 px-4 pb-[max(env(safe-area-inset-bottom),12px)] lg:hidden"
       aria-label="Huvudmeny"
     >
-      <div className="mx-auto flex h-16 max-w-md items-stretch justify-around px-2">
+      <div className="glass-panel mx-auto flex h-16 max-w-md items-stretch justify-around rounded-full px-2">
         {ITEMS.map((item) => {
           const active = item.match(pathname);
           const isNew = item.href === "/exams/new";
@@ -59,14 +59,14 @@ export function BottomNav() {
               key={item.href}
               href={item.href}
               aria-current={active ? "page" : undefined}
-              className={cn("flex flex-1 flex-col items-center justify-center gap-0.5 text-[11px] font-semibold", active ? "text-ink" : "text-subtle")}
+              className={cn("my-1.5 flex flex-1 flex-col items-center justify-center gap-0.5 rounded-full text-[11px] font-semibold transition-colors", active && !isNew ? "bg-white/12 text-ink" : "text-muted")}
             >
               {isNew ? (
                 <span className="grid size-9 place-items-center rounded-full bg-primary text-on-primary">
                   <item.icon className="size-5" aria-hidden />
                 </span>
               ) : (
-                <item.icon className={cn("size-6", active && "text-brand")} aria-hidden />
+                <item.icon className="size-[22px]" aria-hidden />
               )}
               <span className={cn(isNew && "sr-only")}>{item.label}</span>
             </Link>
@@ -81,7 +81,7 @@ export function MobileTopBar() {
   const pathname = usePathname();
   if (pathname.startsWith("/exam/") || pathname.startsWith("/study/")) return null;
   return (
-    <header className="sticky top-0 z-20 flex h-14 items-center border-b border-border bg-background/90 px-5 pt-safe backdrop-blur lg:hidden">
+    <header className="sticky top-0 z-20 flex h-14 items-center bg-black/40 px-5 pt-safe backdrop-blur-xl lg:hidden">
       <Logo />
     </header>
   );

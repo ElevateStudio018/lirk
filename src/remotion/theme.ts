@@ -2,26 +2,27 @@ export const VIDEO_WIDTH = 1280;
 export const VIDEO_HEIGHT = 720;
 
 export const theme = {
-  bg: "#fbfbfc",
-  surface: "#ffffff",
-  ink: "#0c0e13",
-  text: "#1a1d24",
-  muted: "#5d6472",
-  subtle: "#a3a9b5",
-  line: "#e5e7eb",
-  brand: "#ff5a36",
-  brandSoft: "#fff0eb",
-  good: "#12a150",
-  goodSoft: "#e7f7ee",
-  bad: "#e5484d",
-  badSoft: "#fdecec",
-  info: "#2f6fed",
-  infoSoft: "#eaf1ff",
-  warn: "#d99a00",
-  warnSoft: "#fff6dc",
+  bg: "#000000",
+  surface: "rgba(255,255,255,0.06)",
+  ink: "#ffffff",
+  text: "#ededf0",
+  muted: "#9b9ba3",
+  subtle: "#5f5f66",
+  line: "rgba(255,255,255,0.12)",
+  brand: "#ffffff",
+  brandSoft: "rgba(255,255,255,0.14)",
+  onBrand: "#000000",
+  good: "#30d158",
+  goodSoft: "rgba(48,209,88,0.16)",
+  bad: "#ff453a",
+  badSoft: "rgba(255,69,58,0.16)",
+  info: "#64a8ff",
+  infoSoft: "rgba(10,132,255,0.18)",
+  warn: "#ffd60a",
+  warnSoft: "rgba(255,214,10,0.15)",
   font: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
   mono: 'ui-monospace, "SF Mono", Menlo, Consolas, monospace',
 } as const;
 
 /** Accent palette for multi-item scenes (steps, series). */
-export const accents = [theme.brand, theme.info, theme.good, theme.warn, "#8b5cf6", "#0ea5a4"];
+export const accents = ["#ffffff", "#64a8ff", "#30d158", "#ffd60a", "#bf5af2", "#64d2ff"];

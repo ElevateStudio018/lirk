@@ -126,15 +126,15 @@ export function PlanView({
                   href={`/study/${s.id}`}
                   className={cn(
                     "flex items-center gap-4 rounded-card border p-4 transition-all sm:p-5",
-                    isNext ? "border-ink bg-surface shadow-md" : "border-border bg-surface hover:shadow-sm",
+                    isNext ? "border-white/50 bg-white/[0.14]" : "border-white/10 bg-white/[0.05] hover:bg-white/[0.09]",
                     done && "opacity-60",
                   )}
                 >
                   <div className="w-20 shrink-0">
-                    <p className={cn("text-sm font-bold", isNext ? "text-brand" : "text-ink")}>{friendlyDate(s.scheduled_date, today)}</p>
+                    <p className={cn("text-sm font-bold", isNext ? "text-ink" : "text-ink")}>{friendlyDate(s.scheduled_date, today)}</p>
                     {overdue && <p className="text-xs text-muted">ej gjort</p>}
                   </div>
-                  <span className={cn("grid size-10 shrink-0 place-items-center rounded-full", done ? "bg-good text-white" : s.kind === "learn" ? "bg-surface-muted text-ink" : "bg-brand-soft text-brand")}>
+                  <span className={cn("grid size-10 shrink-0 place-items-center rounded-full", done ? "bg-good text-white" : s.kind === "learn" ? "bg-white/[0.06] text-ink" : "bg-white/10 text-ink")}>
                     {done ? <Check className="size-5" /> : <Icon className="size-5" />}
                   </span>
                   <div className="min-w-0 flex-1">
@@ -156,7 +156,7 @@ export function PlanView({
       </section>
 
       <section>
-        <button type="button" onClick={() => setShowWhy((v) => !v)} className="flex w-full items-center justify-between rounded-lg bg-surface-muted px-5 py-4 text-left font-semibold text-ink">
+        <button type="button" onClick={() => setShowWhy((v) => !v)} className="flex w-full items-center justify-between rounded-lg bg-white/[0.06] px-5 py-4 text-left font-semibold text-ink">
           Varför ser planen ut så här?
           <ChevronDown className={cn("size-5 transition-transform", showWhy && "rotate-180")} />
         </button>
@@ -168,7 +168,7 @@ export function PlanView({
               </p>
               <ul className="flex flex-col gap-2">
                 {priorities.map((p) => (
-                  <li key={p.topic_id} className="flex items-center gap-3 rounded-lg border border-border bg-surface p-3 text-sm">
+                  <li key={p.topic_id} className="flex items-center gap-3 rounded-lg border border-white/10 bg-white/[0.05] p-3 text-sm">
                     <span className="w-10 shrink-0 text-right font-bold tabular-nums text-ink">{Math.round(p.priority * 100)}</span>
                     <span className="min-w-0 flex-1 font-semibold text-ink">{p.title}</span>
                     <span className="hidden text-xs text-muted sm:block">
@@ -188,7 +188,7 @@ export function PlanView({
               ) : (
                 <ul className="flex flex-col gap-2">
                   {decisions.map((d) => (
-                    <li key={d.id} className="rounded-lg border border-border bg-surface p-3 text-sm">
+                    <li key={d.id} className="rounded-lg border border-white/10 bg-white/[0.05] p-3 text-sm">
                       <div className="flex flex-wrap items-center gap-2">
                         <Badge tone="info">{ACTION_LABEL[d.action] ?? d.action}</Badge>
                         {d.topic && <span className="font-semibold text-ink">{d.topic}</span>}

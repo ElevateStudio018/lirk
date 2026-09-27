@@ -52,12 +52,12 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
           <p className="mt-1 text-2xl font-bold tabular-nums text-ink">
             {String(entry.result.total_score).replace(".", ",")} / {entry.result.max_score} p
           </p>
-          <Link href={`/results/${entry.attemptId}`} className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-brand">
+          <Link href={`/results/${entry.attemptId}`} className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-ink">
             Se analysen <ArrowRight className="size-4" />
           </Link>
         </>
       ) : entry?.attemptId ? (
-        <Link href={`/results/${entry.attemptId}`} className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-brand">
+        <Link href={`/results/${entry.attemptId}`} className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-ink">
           {entry.status === "in_progress" ? "Fortsätt provet" : "Visa bedömningen"} <ArrowRight className="size-4" />
         </Link>
       ) : (
@@ -76,7 +76,7 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
       {report ? (
         <>
           <Card tone="ink" className="flex flex-col gap-2">
-            <p className="text-sm font-semibold uppercase tracking-wide text-brand">Mock 1 → Slutprov</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Mock 1 → Slutprov</p>
             <p className="text-3xl font-bold tabular-nums">
               {pct(report.totalBefore)} → {pct(report.totalAfter)}
             </p>
@@ -94,7 +94,7 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
             {report.improved.length ? (
               <ul className="flex flex-col gap-2">
                 {report.improved.map((t) => (
-                  <li key={t.topic_id} className="flex items-center gap-3 rounded-lg border border-border bg-surface p-4">
+                  <li key={t.topic_id} className="flex items-center gap-3 rounded-lg border border-white/10 bg-white/[0.05] p-4">
                     <TrendingUp className="size-5 shrink-0 text-good" />
                     <span className="flex-1 font-semibold text-ink">{t.title}</span>
                     <span className="tabular-nums text-muted">
@@ -113,7 +113,7 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
                   .map((d) => {
                     const up = (d.after ?? 0) - (d.before ?? 0);
                     return (
-                      <div key={d.dimension} className="rounded-lg bg-surface-muted p-3">
+                      <div key={d.dimension} className="rounded-lg bg-white/[0.06] p-3">
                         <p className="text-sm font-semibold text-ink">{DIMENSION_LABELS[d.dimension as Dimension] ?? d.dimension}</p>
                         <p className={cn("text-sm font-bold tabular-nums", up > 0.05 ? "text-good" : up < -0.05 ? "text-bad" : "text-muted")}>
                           {up > 0.05 ? "Bättre" : up < -0.05 ? "Sämre" : "Oförändrat"}
@@ -130,7 +130,7 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
             {report.uncertain.length ? (
               <ul className="flex flex-col gap-2">
                 {report.uncertain.map((t) => (
-                  <li key={t.topic_id} className="flex items-center gap-3 rounded-lg border border-border bg-surface p-4">
+                  <li key={t.topic_id} className="flex items-center gap-3 rounded-lg border border-white/10 bg-white/[0.05] p-4">
                     <HelpCircle className="size-5 shrink-0 text-warn" />
                     <span className="flex-1 font-semibold text-ink">{t.title}</span>
                     <span className="tabular-nums text-muted">{pct(t.after)}</span>
@@ -148,7 +148,7 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
               <ul className="flex flex-col gap-3">
                 {report.lastMinute.map((l, i) => (
                   <li key={i} className="flex gap-3 text-text">
-                    <Eye className="mt-0.5 size-5 shrink-0 text-brand" /> {l}
+                    <Eye className="mt-0.5 size-5 shrink-0 text-ink" /> {l}
                   </li>
                 ))}
               </ul>

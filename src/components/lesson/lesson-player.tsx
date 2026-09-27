@@ -280,15 +280,15 @@ export function LessonPlayer({ scenes, checkpoints, answerCheckpoint, onProgress
     <div
       ref={containerRef}
       className={cn(
-        "flex flex-col overflow-hidden rounded-card border border-border bg-surface shadow-md",
+        "glass flex flex-col overflow-hidden rounded-card",
         fullscreen && "fixed inset-0 z-[60] rounded-none border-0 bg-black",
         className,
       )}
     >
-      <div className={cn("relative bg-[#fbfbfc]", fullscreen && "flex flex-1 items-center justify-center bg-black")}>
+      <div className={cn("relative bg-black", fullscreen && "flex flex-1 items-center justify-center bg-black")}>
         {inMicro && microTimeline ? (
           <div className="relative w-full">
-            <div className="absolute left-3 top-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-brand px-3 py-1 text-xs font-bold text-on-brand">
+            <div className="absolute left-3 top-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-black">
               <Sparkles className="size-3.5" /> Mikrolektion
             </div>
             <Player
@@ -324,10 +324,10 @@ export function LessonPlayer({ scenes, checkpoints, answerCheckpoint, onProgress
           <button
             type="button"
             onClick={togglePlay}
-            className="absolute inset-0 grid place-items-center bg-black/5 transition-colors hover:bg-black/10"
+            className="absolute inset-0 grid place-items-center bg-black/20 transition-colors hover:bg-black/30"
             aria-label="Spela lektionen"
           >
-            <span className="grid size-16 place-items-center rounded-full bg-primary text-on-primary shadow-lg sm:size-20">
+            <span className="glass-strong grid size-16 place-items-center rounded-full text-ink sm:size-20">
               <Play className="ml-1 size-7 sm:size-9" fill="currentColor" />
             </span>
           </button>
@@ -347,9 +347,9 @@ export function LessonPlayer({ scenes, checkpoints, answerCheckpoint, onProgress
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            className={cn("border-t border-border bg-surface p-4 sm:p-6", fullscreen && "max-h-[50dvh] overflow-y-auto")}
+            className={cn("border-t border-border p-4 sm:p-6", fullscreen && "max-h-[50dvh] overflow-y-auto")}
           >
-            <p className="text-xs font-bold uppercase tracking-wide text-brand">Kontrollfråga</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Kontrollfråga</p>
             <h3 className="mt-1 text-lg font-semibold text-ink">{phase.cp.question}</h3>
             <div className="mt-4 grid gap-2">
               {phase.cp.options.map((opt, i) => (
@@ -358,7 +358,7 @@ export function LessonPlayer({ scenes, checkpoints, answerCheckpoint, onProgress
                   type="button"
                   disabled={phase.pending || phase.result !== null}
                   onClick={() => answer(i)}
-                  className="rounded-md border border-border bg-surface px-4 py-3 text-left text-[15px] font-medium text-ink transition-colors hover:border-ink disabled:cursor-default disabled:hover:border-border"
+                  className="rounded-md border border-white/10 bg-white/[0.05] px-4 py-3 text-left text-[15px] font-medium text-ink transition-colors hover:border-ink disabled:cursor-default disabled:hover:border-border"
                 >
                   {opt}
                 </button>
@@ -400,7 +400,7 @@ export function LessonPlayer({ scenes, checkpoints, answerCheckpoint, onProgress
           </motion.div>
         )}
         {phase.kind === "micro" && phase.ended && (
-          <motion.div key="micro-done" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center justify-between gap-3 border-t border-border bg-surface p-4">
+          <motion.div key="micro-done" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center justify-between gap-3 border-t border-border p-4">
             <p className="text-sm font-medium text-ink">Mikrolektionen är klar.</p>
             <Button size="sm" onClick={() => resumeMain(phase.cp)}>
               Fortsätt lektionen
@@ -422,13 +422,13 @@ export function LessonPlayer({ scenes, checkpoints, answerCheckpoint, onProgress
               value={frame}
               onChange={(e) => seek(Number(e.target.value))}
               aria-label="Spola"
-              className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-surface-sunken accent-[var(--brand)]"
+              className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-white/15 accent-white"
             />
             {cpFrames.map(({ cp, frame: f }) => (
               <span
                 key={cp.id}
                 aria-hidden
-                className={cn("pointer-events-none absolute top-1/2 size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-surface", answeredIds.includes(cp.id) ? "bg-good" : "bg-brand")}
+                className={cn("pointer-events-none absolute top-1/2 size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-surface", answeredIds.includes(cp.id) ? "bg-good" : "bg-white")}
                 style={{ left: `${(f / (totalFrames - 1)) * 100}%` }}
               />
             ))}

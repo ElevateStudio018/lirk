@@ -20,16 +20,16 @@ export function Sheet({ open, onOpenChange, trigger, title, description, childre
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
       {trigger && <Dialog.Trigger asChild>{trigger}</Dialog.Trigger>}
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-50 bg-black/40" />
+        <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm" />
         <Dialog.Content
           className={cn(
-            "fixed z-50 flex flex-col bg-surface shadow-lg focus:outline-none",
+            "fixed z-50 flex flex-col glass-panel focus:outline-none",
             "inset-x-0 bottom-0 max-h-[90dvh] rounded-t-xl pb-safe",
             "sm:inset-y-0 sm:left-auto sm:right-0 sm:max-h-none sm:w-[440px] sm:rounded-none sm:rounded-l-xl",
             className,
           )}
         >
-          <div className="mx-auto mt-2.5 h-1.5 w-10 rounded-full bg-surface-sunken sm:hidden" aria-hidden />
+          <div className="mx-auto mt-2.5 h-1.5 w-10 rounded-full bg-white/25 sm:hidden" aria-hidden />
           <div className="flex items-start justify-between gap-4 px-6 pb-2 pt-5">
             <div>
               <Dialog.Title className="text-heading font-semibold text-ink">{title}</Dialog.Title>
@@ -39,7 +39,7 @@ export function Sheet({ open, onOpenChange, trigger, title, description, childre
                 <Dialog.Description className="sr-only">{typeof title === "string" ? title : ""}</Dialog.Description>
               )}
             </div>
-            <Dialog.Close className="-mr-2 grid size-9 place-items-center rounded-full text-muted hover:bg-surface-muted hover:text-ink" aria-label="Stäng">
+            <Dialog.Close className="-mr-2 grid size-9 place-items-center rounded-full text-muted hover:bg-white/10 hover:text-ink" aria-label="Stäng">
               <X className="size-5" />
             </Dialog.Close>
           </div>

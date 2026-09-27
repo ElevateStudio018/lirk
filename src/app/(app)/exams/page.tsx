@@ -54,7 +54,7 @@ export default async function ExamsPage() {
                       </p>
                     </div>
                   )}
-                  <p className="mt-4 text-sm font-semibold text-brand">{o.next.title} →</p>
+                  <p className="mt-4 text-sm font-semibold text-ink">{o.next.title} →</p>
                 </Card>
               </Link>
             ))}
@@ -62,10 +62,10 @@ export default async function ExamsPage() {
           {past.length > 0 && (
             <section>
               <SectionHeader title="Tidigare prov" />
-              <ul className="flex flex-col divide-y divide-border rounded-card border border-border bg-surface">
+              <ul className="flex flex-col divide-y divide-border glass rounded-card">
                 {past.map((p) => (
                   <li key={p.id}>
-                    <Link href={`/exams/${p.id}`} className="flex items-center justify-between gap-4 px-5 py-4 hover:bg-surface-muted">
+                    <Link href={`/exams/${p.id}`} className="flex items-center justify-between gap-4 px-5 py-4 hover:bg-white/[0.07]">
                       <span className="font-semibold text-ink">{p.title}</span>
                       <span className="text-sm text-muted">{longDate(p.exam_date)}</span>
                     </Link>

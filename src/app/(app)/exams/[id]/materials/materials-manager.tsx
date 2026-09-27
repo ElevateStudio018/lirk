@@ -176,7 +176,7 @@ export function MaterialsManager({
                   <motion.li key={m.id} layout initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
                     <Card padded={false} className="p-4">
                       <div className="flex items-start gap-3">
-                        <span className={cn("grid size-10 shrink-0 place-items-center rounded-md", m.processing_status === "failed" ? "bg-bad-soft text-bad" : "bg-surface-muted text-muted")}>
+                        <span className={cn("grid size-10 shrink-0 place-items-center rounded-md", m.processing_status === "failed" ? "bg-bad-soft text-bad" : "bg-white/[0.06] text-muted")}>
                           <MaterialIcon type={m.type} />
                         </span>
                         <div className="min-w-0 flex-1">

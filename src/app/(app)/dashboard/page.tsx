@@ -57,10 +57,18 @@ export default async function DashboardPage() {
 
   return (
     <div className="flex flex-col gap-10">
-      <section>
-        <p className="text-sm font-semibold uppercase tracking-wide text-muted">{main.project.subject}</p>
-        <h1 className="mt-1 text-title font-bold text-ink sm:text-display">{main.project.title}</h1>
-        <p className={cn("mt-2 text-lg font-semibold", main.daysLeft <= 2 ? "text-brand" : "text-muted")}>{daysLeftText(main.daysLeft)}</p>
+      {/* Days Since-style hero: one huge number, everything else quiet. */}
+      <section className="flex items-end justify-between gap-6 pt-2">
+        <div className="min-w-0">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{main.project.subject}</p>
+          <h1 className="mt-2 text-title font-bold text-ink sm:text-display">{main.project.title}</h1>
+        </div>
+        <div className="shrink-0 text-right">
+          <p className={cn("text-[5.5rem] font-extrabold leading-[0.85] tracking-[-0.06em] tabular-nums sm:text-[7rem]", main.daysLeft <= 2 ? "text-ink" : "text-ink/90")}>
+            {Math.max(0, main.daysLeft)}
+          </p>
+          <p className="mt-2 text-sm font-semibold text-muted">{main.daysLeft === 0 ? "provet är idag" : main.daysLeft === 1 ? "dag kvar" : "dagar kvar"}</p>
+        </div>
       </section>
 
       <NextStepCard step={main.next} eyebrow={main.next.kind === "session" && main.nextSession && main.nextSession.scheduled_date <= todayISO() ? "Dagens pass" : main.next.kind === "session" ? "Nästa pass" : "Nästa steg"} />
@@ -98,13 +106,13 @@ export default async function DashboardPage() {
               </Link>
             }
           />
-          <ul className="flex flex-col divide-y divide-border rounded-card border border-border bg-surface">
+          <ul className="flex flex-col divide-y divide-border glass rounded-card">
             {main.sessions
               .filter((s) => s.status !== "completed")
               .slice(0, 4)
               .map((s) => (
                 <li key={s.id}>
-                  <Link href={`/study/${s.id}`} className="flex items-center gap-4 px-5 py-4 hover:bg-surface-muted">
+                  <Link href={`/study/${s.id}`} className="flex items-center gap-4 px-5 py-4 hover:bg-white/[0.07]">
                     <span className="w-20 shrink-0 text-sm font-semibold text-muted">{friendlyDate(s.scheduled_date)}</span>
                     <span className="min-w-0 flex-1 truncate font-semibold text-ink">{s.title}</span>
                     <span className="shrink-0 text-sm tabular-nums text-muted">{s.estimated_minutes} min</span>
