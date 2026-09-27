@@ -20,7 +20,7 @@ export const theme = {
   infoSoft: "rgba(10,132,255,0.18)",
   warn: "#ffd60a",
   warnSoft: "rgba(255,214,10,0.15)",
-  font: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+  font: 'var(--font-poppins), Poppins, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
   mono: 'ui-monospace, "SF Mono", Menlo, Consolas, monospace',
 } as const;
 
