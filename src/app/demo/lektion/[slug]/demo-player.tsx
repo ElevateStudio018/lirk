@@ -21,6 +21,8 @@ export function DemoPlayer({ slug }: { slug: string }) {
     <LessonPlayer
       scenes={lesson.scenes}
       checkpoints={lesson.checkpoints.map(({ id, after_scene, question, options }) => ({ id, after_scene, question, options }))}
+      pretest={lesson.pretest}
+      recall={lesson.recall_prompt ? { prompt: lesson.recall_prompt, keyPoints: lesson.key_points } : null}
       answerCheckpoint={answer}
     />
   );

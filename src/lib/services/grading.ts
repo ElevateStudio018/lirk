@@ -3,7 +3,7 @@ import "server-only";
 import { gradeOpenAnswer } from "@/lib/ai/tasks/grade";
 import { answerKindFor, type Answer, type Question } from "@/lib/domain/questions";
 import { canGradeDeterministically, gradeDeterministic, type GradeResult } from "@/lib/engine/grading";
-import { attemptWeight } from "@/lib/engine/mastery";
+import { attemptWeight, type Confidence } from "@/lib/engine/mastery";
 import type { DB } from "@/lib/supabase/server";
 import { badRequest, dbError } from "./errors";
 
@@ -49,6 +49,7 @@ export async function recordAttempt(
     answer: Answer | null;
     grade: Pick<GradeResult, "score" | "is_correct" | "feedback" | "error_type" | "misconception" | "method">;
     weightMultiplier?: number;
+    confidence?: Confidence | null;
   },
 ) {
   const { error } = await db.from("question_attempts").insert({
@@ -66,6 +67,7 @@ export async function recordAttempt(
     error_type: a.grade.error_type === "none" ? null : a.grade.error_type,
     misconception: a.grade.misconception,
     grading_method: a.grade.method,
+    confidence: a.confidence ?? null,
   });
   if (error) dbError(error, "recordAttempt");
 }

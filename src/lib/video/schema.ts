@@ -281,10 +281,30 @@ export const Checkpoint = z.object({
 });
 export type Checkpoint = z.infer<typeof Checkpoint>;
 
+/** A question the student guesses on BEFORE the explanation (pretesting effect). */
+export const Pretest = z.object({
+  question: z.string(),
+  options: z.array(z.string()).min(2).max(4),
+  correct_index: z.number().int().min(0),
+  explanation: z.string().describe("Visas efter lektionen tillsammans med elevens gissning"),
+});
+export type Pretest = z.infer<typeof Pretest>;
+
+/** Learning-science extras stored beside the scenes. */
+export const LessonLearning = z.object({
+  pretest: Pretest.nullable(),
+  recall_prompt: z.string().nullable().describe("Uppmaning att skriva det viktigaste ur minnet innan sammanfattningen visas"),
+  key_points: z.array(z.string()).max(6).describe("3–5 saker eleven ska minnas; eleven jämför sin återkallning med dessa"),
+});
+export type LessonLearning = z.infer<typeof LessonLearning>;
+
 export const Lesson = z.object({
   title: z.string(),
   scenes: z.array(Scene).min(3).max(14),
   checkpoints: z.array(Checkpoint).max(3),
+  pretest: Pretest.nullable(),
+  recall_prompt: z.string().nullable(),
+  key_points: z.array(z.string()).max(6),
 });
 export type Lesson = z.infer<typeof Lesson>;
 
@@ -300,8 +320,9 @@ export type MicroLesson = z.infer<typeof MicroLesson>;
  * repaired safely. Returns the fixed lesson plus a list of problems that were
  * fatal (empty list = valid).
  */
-export function validateLesson(lesson: Lesson): { lesson: Lesson; problems: string[] } {
+export function validateLesson<L extends Pick<Lesson, "title" | "scenes" | "checkpoints"> & Partial<Lesson>>(lesson: L): { lesson: L; problems: string[] } {
   const problems: string[] = [];
+  if (lesson.pretest && lesson.pretest.correct_index >= lesson.pretest.options.length) problems.push("pretest: correct_index utanför options");
   const scenes = lesson.scenes.map(sanitizeScene);
   const checkpoints = lesson.checkpoints
     .filter((c) => {

@@ -214,4 +214,12 @@ export const greenhouseLesson = Lesson.parse({
       ],
     },
   ],
+  pretest: {
+    question: "Gissa innan du tittar: vad gör att jorden är varmare än den skulle vara utan atmosfär?",
+    options: ["Ozonhålet släpper in mer sol", "Gaser i luften håller kvar värmestrålning", "Jordens kärna värmer luften"],
+    correct_index: 1,
+    explanation: "Växthusgaser som koldioxid tar upp värmestrålning från marken och skickar tillbaka en del av den. Ozonhålet är en annan fråga.",
+  },
+  recall_prompt: "Skriv med egna ord: hur fungerar växthuseffekten, och varför blir den starkare?",
+  key_points: ["Solljus värmer marken, marken strålar ut värme", "Växthusgaser håller kvar en del av värmen", "Mer koldioxid från förbränning ger starkare effekt", "Ozonhålet är inte samma sak"],
 });

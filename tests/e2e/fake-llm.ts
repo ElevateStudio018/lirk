@@ -164,7 +164,7 @@ function route(req: StructuredRequest<z.ZodType>): unknown {
 
     case "lesson": {
       const lesson = /Matematik/.test(req.system) ? equationsLesson : greenhouseLesson;
-      return { title: lesson.title, scenes: lesson.scenes, checkpoints: lesson.checkpoints };
+      return { title: lesson.title, scenes: lesson.scenes, checkpoints: lesson.checkpoints, pretest: lesson.pretest, recall_prompt: lesson.recall_prompt, key_points: lesson.key_points };
     }
 
     case "micro_lesson":

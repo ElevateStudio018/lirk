@@ -20,6 +20,19 @@ Regler:
 - Hitta inte på siffror eller fakta. Om underlaget inte har data, använd allmänt vedertagna fakta eller förenklade exempel och säg det.
 - Matematik: skriv uttryck i klartext (2x + 3 = 11), en omskrivning per rad i equation.`;
 
+/** How the lesson is built, from research on how people learn. */
+const LEARNING_SCIENCE = `Bygg lektionen enligt forskning om hur hjärnan lär sig:
+1. FÖRTEST (pretest): en flervalsfråga eleven gissar på INNAN förklaringen. Att gissa först – även fel – gör att förklaringen fastnar bättre. Frågan ska handla om lektionens kärna.
+2. NYFIKENHET: börja med en fråga eller ett överraskande faktum (en lucka hjärnan vill fylla), inte med en definition.
+3. SEGMENTERA: en idé per scen, max 3 meningar narration. Hellre fler korta scener.
+4. DUBBEL KODNING: varje scen har en visuell form som FÖRKLARAR (orsakskedja, process, jämförelse, graf, ekvation) – aldrig dekoration.
+5. SIGNALERA: 1–2 nyckelord i emphasis per scen.
+6. KONKRET + VARFÖR: minst ett vardagsnära exempel, och förklara varför – inte bara vad.
+7. MISSUPPFATTNING: ta upp det vanligaste felet explicit i en misconception-scen.
+8. MINNESREGEL om det finns en naturlig.
+9. ÅTERKALLNING: checkpoints efter viktiga delar. Sista scenen är en summary, och recall_prompt ber eleven skriva det viktigaste ur minnet INNAN sammanfattningen visas. key_points är 3–5 saker eleven ska minnas.
+10. PERSONLIGT: prata direkt till eleven ("du"), vänligt, som en bra lärare.`;
+
 export async function generateLesson(input: {
   subject: string;
   topic: PromptTopic;
@@ -35,9 +48,10 @@ export async function generateLesson(input: {
     system: `Du är en prisbelönt pedagog som gör korta, visuella förklaringsvideor för svenska elever i ${input.subject}.
 ${input.kind === "lesson"
   ? "Gör en lektion på 2–4 minuter (6–10 scener): väck nyfikenhet, förklara kärnan visuellt, visa ett exempel, ta upp en vanlig missuppfattning, sammanfatta."
-  : "Gör en genomgång av 2–3 lösta exempel (4–7 scener) med ökande svårighet. Använd example- och equation-scener för beräkningar, process/cause-effect för resonemang."}
+  : "Gör en genomgång av 2–3 lösta exempel (4–7 scener) med ökande svårighet. Låt stegen gradvis lämnas åt eleven (fading): första exemplet helt löst, i nästa ställer narrationen en fråga om nästa steg innan det visas. Använd example- och equation-scener för beräkningar, process/cause-effect för resonemang."}
 Lägg in ${input.kind === "lesson" ? "2" : "1"} checkpoints (flervalsfrågor) efter viktiga scener. Varje checkpoint har en kort mikrolektion (remedy_scenes, 1–3 scener) som rättar missuppfattningen bakom de felaktiga alternativen.
 ${profile.family === "math" ? "Ämnet är matematik: visa räkneregler med equation-scener och lösta exempel." : ""}
+${LEARNING_SCIENCE}
 ${SCENE_GUIDE}
 Tillåtna scentyper: ${SCENE_TYPES.join(", ")}.
 ${UNTRUSTED_MATERIAL_RULE}
@@ -68,5 +82,5 @@ ${SCENE_GUIDE}
 ${STUDENT_VOICE}`,
     user: `Område:\n${topicsBlock([input.topic])}\n\nFokus: ${input.focus}`,
   });
-  return { ...result, scenes: validateLesson({ title: result.title, scenes: result.scenes, checkpoints: [] }).lesson.scenes };
+  return { ...result, scenes: validateLesson({ title: result.title, scenes: result.scenes, checkpoints: [] as Lesson["checkpoints"] }).lesson.scenes };
 }

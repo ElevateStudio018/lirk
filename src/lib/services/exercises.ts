@@ -3,6 +3,7 @@ import "server-only";
 import { generateExercises, type ExercisePurpose } from "@/lib/ai/tasks/questions";
 import { Answer, Question, toPublicQuestion } from "@/lib/domain/questions";
 import { correctAnswerText } from "@/lib/engine/grading";
+import { confidenceMultiplier, type Confidence } from "@/lib/engine/mastery";
 import type { DB } from "@/lib/supabase/server";
 import { z } from "zod";
 import { dbError, notFound } from "./errors";
@@ -98,7 +99,7 @@ export async function getExerciseSetView(db: DB, setId: string) {
   };
 }
 
-export async function answerExercise(db: DB, setId: string, questionId: string, answer: z.infer<typeof Answer>) {
+export async function answerExercise(db: DB, setId: string, questionId: string, answer: z.infer<typeof Answer>, confidence: Confidence | null = null) {
   const { data: set, error } = await db.from("exercise_sets").select("*, knowledge_topics(title)").eq("id", setId).maybeSingle();
   if (error) dbError(error, "answerExercise");
   if (!set || !set.topic_id) throw notFound("Övningen");
@@ -132,6 +133,8 @@ export async function answerExercise(db: DB, setId: string, questionId: string, 
     question,
     answer,
     grade,
+    confidence,
+    weightMultiplier: confidenceMultiplier(confidence, grade.is_correct),
   });
   const [estimate] = await recomputeMastery(db, [set.topic_id]);
 

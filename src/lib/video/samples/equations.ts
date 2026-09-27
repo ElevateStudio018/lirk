@@ -156,4 +156,12 @@ export const equationsLesson = Lesson.parse({
       ],
     },
   ],
+  pretest: {
+    question: "Gissa: om 2x + 3 = 11, vad är x?",
+    options: ["4", "7", "5,5"],
+    correct_index: 0,
+    explanation: "Ta bort 3 från båda sidor: 2x = 8. Dela med 2: x = 4.",
+  },
+  recall_prompt: "Skriv stegen du använder för att lösa en ekvation som 3x − 4 = 11.",
+  key_points: ["Gör samma sak på båda sidor", "Flytta först över talen utan x", "Dela sist med talet framför x", "Kontrollera genom att sätta in svaret"],
 });

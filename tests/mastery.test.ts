@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { attemptWeight, classifyPattern, estimateMastery, masteryStatus, type Evidence } from "@/lib/engine/mastery";
+import { attemptWeight, classifyPattern, confidenceMultiplier, estimateMastery, masteryStatus, type Evidence } from "@/lib/engine/mastery";
 
 const now = new Date("2026-10-01T12:00:00Z");
 const ev = (score: number, daysAgo = 0, weight = 1, source: Evidence["source"] = "exercise"): Evidence => ({
@@ -58,5 +58,15 @@ describe("mastery model", () => {
 
   it("multiple choice counts less than an explanation", () => {
     expect(attemptWeight("mcq")).toBeLessThan(attemptWeight("explain"));
+  });
+});
+
+describe("confidence rating", () => {
+  it("a lucky guess counts half, a confident mistake counts more", () => {
+    expect(confidenceMultiplier("guess", true)).toBe(0.5);
+    expect(confidenceMultiplier("sure", false)).toBe(1.25);
+    expect(confidenceMultiplier("sure", true)).toBe(1);
+    expect(confidenceMultiplier("think", false)).toBe(1);
+    expect(confidenceMultiplier(null, true)).toBe(1);
   });
 });

@@ -456,6 +456,7 @@ export type Database = {
           kind: string;
           title: string;
           checkpoints: Json;
+          learning: Json | null;
           status: string;
           error_message: string | null;
           watch_progress: number;
@@ -471,6 +472,7 @@ export type Database = {
           kind?: string;
           title: string;
           checkpoints?: Json;
+          learning?: Json | null;
           status?: string;
           error_message?: string | null;
           watch_progress?: number;
@@ -486,6 +488,7 @@ export type Database = {
           kind?: string;
           title?: string;
           checkpoints?: Json;
+          learning?: Json | null;
           status?: string;
           error_message?: string | null;
           watch_progress?: number;
@@ -685,6 +688,7 @@ export type Database = {
           feedback: string | null;
           error_type: string | null;
           misconception: string | null;
+          confidence: string | null;
           grading_method: string;
           created_at: string;
         };
@@ -704,6 +708,7 @@ export type Database = {
           feedback?: string | null;
           error_type?: string | null;
           misconception?: string | null;
+          confidence?: string | null;
           grading_method: string;
           created_at?: string;
         };
@@ -723,6 +728,7 @@ export type Database = {
           feedback?: string | null;
           error_type?: string | null;
           misconception?: string | null;
+          confidence?: string | null;
           grading_method?: string;
           created_at?: string;
         };

@@ -75,7 +75,7 @@ async function runSession(db: DB, sessionId: string, choose: (topicId: string | 
     } else {
       const set = await getExerciseSetView(db, item.ref_id!);
       for (const [i, q] of set.questions.entries()) {
-        await answerExercise(db, item.ref_id!, q.question.id, { kind: "choice", choice: choose(item.topic_id, i) });
+        await answerExercise(db, item.ref_id!, q.question.id, { kind: "choice", choice: choose(item.topic_id, i) }, "sure");
       }
     }
     const res = await completeItem(db, sessionId, item.id);
@@ -188,6 +188,10 @@ describe("Geografi åk 8 – växthuseffekt och klimatförändringar (full loop)
     expect(item!.kind).toBe("lesson");
     const lesson = await getLessonView(dbA, item!.ref_id!);
     expect(JSON.stringify(lesson.checkpoints)).not.toContain("correct_index");
+    // Learning science: guess-first question and free recall before the summary.
+    expect(lesson.learning?.pretest?.options.length).toBeGreaterThan(1);
+    expect(lesson.learning?.recall_prompt).toBeTruthy();
+    expect(lesson.learning?.key_points.length).toBeGreaterThan(0);
     const cp = await answerCheckpoint(dbA, item!.ref_id!, lesson.checkpoints[0].id, 2, 1);
     expect(cp).toMatchObject({ correct: false, decision: "insert_micro_lesson" });
     expect(cp.remedyScenes.length).toBeGreaterThan(0);
@@ -196,6 +200,8 @@ describe("Geografi åk 8 – växthuseffekt och klimatförändringar (full loop)
     const decisions = await runSession(dbA, first.id, () => 1, 2);
     const rest = await runSession(dbA, first.id, () => 0);
     const all = [...decisions, ...rest];
+    const { data: rated } = await dbA.from("question_attempts").select("confidence").eq("confidence", "sure").limit(1);
+    expect(rated?.length).toBe(1);
     expect(all).toContain("MICRO_LESSON");
 
     const session = await getSession(dbA, first.id);

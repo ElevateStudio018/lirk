@@ -8,9 +8,9 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { errorMessage, getJSON, postJSON } from "@/lib/api/client";
 import type { CheckpointResult, PlayerCheckpoint } from "@/lib/video/checkpoint";
-import type { Scene } from "@/lib/video/schema";
+import type { LessonLearning, Scene } from "@/lib/video/schema";
 
-type LessonView = { id: string; title: string; topicTitle: string; scenes: Scene[]; checkpoints: PlayerCheckpoint[]; watchProgress: number; completed: boolean };
+type LessonView = { id: string; title: string; topicTitle: string; scenes: Scene[]; checkpoints: PlayerCheckpoint[]; learning: LessonLearning | null; watchProgress: number; completed: boolean };
 
 export function LessonStep({ lessonId, onDone, completing }: { lessonId: string; onDone: () => void; completing: boolean }) {
   const [lesson, setLesson] = useState<LessonView | null>(null);
@@ -61,7 +61,14 @@ export function LessonStep({ lessonId, onDone, completing }: { lessonId: string;
   return (
     <div className="flex flex-col gap-6">
       <h1 className="text-heading font-bold text-ink sm:text-title">{lesson.title}</h1>
-      <LessonPlayer scenes={lesson.scenes} checkpoints={lesson.checkpoints} answerCheckpoint={answerCheckpoint} onProgress={onProgress} />
+      <LessonPlayer
+        scenes={lesson.scenes}
+        checkpoints={lesson.checkpoints}
+        answerCheckpoint={answerCheckpoint}
+        pretest={lesson.completed ? null : lesson.learning?.pretest}
+        recall={lesson.learning?.recall_prompt ? { prompt: lesson.learning.recall_prompt, keyPoints: lesson.learning.key_points } : null}
+        onProgress={onProgress}
+      />
       <div className="sticky bottom-4 z-10">
         <Button size="lg" block onClick={onDone} disabled={!canContinue} loading={completing} className="shadow-lg">
           {canContinue ? "Fortsätt" : "Titta klart för att fortsätta"} {canContinue && <ArrowRight />}

@@ -3,7 +3,7 @@ import "server-only";
 import { z } from "zod";
 import { generateLesson, generateMicroLesson } from "@/lib/ai/tasks/lessons";
 import { checkpointDecision, type CheckpointResult } from "@/lib/video/checkpoint";
-import { Checkpoint, Scene, type Lesson } from "@/lib/video/schema";
+import { Checkpoint, LessonLearning, Scene, type Lesson } from "@/lib/video/schema";
 import type { DB } from "@/lib/supabase/server";
 import { dbError, notFound } from "./errors";
 import { recordAttempt } from "./grading";
@@ -12,7 +12,7 @@ import { getProject, getReadyMaterials, getTopic, materialExcerptFor, toPromptTo
 
 async function saveLesson(
   db: DB,
-  a: { project: Project; topic: Topic; sessionId: string | null; kind: "lesson" | "micro" | "example"; lesson: Pick<Lesson, "title" | "scenes" | "checkpoints"> },
+  a: { project: Project; topic: Topic; sessionId: string | null; kind: "lesson" | "micro" | "example"; lesson: Pick<Lesson, "title" | "scenes" | "checkpoints"> & Partial<Pick<Lesson, "pretest" | "recall_prompt" | "key_points">> },
 ) {
   const { data: module, error } = await db
     .from("lesson_modules")
@@ -23,6 +23,10 @@ async function saveLesson(
       kind: a.kind,
       title: a.lesson.title,
       checkpoints: a.lesson.checkpoints,
+      learning:
+        a.lesson.pretest || a.lesson.recall_prompt
+          ? { pretest: a.lesson.pretest ?? null, recall_prompt: a.lesson.recall_prompt ?? null, key_points: a.lesson.key_points ?? [] }
+          : null,
       status: "ready",
     })
     .select("id")
@@ -76,6 +80,7 @@ export async function getLessonView(db: DB, lessonId: string) {
   if (sErr) dbError(sErr, "getLessonView.scenes");
   const scenes = (sceneRows ?? []).map((r) => Scene.parse(r.data));
   const checkpoints = z.array(Checkpoint).parse(module.checkpoints);
+  const learning = module.learning ? LessonLearning.safeParse(module.learning).data ?? null : null;
   return {
     id: module.id,
     title: module.title,
@@ -85,6 +90,8 @@ export async function getLessonView(db: DB, lessonId: string) {
     completed: Boolean(module.completed_at),
     scenes,
     checkpoints: checkpoints.map((c): PublicCheckpoint => ({ id: c.id, after_scene: c.after_scene, question: c.question, options: c.options, remedy_scenes: c.remedy_scenes })),
+    // The pretest is a guess, revealed after the lesson, so its answer may go to the browser.
+    learning,
   };
 }
 

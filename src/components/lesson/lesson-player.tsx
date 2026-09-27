@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
   Captions,
   CaptionsOff,
+  Brain,
   CheckCircle2,
   Maximize2,
   Minimize2,
@@ -20,7 +21,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { CheckpointResult, PlayerCheckpoint } from "@/lib/video/checkpoint";
-import type { Scene } from "@/lib/video/schema";
+import type { Pretest, Scene } from "@/lib/video/schema";
 import { computeTimeline, FPS, sceneIndexAtFrame } from "@/lib/video/timing";
 import { getDefaultTTSProvider, SilentTTSProvider, type TTSProvider } from "@/lib/video/tts";
 import { LessonVideo } from "@/remotion/LessonVideo";
@@ -32,12 +33,18 @@ type Props = {
   scenes: Scene[];
   checkpoints: PlayerCheckpoint[];
   answerCheckpoint: (checkpointId: string, choice: number, attempt: number) => Promise<CheckpointResult>;
+  /** Guess-first question shown before the lesson starts (pretesting effect). */
+  pretest?: Pretest | null;
+  /** Free recall before the summary scene; compared against the key points. */
+  recall?: { prompt: string; keyPoints: string[] } | null;
   onProgress?: (progress: number, completed: boolean) => void;
   onComplete?: () => void;
   className?: string;
 };
 
 type Phase =
+  | { kind: "pretest" }
+  | { kind: "recall"; text: string; submitted: boolean }
   | { kind: "main" }
   | { kind: "checkpoint"; cp: PlayerCheckpoint; attempt: number; result: CheckpointResult | null; pending: boolean; error: string | null }
   | { kind: "micro"; cp: PlayerCheckpoint; scenes: Scene[]; ended: boolean };
@@ -47,7 +54,7 @@ function fmt(frames: number) {
   return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
 }
 
-export function LessonPlayer({ scenes, checkpoints, answerCheckpoint, onProgress, onComplete, className }: Props) {
+export function LessonPlayer({ scenes, checkpoints, answerCheckpoint, pretest, recall, onProgress, onComplete, className }: Props) {
   const playerRef = useRef<PlayerRef>(null);
   const microRef = useRef<PlayerRef>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -57,16 +64,20 @@ export function LessonPlayer({ scenes, checkpoints, answerCheckpoint, onProgress
   const [playing, setPlaying] = useState(false);
   const [rate, setRate] = useState(1);
   const [captions, setCaptions] = useState(true);
+  const [pretestChoice, setPretestChoice] = useState<number | null>(null);
   const [voice, setVoice] = useState(true);
   const [fullscreen, setFullscreen] = useState(false);
   const [completed, setCompleted] = useState(false);
-  const [phase, setPhase] = useState<Phase>({ kind: "main" });
+  const [phase, setPhase] = useState<Phase>(pretest ? { kind: "pretest" } : { kind: "main" });
 
   const tts = useRef<TTSProvider>(new SilentTTSProvider());
   const [ttsAvailable, setTtsAvailable] = useState(false);
   useEffect(() => {
     tts.current = getDefaultTTSProvider();
-    setTtsAvailable(tts.current.id !== "silent");
+    const available = tts.current.id !== "silent";
+    setTtsAvailable(available);
+    // Redundancy principle: when the voice reads the narration, the same text on screen competes with the visuals.
+    if (available) setCaptions(false);
     const provider = tts.current;
     return () => provider.cancel();
   }, []);
@@ -83,6 +94,13 @@ export function LessonPlayer({ scenes, checkpoints, answerCheckpoint, onProgress
         .sort((a, b) => a.frame - b.frame),
     [checkpoints, timings],
   );
+  // Free recall happens at the end of the scene before the summary.
+  const recallFrame = useMemo(() => {
+    if (!recall || scenes.length < 3 || scenes[scenes.length - 1].type !== "summary") return null;
+    const t = timings[scenes.length - 2];
+    return t.from + Math.max(1, t.frames - 12);
+  }, [recall, scenes, timings]);
+  const recallDone = useRef(false);
   const answered = useRef(new Set<string>());
   const [answeredIds, setAnsweredIds] = useState<string[]>([]);
   const phaseRef = useRef(phase);
@@ -148,6 +166,15 @@ export function LessonPlayer({ scenes, checkpoints, answerCheckpoint, onProgress
         const cpPhase: Phase = { kind: "checkpoint", cp: next.cp, attempt: 1, result: null, pending: false, error: null };
         phaseRef.current = cpPhase;
         setPhase(cpPhase);
+        return;
+      }
+      if (recallFrame !== null && !recallDone.current && f >= recallFrame && !next && phaseRef.current.kind === "main") {
+        p.pause();
+        p.seekTo(recallFrame);
+        tts.current.cancel();
+        const rPhase: Phase = { kind: "recall", text: "", submitted: false };
+        phaseRef.current = rPhase;
+        setPhase(rPhase);
       }
     };
     const onPlay = () => setPlaying(true);
@@ -168,7 +195,7 @@ export function LessonPlayer({ scenes, checkpoints, answerCheckpoint, onProgress
       p.removeEventListener("pause", onPause);
       p.removeEventListener("ended", onEnded);
     };
-  }, [cpFrames, phase.kind, onComplete, onProgress]);
+  }, [cpFrames, recallFrame, phase.kind, onComplete, onProgress]);
 
   // ---- fullscreen (element fullscreen, CSS fallback for iPhone) -------------------
   useEffect(() => {
@@ -258,6 +285,26 @@ export function LessonPlayer({ scenes, checkpoints, answerCheckpoint, onProgress
     });
   };
 
+  const startAfterPretest = (choice: number) => {
+    setPretestChoice(choice);
+    setPhase({ kind: "main" });
+    requestAnimationFrame(() => {
+      playerRef.current?.play();
+      if (voice) speakScene(0);
+    });
+  };
+
+  const finishRecall = () => {
+    recallDone.current = true;
+    setPhase({ kind: "main" });
+    requestAnimationFrame(() => {
+      const p = playerRef.current;
+      if (!p || recallFrame === null) return;
+      p.seekTo(Math.min(totalFrames - 1, recallFrame + 1));
+      p.play();
+    });
+  };
+
   // Micro-lesson player lifecycle
   const microTimeline = useMemo(() => (phase.kind === "micro" ? computeTimeline(phase.scenes) : null), [phase]);
   useEffect(() => {
@@ -320,7 +367,7 @@ export function LessonPlayer({ scenes, checkpoints, answerCheckpoint, onProgress
             acknowledgeRemotionLicense
           />
         )}
-        {phase.kind === "main" && !playing && frame === 0 && (
+        {phase.kind === "main" && !playing && frame === 0 && !completed && (
           <button
             type="button"
             onClick={togglePlay}
@@ -341,6 +388,76 @@ export function LessonPlayer({ scenes, checkpoints, answerCheckpoint, onProgress
       )}
 
       <AnimatePresence mode="wait">
+        {phase.kind === "pretest" && pretest && (
+          <motion.div key="pretest" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="border-t border-border p-4 sm:p-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Gissa först</p>
+            <h3 className="mt-1 text-lg font-semibold text-ink">{pretest.question}</h3>
+            <p className="mt-1 text-sm text-muted">Gissa innan du tittar – då blir hjärnan nyfiken och minns förklaringen bättre, även om du gissar fel. Svaret kommer efter lektionen.</p>
+            <div className="mt-4 grid gap-2">
+              {pretest.options.map((opt, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => startAfterPretest(i)}
+                  className="rounded-md border border-white/10 bg-white/[0.05] px-4 py-3 text-left text-[15px] font-medium text-ink transition-colors hover:border-ink"
+                >
+                  {opt}
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+        {phase.kind === "recall" && recall && (
+          <motion.div key="recall" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className={cn("border-t border-border p-4 sm:p-6", fullscreen && "max-h-[50dvh] overflow-y-auto")}>
+            <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
+              <Brain className="size-3.5" /> Hämta ur minnet
+            </p>
+            <h3 className="mt-1 text-lg font-semibold text-ink">{recall.prompt}</h3>
+            <p className="mt-1 text-sm text-muted">Att själv plocka fram det du just lärt dig är det bästa sättet att få det att fastna – mycket bättre än att titta igen. Det gör inget om du inte minns allt.</p>
+            <textarea
+              value={phase.text}
+              onChange={(e) => setPhase({ ...phase, text: e.target.value })}
+              disabled={phase.submitted}
+              rows={4}
+              placeholder="Skriv med egna ord…"
+              className="mt-4 w-full rounded-md border border-white/10 bg-white/[0.05] px-4 py-3 text-[15px] text-ink placeholder:text-subtle focus:border-white/40 focus:outline-none"
+            />
+            {phase.submitted ? (
+              <div className="mt-4 rounded-lg bg-info-soft p-4">
+                <p className="font-semibold text-ink">Jämför med det viktigaste:</p>
+                <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-text">
+                  {recall.keyPoints.map((k) => (
+                    <li key={k}>{k}</li>
+                  ))}
+                </ul>
+                <p className="mt-2 text-sm text-muted">Titta extra på det du missade i sammanfattningen.</p>
+                <Button size="sm" className="mt-3" onClick={finishRecall}>
+                  Visa sammanfattningen
+                </Button>
+              </div>
+            ) : (
+              <div className="mt-3 flex flex-wrap gap-2">
+                <Button size="sm" onClick={() => setPhase({ ...phase, submitted: true })} disabled={!phase.text.trim()}>
+                  Jämför
+                </Button>
+                <Button size="sm" variant="ghost" onClick={finishRecall}>
+                  Hoppa över
+                </Button>
+              </div>
+            )}
+          </motion.div>
+        )}
+        {phase.kind === "main" && completed && pretest && pretestChoice !== null && (
+          <motion.div key="pretest-reveal" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="border-t border-border p-4 sm:p-6">
+            <div className={cn("rounded-lg p-4", pretestChoice === pretest.correct_index ? "bg-good-soft" : "bg-info-soft")}>
+              <p className="font-semibold text-ink">Din gissning innan lektionen: {pretest.options[pretestChoice]}</p>
+              <p className="mt-1 text-sm text-text">
+                {pretestChoice === pretest.correct_index ? "Du gissade rätt! " : `Rätt svar: ${pretest.options[pretest.correct_index]}. `}
+                {pretest.explanation}
+              </p>
+            </div>
+          </motion.div>
+        )}
         {phase.kind === "checkpoint" && (
           <motion.div
             key={`cp-${phase.cp.id}-${phase.attempt}`}

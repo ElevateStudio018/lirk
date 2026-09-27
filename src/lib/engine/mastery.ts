@@ -67,6 +67,19 @@ export function attemptWeight(questionType: string, difficulty = 2): number {
   return Math.round(base * (0.85 + 0.075 * (difficulty - 1)) * 100) / 100;
 }
 
+export type Confidence = "sure" | "think" | "guess";
+
+/**
+ * How much an attempt should count given how sure the student was.
+ * A lucky guess says little about knowledge (×0.5). Being sure and wrong
+ * reveals a firm misconception, which we want to surface quickly (×1.25).
+ */
+export function confidenceMultiplier(confidence: Confidence | null | undefined, correct: boolean): number {
+  if (confidence === "guess" && correct) return 0.5;
+  if (confidence === "sure" && !correct) return 1.25;
+  return 1;
+}
+
 export function estimateMastery(evidence: Evidence[], now: Date = new Date()): MasteryEstimate {
   if (evidence.length === 0) {
     return { mastery: null, confidence: 0, pattern: "insufficient_evidence", evidenceCount: 0, effectiveEvidence: 0 };
