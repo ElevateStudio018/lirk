@@ -13,6 +13,18 @@ Skapa prov → Underlag → Kunskapskarta → Diagnostiskt test → Studieplan
    → Övningsprov 1 → AI-bedömning → Riktad träning → Slutprov → Jämförelse
 ```
 
+## Förhandsvisning
+
+| Idag | Vad du ska kunna | Din plan | Provanalys |
+|---|---|---|---|
+| <img src="docs/screenshots/m-idag.png" width="200"> | <img src="docs/screenshots/m-karta.png" width="200"> | <img src="docs/screenshots/m-plan.png" width="200"> | <img src="docs/screenshots/m-resultat.png" width="200"> |
+
+<img src="docs/screenshots/d-idag.png" alt="Dashboard på desktop">
+
+Videolektioner (Remotion, genereras från JSON):
+
+<img src="docs/screenshots/v-GreenhouseDemo-2-cause-effect.png" width="32%"> <img src="docs/screenshots/v-EquationsDemo-3-equation.png" width="32%"> <img src="docs/screenshots/v-GreenhouseDemo-4-comparison.png" width="32%">
+
 ## Design
 
 Helt svart gränssnitt i stil med Days Since och Cal AI: svart bakgrund, grafitgrå nyanser, vita
