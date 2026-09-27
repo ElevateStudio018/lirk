@@ -2,6 +2,7 @@ import "server-only";
 
 import { z } from "zod";
 import { generateLesson, generateMicroLesson } from "@/lib/ai/tasks/lessons";
+import { checkpointDecision, type CheckpointResult } from "@/lib/video/checkpoint";
 import { Checkpoint, Scene, type Lesson } from "@/lib/video/schema";
 import type { DB } from "@/lib/supabase/server";
 import { dbError, notFound } from "./errors";
@@ -100,21 +101,7 @@ export async function saveLessonProgress(db: DB, lessonId: string, progress: num
   if (error) dbError(error, "saveLessonProgress");
 }
 
-/**
- * Checkpoint decision (deterministic):
- *   correct                                 → continue
- *   wrong + option reveals a misconception  → insert_micro_lesson
- *   wrong twice on the same checkpoint      → insert_micro_lesson
- *   otherwise                               → show explanation, continue
- */
-export function checkpointDecision(cp: Checkpoint, choice: number, attempt: number) {
-  const correct = choice === cp.correct_index;
-  const misconception = correct ? null : (cp.misconception_by_option[choice] ?? null);
-  const decision: "continue" | "insert_micro_lesson" = !correct && (misconception || attempt >= 2) ? "insert_micro_lesson" : "continue";
-  return { correct, misconception, decision };
-}
-
-export async function answerCheckpoint(db: DB, lessonId: string, checkpointId: string, choice: number, attempt: number) {
+export async function answerCheckpoint(db: DB, lessonId: string, checkpointId: string, choice: number, attempt: number): Promise<CheckpointResult> {
   const { data: module, error } = await db.from("lesson_modules").select("*").eq("id", lessonId).maybeSingle();
   if (error) dbError(error, "answerCheckpoint");
   if (!module) throw notFound("Lektionen");

@@ -1,0 +1,138 @@
+import type { Metadata } from "next";
+import { CalendarDays, PlayCircle, Plus } from "lucide-react";
+import Link from "next/link";
+import { NextStepCard } from "@/components/study/next-step-card";
+import { ReadinessCard } from "@/components/study/readiness-card";
+import { StatusLegend, TopicChips } from "@/components/study/topic-status";
+import { buttonVariants } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { EmptyState } from "@/components/ui/empty-state";
+import { SectionHeader } from "@/components/ui/section-header";
+import { friendlyDate } from "@/lib/engine/dates";
+import { listOverviews } from "@/lib/services/overview";
+import { requireUser } from "@/lib/supabase/server";
+import { cn } from "@/lib/utils";
+
+export const metadata: Metadata = { title: "Idag" };
+
+function daysLeftText(days: number) {
+  if (days === 0) return "Provet är idag";
+  if (days === 1) return "1 dag kvar";
+  return `${days} dagar kvar`;
+}
+
+export default async function DashboardPage() {
+  const { supabase, user } = await requireUser();
+  const [{ upcoming }, { data: profile }] = await Promise.all([
+    listOverviews(supabase),
+    supabase.from("profiles").select("display_name").eq("id", user.id).maybeSingle(),
+  ]);
+  const name = profile?.display_name;
+
+  if (upcoming.length === 0) {
+    return (
+      <>
+        <h1 className="mb-8 text-title font-bold text-ink sm:text-display">{name ? `Hej ${name}!` : "Hej!"}</h1>
+        <EmptyState
+          icon={CalendarDays}
+          title="Har du ett prov på gång?"
+          description="Lägg in provet och lärarens underlag, så bygger vi en plan som visar vad du ska göra varje dag."
+          action={
+            <div className="flex flex-col items-center gap-3">
+              <Link href="/exams/new" className={buttonVariants({ size: "lg", variant: "brand" })}>
+                <Plus /> Jag har ett prov
+              </Link>
+              <Link href="/demo/lektion/vaxthuseffekten" className={buttonVariants({ variant: "ghost", size: "sm" })}>
+                <PlayCircle /> Se hur en lektion ser ut
+              </Link>
+            </div>
+          }
+        />
+      </>
+    );
+  }
+
+  const [main, ...others] = upcoming;
+  const measuredTopics = main.topicStatus.length > 0;
+
+  return (
+    <div className="flex flex-col gap-10">
+      <section>
+        <p className="text-sm font-semibold uppercase tracking-wide text-muted">{main.project.subject}</p>
+        <h1 className="mt-1 text-title font-bold text-ink sm:text-display">{main.project.title}</h1>
+        <p className={cn("mt-2 text-lg font-semibold", main.daysLeft <= 2 ? "text-brand" : "text-muted")}>{daysLeftText(main.daysLeft)}</p>
+      </section>
+
+      <NextStepCard step={main.next} eyebrow={main.next.kind === "session" ? "Dagens pass" : "Nästa steg"} />
+
+      {measuredTopics && (
+        <section className="grid gap-6 md:grid-cols-[1fr_320px]">
+          <div>
+            <SectionHeader
+              title="Kunskapsområden"
+              action={
+                <Link href={`/exams/${main.project.id}/map`} className="text-sm font-semibold text-muted hover:text-ink">
+                  Visa alla
+                </Link>
+              }
+            />
+            <TopicChips topics={main.topicStatus} />
+            <div className="mt-4">
+              <StatusLegend />
+            </div>
+          </div>
+          <div>
+            <SectionHeader title="Läget" />
+            <ReadinessCard readiness={main.readiness} />
+          </div>
+        </section>
+      )}
+
+      {main.sessions.length > 0 && (
+        <section>
+          <SectionHeader
+            title="Din plan"
+            action={
+              <Link href={`/exams/${main.project.id}/plan`} className="text-sm font-semibold text-muted hover:text-ink">
+                Hela planen
+              </Link>
+            }
+          />
+          <ul className="flex flex-col divide-y divide-border rounded-card border border-border bg-surface">
+            {main.sessions
+              .filter((s) => s.status !== "completed")
+              .slice(0, 4)
+              .map((s) => (
+                <li key={s.id}>
+                  <Link href={`/study/${s.id}`} className="flex items-center gap-4 px-5 py-4 hover:bg-surface-muted">
+                    <span className="w-20 shrink-0 text-sm font-semibold text-muted">{friendlyDate(s.scheduled_date)}</span>
+                    <span className="min-w-0 flex-1 truncate font-semibold text-ink">{s.title}</span>
+                    <span className="shrink-0 text-sm tabular-nums text-muted">{s.estimated_minutes} min</span>
+                  </Link>
+                </li>
+              ))}
+          </ul>
+        </section>
+      )}
+
+      {others.length > 0 && (
+        <section>
+          <SectionHeader title="Andra prov" />
+          <div className="grid gap-3 sm:grid-cols-2">
+            {others.map((o) => (
+              <Link key={o.project.id} href={`/exams/${o.project.id}`}>
+                <Card interactive>
+                  <p className="text-sm font-semibold text-muted">{o.project.subject}</p>
+                  <p className="mt-1 text-lg font-semibold text-ink">{o.project.title}</p>
+                  <p className="mt-2 text-sm text-muted">
+                    {daysLeftText(o.daysLeft)} · {o.next.title}
+                  </p>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+    </div>
+  );
+}
