@@ -1,5 +1,3 @@
-@AGENTS.md
-
 ## Hur du pratar med ägaren (gäller alltid, inga undantag)
 
 - Prata med ägaren som om hen vore fem år: korta meningar, enkla ord, inga svåra tekniska ord.
