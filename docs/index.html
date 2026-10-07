@@ -4,265 +4,34 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Lindvik Bygg</title>
+<meta name="description" content="Lindvik Bygg är ett familjeägt bygg- och anläggningsföretag i Västsverige. Testsida med påhittat innehåll.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:wght@400;500;600;700&display=swap">
-<style>
-/* Layout: luftig vit sajt med beige band och skogsgrön som bärande färg – sektioner byggda av användarens favoriter. */
-:root{
-  --white:#ffffff;--beige:#efe8db;--sand:#e2d6c1;--green:#1f4d3a;--green-2:#2e6a51;--sage:#a9c3a0;--ink:#1d2420;--muted:#5d665f;--line:#dcd5c7;
-  --display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;--body:"Source Sans 3","Helvetica Neue",Arial,sans-serif;
-  --max:1200px;--r:14px;color-scheme:light;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{margin:0;background:var(--white);color:var(--ink);font:17px/1.6 var(--body)}
-img{max-width:100%}
-a{color:inherit}
-h1,h2,h3{font-family:var(--display);margin:0;line-height:1.08;text-wrap:balance;letter-spacing:-.015em}
-h2{font-size:clamp(1.8rem,4vw,2.7rem);font-weight:800}
-h3{font-size:1.2rem;font-weight:700}
-p{margin:0}
-.in{max-width:var(--max);margin:0 auto;padding-inline:20px}
-section{padding-block:clamp(56px,8vw,104px)}
-.eyebrow{font:700 12.5px var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--green-2)}
-.lead{font-size:1.15rem;color:var(--muted);max-width:60ch}
-.btn{display:inline-flex;align-items:center;gap:8px;font:700 15px var(--body);padding:13px 22px;border-radius:999px;text-decoration:none;border:0;cursor:pointer}
-.btn-g{background:var(--green);color:var(--white)}
-.btn-w{background:var(--white);color:var(--green)}
-.btn-o{border:1.5px solid currentColor;background:transparent}
-.btn:focus-visible,a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--sage);outline-offset:3px}
-.arrow{font-weight:700;color:var(--green);text-decoration:none;display:inline-flex;gap:6px}
-.arrow::after{content:"→";transition:transform .2s}
-.arrow:hover::after{transform:translateX(4px)}
-/* bildplatser (Pexels) */
-.ph{position:relative;overflow:hidden;background:var(--sand);border-radius:var(--r);isolation:isolate;min-height:120px}
-.ph .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1}
-.ph::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--g)}
-.ph .tag{position:absolute;left:10px;bottom:10px;max-width:calc(100% - 20px);font:600 11.5px/1.3 var(--body);background:rgb(255 255 255/.88);color:var(--ink);padding:6px 9px;border-radius:7px;text-decoration:none;display:flex;gap:6px;align-items:center}
-.ph .tag b{color:var(--green)}
-.forest{--g:linear-gradient(180deg,#b9cfc0 0%,#8fb09c 38%,#3f6b52 39%,#2a4d3a 70%,#1f3a2c 100%)}
-.wood{--g:repeating-linear-gradient(90deg,#c8a47a 0 18px,#b88f62 18px 22px,#d3b28a 22px 40px,#a97f55 40px 43px)}
-.site{--g:linear-gradient(180deg,#dfe7ea 0%,#c9d6db 45%,#b8a98f 46%,#8f7f66 100%)}
-.house{--g:radial-gradient(60% 50% at 70% 30%,#f6efe0 0,transparent 70%),linear-gradient(180deg,#d9e4e6 0,#d9e4e6 52%,#7f9a7a 53%,#5c7a5a 100%)}
-.people{--g:radial-gradient(30% 40% at 35% 45%,#e7b47a 0,transparent 70%),radial-gradient(28% 38% at 65% 50%,#f2d36b 0,transparent 70%),linear-gradient(160deg,#c5cdc8,#9fb0a6)}
-.road{--g:linear-gradient(180deg,#cdd9df 0,#cdd9df 40%,#6c6f6c 41%,#4b4e4c 100%),repeating-linear-gradient(90deg,transparent 0 40px,#f2efe6 40px 70px)}
-.night{--g:linear-gradient(180deg,#1d2b2a 0,#2a3e3a 55%,#c9a46b 56%,#6a5a40 100%)}
-/* header */
-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgb(255 255 255/.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.nav{display:flex;align-items:center;gap:24px;height:68px}
-.logo{display:flex;align-items:center;gap:10px;font:800 1.25rem var(--display);text-decoration:none;color:var(--green)}
-.logo svg{width:30px;height:30px}
-/* hero */
-.hero{position:relative;padding:0;min-height:min(78vh,680px);display:flex;align-items:flex-end;color:var(--white)}
-.hero .ph{position:absolute;inset:0;border-radius:0}
-.hero .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgb(16 33 25/.78) 0%,rgb(16 33 25/.25) 55%,transparent)}
-.hero .ph .tag{left:auto;right:16px;top:16px;bottom:auto;z-index:2}
-.slide{opacity:0;transition:opacity 1s}
-.slide.on{opacity:1}
-.hero .in{position:relative;width:100%;padding-block:0 56px}
-.hero h1{font-size:clamp(2.6rem,7.5vw,5.4rem);font-weight:800;max-width:14ch}
-.hero p{margin-top:14px;font-size:1.2rem;max-width:46ch;color:rgb(255 255 255/.9)}
-.hero .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px;align-items:center}
-.dots{display:flex;gap:8px;margin-left:auto}
-.dots button{width:34px;height:4px;border:0;border-radius:2px;background:rgb(255 255 255/.4);cursor:pointer;padding:0}
-.dots button[aria-current="true"]{background:var(--white)}
-/* tjänster – dörrar */
-.doors{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:34px}
-.door{background:var(--green);color:var(--white);border-radius:var(--r);padding:22px 18px;min-height:150px;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;transition:background .2s,transform .2s}
-.door:hover{background:var(--green-2)}
-.door svg{width:30px;height:30px;stroke:var(--sage)}
-.door b{font:700 1.08rem var(--display)}
-.door span{font-size:14px;color:rgb(255 255 255/.75)}
-@media (max-width:860px){.doors{grid-template-columns:1fr 1fr}}
-.center{text-align:center}.center .lead{margin:12px auto 0}
-/* om oss */
-.about{background:var(--beige)}
-.split{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(28px,5vw,64px);align-items:center}
-.split .ph{aspect-ratio:4/3.4}
-.cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:30px;padding-top:26px;border-top:1px solid var(--sand)}
-.cols3 h3{font-size:1.02rem}
-.cols3 p{font-size:15px;color:var(--muted);margin-block:6px 10px}
-@media (max-width:860px){.split{grid-template-columns:1fr}.cols3{grid-template-columns:1fr}}
-/* projekt */
-.proj{display:grid;grid-template-columns:300px 1fr;gap:34px;align-items:start}
-.track{display:grid;grid-auto-flow:column;grid-auto-columns:min(330px,78vw);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px}
-.pcard{scroll-snap-align:start}
-.pcard .ph{aspect-ratio:3/4}
-.pcard .meta{display:flex;justify-content:space-between;align-items:baseline;margin-top:10px;gap:10px}
-.pcard small{color:var(--muted);font-size:14px;white-space:nowrap}
-.ctrl{display:flex;gap:8px;margin-top:22px}
-.ctrl button{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--green);background:var(--white);color:var(--green);font-size:18px;cursor:pointer}
-@media (max-width:860px){.proj{grid-template-columns:1fr}}
-/* helhetserbjudande */
-.band{position:relative;padding:0;color:var(--white)}
-.band .ph{border-radius:0;min-height:520px}
-.band .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgb(16 33 25/.8),rgb(16 33 25/.15))}
-.band .ph .tag{left:auto;right:16px}
-.band .in{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:16px;z-index:1}
-.band h2{max-width:16ch;font-size:clamp(2rem,5vw,3.4rem)}
-.band p{max-width:46ch;color:rgb(255 255 255/.9)}
-.overlap{position:relative;z-index:2;margin-top:-80px}
-.ocard{background:var(--white);border-radius:var(--r);box-shadow:0 24px 60px rgb(29 36 32/.16);display:grid;grid-template-columns:1fr 1fr;overflow:hidden;max-width:980px;margin-left:auto}
-.ocard .ph{border-radius:0;min-height:260px}
-.ocard div.txt{padding:30px;display:flex;flex-direction:column;gap:12px;justify-content:center}
-@media (max-width:760px){.ocard{grid-template-columns:1fr}.overlap{margin-top:-50px}}
-/* hållbarhet */
-.sust{display:grid;grid-template-columns:1fr 1.15fr;gap:14px}
-.sust .box{background:var(--green);color:var(--white);border-radius:var(--r);padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:16px;justify-content:center}
-.sust .box p{color:rgb(255 255 255/.85)}
-.mosaic{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:14px}
-.mosaic .t{border-radius:var(--r);padding:20px;display:flex;flex-direction:column;justify-content:flex-end;min-height:180px}
-.t.sand{background:var(--beige)}.t.sage{background:var(--sage)}
-.t b{font:800 2.1rem var(--display);color:var(--green);line-height:1}
-.t span{font-weight:600;font-size:15px}
-@media (max-width:860px){.sust{grid-template-columns:1fr}}
-/* nyheter */
-.newsgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px 20px;margin-top:30px}
-.news{display:flex;flex-direction:column;gap:8px}
-.news .ph{aspect-ratio:16/10}
-.news time{font-size:13px;color:var(--muted);font-weight:600}
-.news p{font-size:15px;color:var(--muted)}
-@media (max-width:860px){.newsgrid{grid-template-columns:1fr 1fr}}
-@media (max-width:560px){.newsgrid{grid-template-columns:1fr}}
-.headrow{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}
-/* jobb */
-.jobs{background:var(--beige)}
-.jobgrid{display:grid;grid-template-columns:1.1fr 1fr;gap:16px}
-.jobgrid .big{min-height:460px;display:flex;align-items:flex-end}
-.jobgrid .big .ph{position:absolute;inset:0;border-radius:var(--r)}
-.jobgrid .big .card{position:relative;margin:16px;background:rgb(31 77 58/.92);color:var(--white);border-radius:12px;padding:22px;display:flex;flex-direction:column;gap:10px;max-width:420px}
-.jobgrid .big{position:relative}
-.jobgrid .side{display:grid;gap:16px}
-.jobgrid .side .ph{min-height:200px}
-.jobgrid .side .card2{background:var(--white);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;gap:10px}
-@media (max-width:860px){.jobgrid{grid-template-columns:1fr}}
-/* bolag + genvägar */
-.cos{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:30px}
-.co{position:relative;grid-column:span 2;min-height:230px;border-radius:var(--r);overflow:hidden;color:var(--white);display:flex;align-items:flex-end}
-.co.wide{grid-column:span 3;min-height:300px}
-.co .ph{position:absolute;inset:0;border-radius:0}
-.co .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgb(16 33 25/.82),transparent 65%)}
-.co .ph .tag{top:10px;bottom:auto}
-.co div.txt{position:relative;padding:18px;display:flex;flex-direction:column;gap:2px}
-.co small{font:700 11px var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--sage)}
-@media (max-width:760px){.cos{grid-template-columns:1fr}.co,.co.wide{grid-column:auto}}
-.shortcuts{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px}
-.sc{position:relative;min-height:150px;border-radius:var(--r);overflow:hidden;display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--white)}
-.sc .ph{position:absolute;inset:0;border-radius:0}
-.sc .ph::after{content:"";position:absolute;inset:0;background:rgb(16 33 25/.42)}
-.sc .ph .tag{display:none}
-.sc b{position:relative;font:800 1.35rem var(--display)}
-@media (max-width:760px){.shortcuts{grid-template-columns:1fr 1fr}}
-/* faq */
-.faq{display:grid;grid-template-columns:1fr 1.4fr;gap:40px}
-details{border-bottom:1px solid var(--line)}
-summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;padding:18px 0;font:700 1.05rem var(--display)}
-summary::-webkit-details-marker{display:none}
-summary::after{content:"+";color:var(--green);font-size:1.5rem;line-height:1}
-details[open] summary::after{content:"−"}
-details p{padding-bottom:18px;color:var(--muted);max-width:62ch}
-@media (max-width:860px){.faq{grid-template-columns:1fr}}
-/* kundtjänst */
-.cs{background:var(--sage);padding-block:46px}
-.cs .in{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center}
-.cs h2{font-size:clamp(1.5rem,3vw,2rem)}
-.cs .contact{margin-top:10px;font-size:1.15rem;font-weight:700;display:flex;gap:6px 24px;flex-wrap:wrap}
-.cs ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
-.cs ul a{font:700 1.1rem var(--display);text-decoration:none;color:var(--green);display:flex;gap:10px}
-.cs ul a::before{content:"→"}
-@media (max-width:760px){.cs .in{grid-template-columns:1fr}}
-/* footer */
-footer{background:var(--green);color:rgb(255 255 255/.85);padding-block:64px 30px;font-size:15px}
-.fgrid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:30px}
-footer h4{font:700 13px var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--sage);margin:0 0 12px}
-footer ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-footer a{text-decoration:none}
-footer a:hover{color:var(--white);text-decoration:underline}
-footer .logo{color:var(--white)}
-.fbottom{margin-top:44px;padding-top:20px;border-top:1px solid rgb(255 255 255/.18);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px}
-@media (max-width:860px){.fgrid{grid-template-columns:1fr 1fr}}
-.demo{background:var(--ink);color:var(--white);text-align:center;font-size:13px;padding:8px 16px}
-.demo a{color:var(--sage)}
-html,body{overflow-x:clip}
-/* ---------- hamburgermeny ---------- */
-.burger{margin-left:auto;width:48px;height:48px;border-radius:50%;border:1.5px solid var(--line);background:var(--white);display:grid;place-content:center;gap:5px;cursor:pointer;position:relative;z-index:31;transition:background .3s,border-color .3s}
-.burger span{display:block;width:20px;height:2px;border-radius:2px;background:var(--green);transition:transform .45s cubic-bezier(.7,0,.2,1),opacity .3s,background .3s}
-.burger[aria-expanded="true"]{background:var(--sage);border-color:var(--sage)}
-.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.burger[aria-expanded="true"] span:nth-child(2){opacity:0;transform:scaleX(0)}
-.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.nav .btn{margin-left:4px}
-@media (max-width:560px){.nav .btn{display:none}}
-.overlay{position:fixed;inset:0;z-index:19;background:var(--green);color:var(--white);display:flex;flex-direction:column;justify-content:center;padding:calc(90px + env(safe-area-inset-top,0px)) 24px calc(30px + env(safe-area-inset-bottom,0px));clip-path:circle(0% at calc(100% - 44px) 34px);transition:clip-path .7s cubic-bezier(.7,0,.2,1);visibility:hidden;perspective:900px;overflow-y:auto}
-.overlay.open{clip-path:circle(150% at calc(100% - 44px) 34px);visibility:visible}
-.overlay ul{list-style:none;margin:0 auto;padding:0;width:100%;max-width:var(--max);display:grid;gap:4px}
-.overlay li{transform-origin:50% 0;transform:rotateX(-90deg);opacity:0;transition:transform .7s cubic-bezier(.2,.9,.25,1.15),opacity .5s}
-.overlay.open li{transform:none;opacity:1}
-.overlay.open li:nth-child(1){transition-delay:.18s}.overlay.open li:nth-child(2){transition-delay:.24s}.overlay.open li:nth-child(3){transition-delay:.3s}.overlay.open li:nth-child(4){transition-delay:.36s}.overlay.open li:nth-child(5){transition-delay:.42s}.overlay.open li:nth-child(6){transition-delay:.48s}.overlay.open li:nth-child(7){transition-delay:.54s}
-.overlay a{display:flex;justify-content:space-between;align-items:baseline;gap:16px;text-decoration:none;font:800 clamp(2rem,7vw,3.6rem)/1.15 var(--display);letter-spacing:-.02em;padding:6px 0;border-bottom:1px solid rgb(255 255 255/.14)}
-.overlay a::after{content:"→";font-size:.6em;color:var(--sage);transition:transform .3s}
-.overlay a:hover::after,.overlay a:focus-visible::after{transform:translateX(8px)}
-.overlay .ov-foot{max-width:var(--max);width:100%;margin:28px auto 0;display:flex;gap:8px 28px;flex-wrap:wrap;color:var(--sage);font-weight:600;opacity:0;transition:opacity .5s .55s}
-.overlay.open .ov-foot{opacity:1}
-body.menu-open{overflow:hidden}
-/* ---------- logga i 3D ---------- */
-.logo .cube{display:inline-block;transform-style:preserve-3d;animation:logospin 1.6s cubic-bezier(.6,0,.2,1) .4s both}
-.logo:hover .cube{animation:logospin 1.1s cubic-bezier(.6,0,.2,1)}
-@keyframes logospin{0%{transform:perspective(200px) rotateY(0)}100%{transform:perspective(200px) rotateY(360deg)}}
-/* ---------- toppen: djup ---------- */
-.hero{perspective:1000px}
-.slide.on .photo{animation:kb 14s ease-out both}
-@keyframes kb{from{transform:scale(1.14)}to{transform:scale(1)}}
-.hero .in{transform-style:preserve-3d}
-.hero h1,.hero p,.hero .row{transition:transform .5s cubic-bezier(.2,.8,.2,1)}
-.hero h1{animation:rise 1.1s cubic-bezier(.2,.8,.2,1) both}
-.hero p{animation:rise 1.1s .15s cubic-bezier(.2,.8,.2,1) both}
-.hero .row{animation:rise 1.1s .3s cubic-bezier(.2,.8,.2,1) both}
-@keyframes rise{from{transform:perspective(800px) rotateX(35deg) translateY(40px)}to{transform:none}}
-/* ---------- lutande kort ---------- */
-[data-tilt]{transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.8,.2,1);will-change:transform}
-[data-tilt].tilting{transition:transform .08s linear}
-[data-tilt] .ph{position:relative}
-[data-tilt] .ph::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgb(255 255 255/.35),transparent 55%);opacity:0;transition:opacity .3s}
-[data-tilt].tilting .ph::after{opacity:1}
-.co[data-tilt] .ph::after{background:linear-gradient(0deg,rgb(16 33 25/.82),transparent 65%)}
-/* ---------- delar som fälls upp ---------- */
-.pre{opacity:0;transform:perspective(1000px) rotateX(18deg) translateY(60px);transform-origin:50% 100%}
-.rv{transition:opacity 1s cubic-bezier(.2,.8,.2,1),transform 1.1s cubic-bezier(.2,.8,.2,1)}
-/* ---------- siffror som vänds ---------- */
-.t b{display:inline-block;transform-origin:50% 50% -20px}
-.t b.flip{animation:flipnum .9s cubic-bezier(.2,.8,.2,1)}
-@keyframes flipnum{from{transform:perspective(400px) rotateX(-100deg);opacity:0}to{transform:none;opacity:1}}
-@media (prefers-reduced-motion:reduce){
-  .logo .cube,.slide.on .photo,.hero h1,.hero p,.hero .row,.t b.flip{animation:none}
-  .overlay,.overlay li,[data-tilt],.rv{transition:none}
-  .pre{opacity:1;transform:none}
-}
-</style>
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-
 <div class="demo">Testlayout med påhittat företag och påhittade fakta. Foton från Pexels.</div>
 <header>
   <div class="in nav">
-    <a class="logo" href="#top" aria-label="Lindvik Bygg, till toppen"><span class="cube"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#1f4d3a"/><path d="M7 23V12l9-5 9 5v11" fill="none" stroke="#a9c3a0" stroke-width="2.6" stroke-linejoin="round"/><path d="M13 23v-6h6v6" fill="none" stroke="#fff" stroke-width="2.6"/></svg></span>Lindvik Bygg</a>
+    <a class="logo" href="index.html" aria-label="Lindvik Bygg, till toppen"><span class="cube"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#1f4d3a"/><path d="M7 23V12l9-5 9 5v11" fill="none" stroke="#a9c3a0" stroke-width="2.6" stroke-linejoin="round"/><path d="M13 23v-6h6v6" fill="none" stroke="#fff" stroke-width="2.6"/></svg></span>Lindvik Bygg</a>
     <button class="burger" id="burger" aria-expanded="false" aria-controls="overlay" aria-label="Öppna menyn"><span></span><span></span><span></span></button>
-    <a class="btn btn-g" href="#kontakt">Kontakta oss</a>
+    <a class="btn btn-g" href="kontakt.html">Kontakta oss</a>
   </div>
 </header>
 <div class="overlay" id="overlay" aria-hidden="true" inert>
+  <div class="ov-top"><a class="logo" href="index.html"><span class="cube"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#a9c3a0"/><path d="M7 23V12l9-5 9 5v11" fill="none" stroke="#1f4d3a" stroke-width="2.6" stroke-linejoin="round"/><path d="M13 23v-6h6v6" fill="none" stroke="#fff" stroke-width="2.6"/></svg></span>Lindvik Bygg</a><button class="ov-close" id="menuClose" type="button" aria-label="Stäng menyn">Stäng <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 4l12 12M16 4 4 16"/></svg></button></div>
   <nav aria-label="Huvudmeny"><ul>
-    <li><a href="#tjanster">Vårt erbjudande</a></li>
-    <li><a href="#projekt">Projekt</a></li>
-    <li><a href="#hallbarhet">Hållbarhet</a></li>
-    <li><a href="#nyheter">Nyheter</a></li>
-    <li><a href="#jobb">Jobba hos oss</a></li>
-    <li><a href="#kontakt">Kontakt</a></li>
+    <li><a href="tjanster.html">Vårt erbjudande</a></li>
+    <li><a href="projekt.html">Projekt</a></li>
+    <li><a href="om-oss.html">Om oss</a></li>
+    <li><a href="hallbarhet.html">Hållbarhet</a></li>
+    <li><a href="nyheter.html">Nyheter</a></li>
+    <li><a href="jobb.html">Jobba hos oss</a></li>
+    <li><a href="kontakt.html">Kontakt</a></li>
   </ul>
+  <div class="ov-sub"><a href="tjanst-bostader.html">Bostäder</a><a href="tjanst-skolor.html">Skolor och förskolor</a><a href="tjanst-mark.html">Mark och anläggning</a><a href="tjanst-trabyggnation.html">Träbyggnation</a><a href="tjanst-byggservice.html">Byggservice</a><a href="tjanst-projektutveckling.html">Projektutveckling</a></div>
   <div class="ov-foot"><span>033-20 40 60</span><span>info@lindvikbygg.se</span><span>Allégatan 12, Borås</span></div></nav>
 </div>
-
 <main id="top">
   <!-- Toppen: Svevia + Granitor -->
   <section class="hero" aria-label="Välkommen">
@@ -272,44 +41,34 @@ body.menu-open{overflow:hidden}
     <div class="in">
       <h1>Vi bygger det Västsverige växer i</h1>
       <p>Hus, skolor och vägar – byggt med trä, omtanke och egen personal sedan 1987.</p>
-      <div class="row"><a class="btn btn-w" href="#tjanster">Se vårt erbjudande</a><a class="btn btn-o" href="#projekt" style="color:#fff">Våra projekt</a>
+      <div class="row"><a class="btn btn-w" href="tjanster.html">Se vårt erbjudande</a><a class="btn btn-o" href="projekt.html" style="color:#fff">Våra projekt</a>
         <div class="dots" role="group" aria-label="Byt bild"><button aria-label="Bild 1" aria-current="true"></button><button aria-label="Bild 2"></button><button aria-label="Bild 3"></button></div></div>
     </div>
   </section>
 
-  <!-- Tjänster: Granitor (dörrar) + GBJ/Brixly/Contractor/ByggPartner -->
+  <!-- Tjänster: som Brixly -->
   <section id="tjanster">
-    <div class="in center">
-      <p class="eyebrow">Vårt erbjudande</p>
-      <h2 style="margin-top:8px">Åtta dörrar. Vilken vill du öppna?</h2>
-      <p class="lead">Från första skissen till nyckelöverlämning – och servicen efteråt. Allt under ett tak.</p>
-    </div>
-    <div class="in doors">
-      <a class="door" href="#projekt"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M3 21h18M5 21V9l7-5 7 5v12M10 21v-6h4v6"/></svg><div><b>Bostäder</b><br><span>Villor, radhus, flerbostadshus</span></div></a>
-      <a class="door" href="#projekt"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M3 21h18M4 21V7h16v14M8 11h2M14 11h2M8 15h2M14 15h2"/></svg><div><b>Skolor &amp; förskolor</b><br><span>Trygga miljöer för barn</span></div></a>
-      <a class="door" href="#projekt"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M2 18h20M5 18l3-8h8l3 8M9 10V6h6v4"/></svg><div><b>Mark &amp; anläggning</b><br><span>Grund, vatten och avlopp</span></div></a>
-      <a class="door" href="#erbjudande"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M4 20 20 4M7 4h13v13"/></svg><div><b>Träbyggnation</b><br><span>KL-trä och limträ</span></div></a>
-      <a class="door" href="#kontakt"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M14 7a4 4 0 1 0-5 5l-6 6 2 2 6-6a4 4 0 0 0 3-7z"/></svg><div><b>Byggservice</b><br><span>Snabb hjälp med det lilla</span></div></a>
-      <a class="door" href="#kontakt"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M4 20V10l8-6 8 6v10H4zM9 20v-5h6v5"/></svg><div><b>Renovering</b><br><span>Om- och tillbyggnad</span></div></a>
-      <a class="door" href="#projekt"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M3 20h18M6 20V4h12v16M9 8h6M9 12h6"/></svg><div><b>Projektutveckling</b><br><span>Från tomt till färdigt kvarter</span></div></a>
-      <a class="door" href="#jobb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg><div><b>Lediga jobb</b><br><span>14 tjänster just nu</span></div></a>
+    <div class="in">
+      <div class="headrow"><div><p class="eyebrow">Vårt erbjudande</p><h2>Det här bygger vi</h2></div><a class="arrow" href="tjanster.html">Alla tjänster</a></div>
+      <div class="tiles"><a class="tile" href="tjanst-bostader.html"><img class="photo" src="img/foto-06.jpg" alt="" loading="lazy" style="object-position:50% 50%"><svg class="arr" viewBox="0 0 52 52" fill="none" stroke-width="2.2" aria-hidden="true"><path d="M10 42 42 10M16 10h26v26"/></svg><span><b>Bostäder</b><small>Villor, radhus och flerbostadshus</small></span></a><a class="tile" href="tjanst-skolor.html"><img class="photo" src="img/foto-05.jpg" alt="" loading="lazy" style="object-position:50% 50%"><svg class="arr" viewBox="0 0 52 52" fill="none" stroke-width="2.2" aria-hidden="true"><path d="M10 42 42 10M16 10h26v26"/></svg><span><b>Skolor och förskolor</b><small>Lugna, ljusa miljöer i trä</small></span></a><a class="tile" href="tjanst-mark.html"><img class="photo" src="img/foto-20.jpg" alt="" loading="lazy" style="object-position:50% 50%"><svg class="arr" viewBox="0 0 52 52" fill="none" stroke-width="2.2" aria-hidden="true"><path d="M10 42 42 10M16 10h26v26"/></svg><span><b>Mark och anläggning</b><small>Grund, vatten, avlopp och vägar</small></span></a><a class="tile" href="tjanst-trabyggnation.html"><img class="photo" src="img/foto-09.jpg" alt="" loading="lazy" style="object-position:50% 50%"><svg class="arr" viewBox="0 0 52 52" fill="none" stroke-width="2.2" aria-hidden="true"><path d="M10 42 42 10M16 10h26v26"/></svg><span><b>Träbyggnation</b><small>KL-trä och limträ från egen fabrik</small></span></a><a class="tile" href="tjanst-byggservice.html"><img class="photo" src="img/foto-22.jpg" alt="" loading="lazy" style="object-position:50% 50%"><svg class="arr" viewBox="0 0 52 52" fill="none" stroke-width="2.2" aria-hidden="true"><path d="M10 42 42 10M16 10h26v26"/></svg><span><b>Byggservice</b><small>Snabb hjälp med det lilla – även för privatpersoner</small></span></a><a class="tile" href="tjanst-projektutveckling.html"><img class="photo" src="img/foto-18.jpg" alt="" loading="lazy" style="object-position:50% 50%"><svg class="arr" viewBox="0 0 52 52" fill="none" stroke-width="2.2" aria-hidden="true"><path d="M10 42 42 10M16 10h26v26"/></svg><span><b>Projektutveckling</b><small>Från tomt till färdigt kvarter</small></span></a></div>
     </div>
   </section>
 
-  <!-- Om oss: Brixly + BDX + ByggPartner -->
+  <!-- Om oss -->
   <section class="about" id="om">
-    <div class="in split">
-      <div>
+    <div class="in about2">
+      <div class="media"><div class="ph"><img class="photo" src="img/foto-04.jpg" alt="Byggteam som tittar på en ritning" loading="lazy" style="object-position:50% 30%"></div><div class="badge"><b>Sedan 1987</b><span>Familjeägt i tre generationer</span></div></div>
+      <div class="txt">
         <p class="eyebrow">Om Lindvik Bygg</p>
         <h2 style="margin-top:8px">Ett lokalt byggföretag med 240 egna medarbetare</h2>
-        <p class="lead" style="margin-top:16px">Vi är ett familjeägt bygg- och anläggningsföretag från Borås. Vi tror på samverkan: när beställare, arkitekt och hantverkare sitter vid samma bord från början blir husen bättre, billigare och klara i tid.</p>
-        <div class="cols3">
-          <div><h3>Tjänster och projekt</h3><p>Bostäder, skolor och mark i hela Sjuhärad och Göteborgsregionen.</p><a class="arrow" href="#tjanster">Våra tjänster</a></div>
-          <div><h3>Detta är Lindvik</h3><p>Grundat 1987 i ett garage i Viskafors. Idag fyra kontor.</p><a class="arrow" href="#om">Vår historia</a></div>
-          <div><h3>Jobba med oss</h3><p>Hos oss får du ansvar tidigt och kollegor som hjälper till.</p><a class="arrow" href="#jobb">Lediga jobb</a></div>
+        <p class="lead" style="margin-top:14px">Vi är ett familjeägt bygg- och anläggningsföretag från Borås. När beställare, arkitekt och hantverkare sitter vid samma bord från början blir husen bättre, billigare och klara i tid.</p>
+        <div class="facts"><div><b>240</b><span>medarbetare</span></div><div><b>1 100</b><span>byggda projekt</span></div><div><b>4</b><span>kontor i Sjuhärad</span></div></div>
+        <div class="minis">
+          <a class="mini" href="tjanster.html"><b>Tjänster och projekt</b><span>Bostäder, skolor och mark i Sjuhärad och Göteborgsregionen.</span></a>
+          <a class="mini" href="om-oss.html#historia"><b>Vår historia</b><span>Från ett garage i Viskafors till fyra kontor.</span></a>
+          <a class="mini" href="jobb.html"><b>Jobba med oss</b><span>Ansvar tidigt och kollegor som hjälper till.</span></a>
         </div>
       </div>
-      <div class="ph people"><img class="photo" src="img/foto-04.jpg" alt="" style="object-position:50% 30%"></div>
     </div>
   </section>
 
@@ -321,13 +80,13 @@ body.menu-open{overflow:hidden}
         <h2 style="margin-top:8px">Byggt av oss</h2>
         <p class="lead" style="margin-top:14px">Över 1 100 projekt sedan starten. Här är några av de senaste.</p>
         <div class="ctrl"><button id="prev" aria-label="Föregående projekt">←</button><button id="next" aria-label="Nästa projekt">→</button></div>
-        <a class="btn btn-g" style="margin-top:22px" href="#projekt">Alla projekt</a>
+        <a class="btn btn-g" style="margin-top:22px" href="projekt.html">Alla projekt</a>
       </div>
       <div class="track" id="track" tabindex="0" aria-label="Projekt, svep i sidled">
-        <div class="pcard"><div class="ph wood"><img class="photo" src="img/foto-05.jpg" alt="" style="object-position:50% 50%"></div><div class="meta"><h3>Förskolan Ekbacken</h3><small>Borås · 2026</small></div></div>
-        <div class="pcard"><div class="ph house"><img class="photo" src="img/foto-06.jpg" alt="" style="object-position:50% 50%"></div><div class="meta"><h3>Kv. Sjöglimten</h3><small>Ulricehamn · 2025</small></div></div>
-        <div class="pcard"><div class="ph site"><img class="photo" src="img/foto-07.jpg" alt="" style="object-position:50% 50%"></div><div class="meta"><h3>Viskahallen</h3><small>Viskafors · 2025</small></div></div>
-        <div class="pcard"><div class="ph road"><img class="photo" src="img/foto-08.jpg" alt="" style="object-position:50% 50%"></div><div class="meta"><h3>Rondell Hultafors</h3><small>Bollebygd · 2024</small></div></div>
+        <a class="pcard" href="projekt-ekbacken.html"><div class="ph wood"><img class="photo" src="img/foto-05.jpg" alt="" style="object-position:50% 50%"></div><div class="meta"><h3>Förskolan Ekbacken</h3><small>Borås · 2026</small></div></a>
+        <a class="pcard" href="projekt-sjoglimten.html"><div class="ph house"><img class="photo" src="img/foto-06.jpg" alt="" style="object-position:50% 50%"></div><div class="meta"><h3>Kv. Sjöglimten</h3><small>Ulricehamn · 2025</small></div></a>
+        <a class="pcard" href="projekt-viskahallen.html"><div class="ph site"><img class="photo" src="img/foto-07.jpg" alt="" style="object-position:50% 50%"></div><div class="meta"><h3>Viskahallen</h3><small>Viskafors · 2025</small></div></a>
+        <a class="pcard" href="projekt-rondell.html"><div class="ph road"><img class="photo" src="img/foto-08.jpg" alt="" style="object-position:50% 50%"></div><div class="meta"><h3>Rondell Hultafors</h3><small>Bollebygd · 2024</small></div></a>
       </div>
     </div>
   </section>
@@ -339,13 +98,13 @@ body.menu-open{overflow:hidden}
       <p class="eyebrow" style="color:var(--sage)">Helhetserbjudande</p>
       <h2>Trähus – från skogen till nyckeln</h2>
       <p>Vi ritar, tillverkar och monterar stommen själva. Det ger 40 % lägre klimatavtryck än en betongstomme och halverad byggtid på plats.</p>
-      <div><a class="btn btn-w" href="#kontakt">Läs om vårt träbyggande</a></div>
+      <div><a class="btn btn-w" href="tjanst-trabyggnation.html">Läs om vårt träbyggande</a></div>
     </div>
   </section>
   <div class="in overlap">
     <div class="ocard">
       <div class="ph house" style="border-radius:0"><img class="photo" src="img/foto-10.jpg" alt="" style="object-position:50% 40%"></div>
-      <div class="txt"><p class="eyebrow">Hitta bostad</p><h3 style="font-size:1.5rem">Hyr du bostad eller letar du efter en att köpa?</h3><p class="lead" style="font-size:1rem">Just nu säljer vi 18 nyproducerade radhus i Fristad. Inflyttning hösten 2027.</p><a class="arrow" href="#kontakt">Se lediga bostäder</a></div>
+      <div class="txt"><p class="eyebrow">Hitta bostad</p><h3 style="font-size:1.5rem">Hyr du bostad eller letar du efter en att köpa?</h3><p class="lead" style="font-size:1rem">Just nu säljer vi 18 nyproducerade radhus i Fristad. Inflyttning hösten 2027.</p><a class="arrow" href="bolag-bostad.html">Se lediga bostäder</a></div>
     </div>
   </div>
 
@@ -356,7 +115,7 @@ body.menu-open{overflow:hidden}
         <p class="eyebrow" style="color:var(--sage)">Hållbarhetsredovisning 2026</p>
         <h2>Vi mäter det vi bygger</h2>
         <p>Varje år redovisar vi hur vi påverkar miljön, människorna och ekonomin omkring oss. I år nådde vi målet för återvunnet material ett år tidigare än planerat.</p>
-        <div><a class="btn btn-w" href="#hallbarhet">Läs redovisningen</a></div>
+        <div><a class="btn btn-w" href="hallbarhet.html">Läs redovisningen</a></div>
       </div>
       <div class="mosaic">
         <div class="ph forest" style="min-height:180px"><img class="photo" src="img/foto-11.jpg" alt="" style="object-position:50% 50%"></div>
@@ -370,11 +129,11 @@ body.menu-open{overflow:hidden}
   <!-- Nyheter: Svevia + Myresjöhus + BDX -->
   <section id="nyheter" style="background:var(--beige)">
     <div class="in">
-      <div class="headrow"><div><p class="eyebrow">Nyheter och press</p><h2 style="margin-top:8px">Senaste från Lindvik</h2></div><a class="arrow" href="#nyheter">Alla nyheter</a></div>
+      <div class="headrow"><div><p class="eyebrow">Nyheter och press</p><h2 style="margin-top:8px">Senaste från Lindvik</h2></div><a class="arrow" href="nyheter.html">Alla nyheter</a></div>
       <div class="newsgrid">
-        <div class="news" data-tilt><div class="ph wood"><img class="photo" src="img/foto-13.jpg" alt="" style="object-position:50% 50%"></div><time datetime="2026-10-02">2 oktober 2026</time><h3>Förskolan Ekbacken vinner Borås byggnadspris</h3><p>Juryn lyfte fram hur trä och dagsljus gör förskolan lugn och varm.</p></div>
-        <div class="news" data-tilt><div class="ph people"><img class="photo" src="img/foto-14.jpg" alt="" style="object-position:50% 25%"></div><time datetime="2026-09-24">24 september 2026</time><h3>Sara Lindqvist blir ny vd</h3><p>Sara har arbetat på Lindvik sedan 2009, senast som platschef.</p></div>
-        <div class="news" data-tilt><div class="ph house"><img class="photo" src="img/foto-15.jpg" alt="" style="object-position:50% 50%"></div><time datetime="2026-09-10">10 september 2026</time><h3>Goda råd: fem saker att tänka på innan du bygger hus</h3><p>Budget, tomt och tidplan – så undviker du de vanligaste misstagen.</p></div>
+        <a class="news" data-tilt href="nyhet-ekbacken-pris.html"><div class="ph wood"><img class="photo" src="img/foto-13.jpg" alt="" style="object-position:50% 50%"></div><time datetime="2026-10-02">2 oktober 2026</time><h3>Förskolan Ekbacken vinner Borås byggnadspris</h3><p>Juryn lyfte fram hur trä och dagsljus gör förskolan lugn och varm.</p></a>
+        <a class="news" data-tilt href="nyhet-ny-vd.html"><div class="ph people"><img class="photo" src="img/foto-14.jpg" alt="" style="object-position:50% 25%"></div><time datetime="2026-09-24">24 september 2026</time><h3>Sara Lindqvist blir ny vd</h3><p>Sara har arbetat på Lindvik sedan 2009, senast som platschef.</p></a>
+        <a class="news" data-tilt href="nyhet-goda-rad.html"><div class="ph house"><img class="photo" src="img/foto-15.jpg" alt="" style="object-position:50% 50%"></div><time datetime="2026-09-10">10 september 2026</time><h3>Goda råd: fem saker att tänka på innan du bygger hus</h3><p>Budget, tomt och tidplan – så undviker du de vanligaste misstagen.</p></a>
       </div>
     </div>
   </section>
@@ -385,31 +144,25 @@ body.menu-open{overflow:hidden}
       <div class="center" style="margin-bottom:30px"><p class="eyebrow">Jobba hos oss</p><h2 style="margin-top:8px">Vi bygger människor också</h2></div>
       <div class="jobgrid">
         <div class="big"><div class="ph people"><img class="photo" src="img/foto-16.jpg" alt="" style="object-position:50% 30%"></div>
-          <div class="card"><h3 style="font-size:1.4rem">Det vi gör går till historien</h3><p style="color:rgb(255 255 255/.85)">När du packar ihop för dagen står det något kvar som människor ska använda i hundra år.</p><div><a class="btn btn-w" href="#jobb">Lediga jobb (14)</a></div></div></div>
+          <div class="card"><h3 style="font-size:1.4rem">Det vi gör går till historien</h3><p style="color:rgb(255 255 255/.85)">När du packar ihop för dagen står det något kvar som människor ska använda i hundra år.</p><div><a class="btn btn-w" href="jobb.html">Lediga jobb (6)</a></div></div></div>
         <div class="side">
           <div class="ph site"><img class="photo" src="img/foto-17.jpg" alt="" style="object-position:50% 50%"></div>
-          <div class="card2"><p class="eyebrow">Lärling eller student?</p><h3 style="font-size:1.35rem">Börja din karriär hos oss</h3><p class="lead" style="font-size:1rem">Varje år tar vi in 20 lärlingar och 10 sommarjobbare. Prenumerera på lediga jobb så missar du inget.</p><a class="arrow" href="#jobb">Så är det att jobba här</a></div>
+          <div class="card2"><p class="eyebrow">Lärling eller student?</p><h3 style="font-size:1.35rem">Börja din karriär hos oss</h3><p class="lead" style="font-size:1rem">Varje år tar vi in 20 lärlingar och 10 sommarjobbare. Prenumerera på lediga jobb så missar du inget.</p><a class="arrow" href="jobb.html">Så är det att jobba här</a></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Våra bolag: Granitor  +  Genvägar: ByggPartner -->
-  <section style="background:var(--beige)">
+  <!-- Våra bolag -->
+  <section id="bolag" style="background:var(--beige)">
     <div class="in">
       <div class="center"><p class="eyebrow">Koncernen</p><h2 style="margin-top:8px">Våra bolag</h2></div>
-      <div class="cos">
-        <div class="co wide" data-tilt><div class="ph house"><img class="photo" src="img/foto-18.jpg" alt="" style="object-position:50% 50%"></div><div class="txt"><small>Lindvik Bostad</small><h3>Hem för framtidens Sjuhärad</h3><span class="arrow" style="color:#fff">Sök bostad</span></div></div>
-        <div class="co wide" data-tilt><div class="ph site"><img class="photo" src="img/foto-19.jpg" alt="" style="object-position:50% 50%"></div><div class="txt"><small>Lindvik Fastighet</small><h3>Lokaler som inspirerar</h3><span class="arrow" style="color:#fff">Sök lokal</span></div></div>
-        <div class="co" data-tilt><div class="ph road"><img class="photo" src="img/foto-20.jpg" alt="" style="object-position:50% 50%"></div><div class="txt"><small>Lindvik Mark</small><h3>Mark &amp; anläggning</h3></div></div>
-        <div class="co" data-tilt><div class="ph wood"><img class="photo" src="img/foto-21.jpg" alt="" style="object-position:50% 50%"></div><div class="txt"><small>Lindvik Trä</small><h3>Egen husfabrik</h3></div></div>
-        <div class="co" data-tilt><div class="ph night"><img class="photo" src="img/foto-22.jpg" alt="" style="object-position:50% 50%"></div><div class="txt"><small>Lindvik Service</small><h3>Byggservice</h3></div></div>
-      </div>
+      <div class="cos2"><a class="co2" href="bolag-bostad.html"><div class="ph"><img class="photo" src="img/foto-18.jpg" alt="Lindvik Bostad" loading="lazy" style="object-position:50% 50%"></div><div class="body"><small>Bostäder</small><h3>Lindvik Bostad</h3><p>Säljer och hyr ut bostäderna vi bygger.</p><span class="arrow">Till Lindvik Bostad</span></div></a><a class="co2" href="bolag-fastighet.html"><div class="ph"><img class="photo" src="img/foto-19.jpg" alt="Lindvik Fastighet" loading="lazy" style="object-position:50% 50%"></div><div class="body"><small>Lokaler</small><h3>Lindvik Fastighet</h3><p>Äger och förvaltar 40 000 kvadratmeter lokaler.</p><span class="arrow">Till Lindvik Fastighet</span></div></a><a class="co2" href="bolag-mark.html"><div class="ph"><img class="photo" src="img/foto-20.jpg" alt="Lindvik Mark" loading="lazy" style="object-position:50% 50%"></div><div class="body"><small>Mark och anläggning</small><h3>Lindvik Mark</h3><p>Mark, väg och ledningar i hela Västsverige.</p><span class="arrow">Till Lindvik Mark</span></div></a><a class="co2" href="bolag-tra.html"><div class="ph"><img class="photo" src="img/foto-21.jpg" alt="Lindvik Trä" loading="lazy" style="object-position:50% 50%"></div><div class="body"><small>Husfabrik</small><h3>Lindvik Trä</h3><p>Husfabriken i Viskafors som tillverkar våra stommar.</p><span class="arrow">Till Lindvik Trä</span></div></a><a class="co2" href="bolag-service.html"><div class="ph"><img class="photo" src="img/foto-22.jpg" alt="Lindvik Service" loading="lazy" style="object-position:50% 50%"></div><div class="body"><small>Byggservice</small><h3>Lindvik Service</h3><p>Byggservice och underhåll, även för privatpersoner.</p><span class="arrow">Till Lindvik Service</span></div></a></div>
       <div class="shortcuts" aria-label="Genvägar">
-        <a class="sc" href="#om"><div class="ph"><img class="photo" src="img/foto-04.jpg" alt="" style="object-position:50% 50%"></div><b>Kultur</b></a>
-        <a class="sc" href="#kontakt"><div class="ph"><img class="photo" src="img/foto-23.jpg" alt="" style="object-position:50% 50%"></div><b>Regioner</b></a>
-        <a class="sc" href="#hallbarhet"><div class="ph"><img class="photo" src="img/foto-11.jpg" alt="" style="object-position:50% 50%"></div><b>Hållbarhet</b></a>
-        <a class="sc" href="#projekt"><div class="ph"><img class="photo" src="img/foto-24.jpg" alt="" style="object-position:50% 50%"></div><b>Byggnader</b></a>
+        <a class="sc" href="om-oss.html"><div class="ph"><img class="photo" src="img/foto-04.jpg" alt="" style="object-position:50% 50%"></div><b>Kultur</b></a>
+        <a class="sc" href="kontakt.html#kontor"><div class="ph"><img class="photo" src="img/foto-23.jpg" alt="" style="object-position:50% 50%"></div><b>Regioner</b></a>
+        <a class="sc" href="hallbarhet.html"><div class="ph"><img class="photo" src="img/foto-11.jpg" alt="" style="object-position:50% 50%"></div><b>Hållbarhet</b></a>
+        <a class="sc" href="projekt.html"><div class="ph"><img class="photo" src="img/foto-24.jpg" alt="" style="object-position:50% 50%"></div><b>Byggnader</b></a>
       </div>
     </div>
   </section>
@@ -417,7 +170,7 @@ body.menu-open{overflow:hidden}
   <!-- Vanliga frågor: GBJ -->
   <section id="faq">
     <div class="in faq">
-      <div><p class="eyebrow">Vanliga frågor</p><h2 style="margin-top:8px">Undrar du något?</h2><p class="lead" style="margin-top:14px">Här är svaren på det vi får frågor om oftast. Hittar du inte svaret? Ring oss.</p><a class="arrow" style="margin-top:18px" href="#kontakt">Fler frågor och svar</a></div>
+      <div><p class="eyebrow">Vanliga frågor</p><h2 style="margin-top:8px">Undrar du något?</h2><p class="lead" style="margin-top:14px">Här är svaren på det vi får frågor om oftast. Hittar du inte svaret? Ring oss.</p><a class="arrow" style="margin-top:18px" href="kontakt.html">Fråga oss något annat</a></div>
       <div>
         <details><summary>Hur lång tid tar det att bygga ett flerbostadshus i trä?</summary><p>Ett hus med 40 lägenheter tar ungefär 14 månader från byggstart till inflyttning. Stommen monteras på sex veckor.</p></details>
         <details><summary>Bygger ni åt privatpersoner?</summary><p>Ja, via Lindvik Service gör vi om- och tillbyggnader, badrum och mindre renoveringar i hela Sjuhärad.</p></details>
@@ -427,111 +180,27 @@ body.menu-open{overflow:hidden}
       </div>
     </div>
   </section>
-
-  <!-- Kundtjänst: Svevia -->
-  <section class="cs" id="kontakt">
-    <div class="in">
-      <div><h2>Lindviks kundtjänst</h2><div class="contact"><span>033-20 40 60</span><span>info@lindvikbygg.se</span></div><p style="margin-top:6px">Vardagar 07–16. Påhittade uppgifter.</p></div>
-      <ul><li><a href="#kontakt">Kontor och medarbetare</a></li><li><a href="#nyheter">Presskontakt</a></li><li><a href="#kontakt">Fakturering</a></li></ul>
-    </div>
-  </section>
 </main>
-
-<!-- Botten: Granitor + ByggPartner -->
+<section class="fcta" aria-label="Kontakta oss">
+  <div class="in"><div><h2>Har du ett projekt på gång?</h2><p>Berätta om det, så hör vi av oss inom två arbetsdagar.</p></div><a class="btn btn-w" href="kontakt.html">Kontakta oss</a></div>
+</section>
 <footer>
   <div class="in">
     <div class="fgrid">
-      <div><a class="logo" href="#top"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#a9c3a0"/><path d="M7 23V12l9-5 9 5v11" fill="none" stroke="#1f4d3a" stroke-width="2.6" stroke-linejoin="round"/><path d="M13 23v-6h6v6" fill="none" stroke="#fff" stroke-width="2.6"/></svg>Lindvik Bygg</a><p style="margin-top:14px;max-width:34ch">Ett familjeägt bygg- och anläggningsföretag i Västsverige. 240 medarbetare, fyra kontor, sedan 1987.</p><p style="margin-top:12px">Allégatan 12, 503 32 Borås</p></div>
-      <div><h4>Om oss</h4><ul><li><a href="#om">Kultur och värderingar</a></li><li><a href="#om">Historik</a></li><li><a href="#om">Ledning</a></li><li><a href="#nyheter">Nyheter &amp; press</a></li></ul></div>
-      <div><h4>Vårt erbjudande</h4><ul><li><a href="#tjanster">Bostäder</a></li><li><a href="#tjanster">Skolor</a></li><li><a href="#tjanster">Mark &amp; anläggning</a></li><li><a href="#tjanster">Byggservice</a></li></ul></div>
-      <div><h4>Kontakt</h4><ul><li><a href="#kontakt">Kontakta oss</a></li><li><a href="#jobb">Lediga jobb</a></li><li><a href="#hallbarhet">Hållbarhet</a></li><li><a href="#faq">Vanliga frågor</a></li></ul></div>
+      <div><a class="logo" href="index.html"><span class="cube"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#a9c3a0"/><path d="M7 23V12l9-5 9 5v11" fill="none" stroke="#1f4d3a" stroke-width="2.6" stroke-linejoin="round"/><path d="M13 23v-6h6v6" fill="none" stroke="#fff" stroke-width="2.6"/></svg></span>Lindvik Bygg</a>
+        <p style="margin-top:14px;max-width:36ch">Ett familjeägt bygg- och anläggningsföretag i Västsverige. 240 medarbetare och fyra kontor sedan 1987.</p>
+        <p style="margin-top:12px">Allégatan 12, 503 32 Borås<br>033-20 40 60 · info@lindvikbygg.se</p>
+        <div class="social"><a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn (öppnas i ny flik)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm-2 6h4v12H2zm7 0h4v1.7c.6-1 2-2 4-2 4 0 5 2.5 5 6V21h-4v-5.5c0-1.6-.3-3-2-3s-2.3 1.3-2.3 3V21H9z"/></svg></a><a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram (öppnas i ny flik)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm5.3-9.5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4zM12 2c-2.7 0-3 0-4.1.1C4.4 2.2 2.2 4.4 2.1 7.9 2 9 2 9.3 2 12s0 3 .1 4.1c.1 3.5 2.3 5.7 5.8 5.8 1.1.1 1.4.1 4.1.1s3 0 4.1-.1c3.5-.1 5.7-2.3 5.8-5.8.1-1.1.1-1.4.1-4.1s0-3-.1-4.1c-.1-3.5-2.3-5.7-5.8-5.8C15 2 14.7 2 12 2z"/></svg></a><a href="https://www.facebook.com" target="_blank" rel="noopener" aria-label="Facebook (öppnas i ny flik)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8V6.5c0-.7.5-1.2 1.2-1.2H17V2h-2.8C11.6 2 10 3.7 10 6.3V8H7.5v3.3H10V22h4V11.3h2.8l.5-3.3z"/></svg></a></div>
+        <form class="news-f" data-demo><label for="nf">Få våra nyheter</label><div class="row"><input id="nf" type="email" required placeholder="din@mejl.se" autocomplete="email"><button type="submit">Prenumerera</button></div><p class="form-ok" hidden tabindex="-1">Tack! Det här är en testsida, så inget skickades.</p></form>
+      </div>
+      <div><h4>Vårt erbjudande</h4><ul><li><a href="tjanst-bostader.html">Bostäder</a></li><li><a href="tjanst-skolor.html">Skolor och förskolor</a></li><li><a href="tjanst-mark.html">Mark och anläggning</a></li><li><a href="tjanst-trabyggnation.html">Träbyggnation</a></li><li><a href="tjanst-byggservice.html">Byggservice</a></li><li><a href="tjanst-projektutveckling.html">Projektutveckling</a></li></ul></div>
+      <div><h4>Våra bolag</h4><ul><li><a href="bolag-bostad.html">Lindvik Bostad</a></li><li><a href="bolag-fastighet.html">Lindvik Fastighet</a></li><li><a href="bolag-mark.html">Lindvik Mark</a></li><li><a href="bolag-tra.html">Lindvik Trä</a></li><li><a href="bolag-service.html">Lindvik Service</a></li></ul></div>
+      <div><h4>Om Lindvik</h4><ul><li><a href="om-oss.html">Om oss</a></li><li><a href="om-oss.html#historia">Vår historia</a></li><li><a href="projekt.html">Projekt</a></li><li><a href="hallbarhet.html">Hållbarhet</a></li><li><a href="nyheter.html">Nyheter och press</a></li><li><a href="jobb.html">Jobba hos oss</a></li><li><a href="kontakt.html">Kontakt</a></li></ul></div>
     </div>
-    <div class="fbottom"><span>© 2026 Lindvik Bygg AB · Påhittat testföretag · Foton: Pexels</span><span>Integritetspolicy · Cookies · Tillgänglighet</span></div>
+    <div class="certs" aria-label="Certifieringar"><span>ISO 9001</span><span>ISO 14001</span><span>ISO 45001</span><span>Svanen-licens</span></div>
+    <div class="fbottom"><span>© 2026 Lindvik Bygg AB · Påhittat testföretag · Foton: Pexels</span><a class="totop" href="#" data-top>Till toppen ↑</a></div>
   </div>
 </footer>
-
-<script>
-const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-const fine = matchMedia("(pointer: fine)").matches;
-
-/* ---------- hamburgermeny ---------- */
-const burger = document.getElementById("burger"), overlay = document.getElementById("overlay");
-const setMenu = (open) => {
-  overlay.classList.toggle("open", open); overlay.toggleAttribute("inert", !open); overlay.setAttribute("aria-hidden", !open);
-  burger.setAttribute("aria-expanded", open); burger.setAttribute("aria-label", open ? "Stäng menyn" : "Öppna menyn");
-  document.body.classList.toggle("menu-open", open);
-  if (open) overlay.querySelector("a").focus({ preventScroll: true });
-};
-burger.onclick = () => setMenu(!overlay.classList.contains("open"));
-overlay.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setMenu(false)));
-addEventListener("keydown", (e) => { if (e.key === "Escape" && overlay.classList.contains("open")) { setMenu(false); burger.focus(); } });
-
-/* ---------- bildspel i toppen ---------- */
-const slides = [...document.querySelectorAll(".hero .slide")], dots = [...document.querySelectorAll(".dots button")];
-let cur = 0, timer = null;
-const show = (i) => { cur = i; slides.forEach((s, k) => s.classList.toggle("on", k === i)); dots.forEach((d, k) => d.setAttribute("aria-current", k === i)); };
-const restart = () => { clearInterval(timer); if (!reduce) timer = setInterval(() => show((cur + 1) % slides.length), 6500); };
-dots.forEach((d, i) => (d.onclick = () => { show(i); restart(); }));
-restart();
-
-/* ---------- toppen: texten i lager följer musen ---------- */
-const hero = document.querySelector(".hero");
-if (!reduce && fine && hero) {
-  const layers = [[".hero h1", 26], [".hero p", 16], [".hero .row", 10]].map(([s, d]) => [hero.querySelector(s), d]);
-  hero.addEventListener("pointermove", (e) => {
-    const r = hero.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
-    for (const [el, d] of layers) el.style.transform = `perspective(900px) translate3d(${x * d}px,${y * d * 0.6}px,0) rotateY(${x * 6}deg) rotateX(${-y * 4}deg)`;
-  });
-  hero.addEventListener("pointerleave", () => layers.forEach(([el]) => (el.style.transform = "")));
-}
-
-/* ---------- projektpilar ---------- */
-const track = document.getElementById("track"), step = () => track.firstElementChild.getBoundingClientRect().width + 16;
-document.getElementById("prev").onclick = () => track.scrollBy({ left: -step(), behavior: reduce ? "auto" : "smooth" });
-document.getElementById("next").onclick = () => track.scrollBy({ left: step(), behavior: reduce ? "auto" : "smooth" });
-
-/* ---------- kort som lutar i 3D ---------- */
-if (!reduce) document.querySelectorAll("[data-tilt]").forEach((el) => {
-  const max = el.classList.contains("co") ? 6 : 9;
-  el.addEventListener("pointermove", (e) => {
-    const r = el.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
-    el.classList.add("tilting");
-    el.style.transform = `perspective(900px) rotateY(${(x - 0.5) * max * 2}deg) rotateX(${(0.5 - y) * max * 2}deg) scale(1.02)`;
-    el.style.setProperty("--mx", x * 100 + "%"); el.style.setProperty("--my", y * 100 + "%");
-  });
-  el.addEventListener("pointerleave", () => { el.classList.remove("tilting"); el.style.transform = ""; });
-});
-
-/* ---------- delar fälls upp när de syns, dörrar glipar, siffror vänds ---------- */
-if (!reduce && "IntersectionObserver" in window) {
-  const targets = [...document.querySelectorAll("main > section:not(.hero):not(.build) > .in, .overlap .ocard, .newsgrid > *, .cos > *")];
-  const below = targets.filter((el) => el.getBoundingClientRect().top > innerHeight * 0.9);
-  below.forEach((el) => el.classList.add("pre", "rv"));
-  const io = new IntersectionObserver((es) => es.forEach((e) => {
-    if (!e.isIntersecting) return;
-    const el = e.target, i = [...(el.parentElement?.children || [])].indexOf(el);
-    el.style.transitionDelay = el.matches(".newsgrid > *, .cos > *") ? Math.min(i, 7) * 70 + "ms" : "0ms";
-    el.classList.remove("pre"); io.unobserve(el);
-    setTimeout(() => (el.style.transitionDelay = ""), 1400);
-  }), { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
-  below.forEach((el) => io.observe(el));
-  let sweep = 0;
-  const reveal = () => { sweep = 0; document.querySelectorAll(".pre").forEach((el) => { if (el.getBoundingClientRect().top < innerHeight) { el.classList.remove("pre"); io.unobserve(el); } }); };
-  addEventListener("scroll", () => { if (!sweep) sweep = setTimeout(reveal, 250); }, { passive: true });
-
-
-  const nio = new IntersectionObserver((es) => es.forEach((e) => {
-    if (!e.isIntersecting) return; nio.unobserve(e.target);
-    const b = e.target, txt = b.textContent, m = txt.match(/-?−?\d+/); if (!m) return;
-    const end = Math.abs(parseInt(m[0].replace("−", "-"), 10)), t0 = performance.now();
-    b.classList.add("flip");
-    const tick = (t) => { const k = Math.min(1, (t - t0) / 1100), v = Math.round(end * (1 - Math.pow(1 - k, 3))); b.textContent = txt.replace(/\d+/, v); if (k < 1) requestAnimationFrame(tick); };
-    requestAnimationFrame(tick);
-  }), { threshold: 0.6 });
-  document.querySelectorAll(".t b").forEach((b) => nio.observe(b));
-}
-
-</script>
-
+<script src="assets/site.js"></script>
 </body>
 </html>

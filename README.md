@@ -26,7 +26,7 @@ All fakta är påhittad. Fotona kommer från [Pexels](https://www.pexels.com).
 | Del | Inspirerad av |
 | --- | --- |
 | Toppen med bildspel | Svevia, Granitor |
-| Åtta "dörrar" (tjänster) | Granitor, GBJ Bygg, Brixly, Contractor, ByggPartner |
+| Tjänsterutor med pil (som Brixly) | Brixly |
 | Om oss med tre spalter | Brixly, BDX, ByggPartner |
 | Projekt att svepa | GBJ Bygg, Brixly, Granitor, Contractor |
 | Helhetserbjudande med överlappande kort | Svevia, GBJ Bygg |
@@ -37,6 +37,10 @@ All fakta är påhittad. Fotona kommer från [Pexels](https://www.pexels.com).
 | Vanliga frågor | GBJ Bygg |
 | Kundtjänst | Svevia |
 | Botten | Granitor, ByggPartner |
+
+## Undersidor
+
+Varje knapp leder till en egen sida: sex tjänster, fem bolag, fyra projekt, tre nyheter samt Om oss, Hållbarhet, Jobba hos oss och Kontakt (27 sidor totalt). Sidorna ligger i [`docs/`](docs/) och delar på `docs/assets/site.css` och `docs/assets/site.js`.
 
 ## Öppna sidan
 
