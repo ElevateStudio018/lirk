@@ -391,15 +391,17 @@ footer{padding-top:56px}
 
 /* inga versala etiketter */
 footer h4{text-transform:none;letter-spacing:0;font:700 16px var(--body);color:var(--white)}
-/* projektpilar */
-.ctrl{display:flex;align-items:center;gap:10px;margin-top:26px}
-.ctrl .pbtn{width:64px;height:48px;border-radius:6px;border:1.5px solid var(--green);background:var(--white);color:var(--green);display:grid;place-items:center;cursor:pointer;transition:background .2s,color .2s,opacity .2s}
-.ctrl .pbtn:hover:not(:disabled){background:var(--green);color:var(--white)}
-.ctrl .pbtn:disabled{opacity:.3;cursor:default}
-.pcount{margin-left:8px;font:500 15px var(--body);color:var(--muted);font-variant-numeric:tabular-nums}
-.pcount b{color:var(--ink);font-weight:700}
-.pbar{height:2px;background:var(--line);margin-top:16px;max-width:220px;overflow:hidden}
-.pbar i{display:block;height:100%;width:25%;background:var(--green);transition:width .3s}
 
 a.pcard{text-decoration:none;color:inherit;display:block}
 a.pcard:hover h3{color:var(--green)}
+
+/* projektkarusell: runda knappar på bilderna */
+.tw{position:relative;min-width:0}
+.cnav{position:absolute;top:calc(50% - 40px);z-index:2;width:52px;height:52px;border-radius:50%;border:0;background:var(--white);color:var(--ink);display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 20px rgb(29 36 32/.18);transition:opacity .25s,transform .25s,color .2s}
+.cnav-l{left:-18px}.cnav-r{right:-18px}
+.cnav:hover{color:var(--green);transform:scale(1.06)}
+.cnav.off{opacity:0;pointer-events:none}
+.pdots{display:none;justify-content:center;gap:6px;margin-top:14px}
+.pdots i{width:6px;height:6px;border-radius:50%;background:var(--line);transition:background .2s,width .2s}
+.pdots i.on{background:var(--green);width:18px;border-radius:3px}
+@media (max-width:860px){.cnav{display:none}.pdots{display:flex}}

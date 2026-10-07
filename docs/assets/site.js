@@ -45,13 +45,13 @@ if (track) {
   const step = () => track.firstElementChild.getBoundingClientRect().width + 16;
   $("#prev").addEventListener("click", () => track.scrollBy({ left: -step(), behavior: reduce ? "auto" : "smooth" }));
   $("#next").addEventListener("click", () => track.scrollBy({ left: step(), behavior: reduce ? "auto" : "smooth" }));
-  const prev = $("#prev"), next = $("#next"), cur = $("#pcur"), tot = $("#ptot"), fill = $("#pfill");
-  const n = track.children.length; if (tot) tot.textContent = n;
+  const prev = $("#prev"), next = $("#next"), dotsEl = $("#pdots"), n = track.children.length;
+  if (dotsEl) dotsEl.innerHTML = "<i></i>".repeat(n);
   const sync = () => {
-    const max = track.scrollWidth - track.clientWidth, k = max > 0 ? track.scrollLeft / max : 0;
-    prev.disabled = track.scrollLeft < 4; next.disabled = track.scrollLeft > max - 4;
-    if (cur) cur.textContent = Math.min(n, Math.round(track.scrollLeft / step()) + 1);
-    if (fill) fill.style.width = (track.clientWidth / track.scrollWidth + k * (1 - track.clientWidth / track.scrollWidth)) * 100 + "%";
+    const max = track.scrollWidth - track.clientWidth;
+    prev.classList.toggle("off", track.scrollLeft < 4); next.classList.toggle("off", track.scrollLeft > max - 4);
+    const idx = max > 0 ? Math.round((track.scrollLeft / max) * (n - 1)) : 0;
+    dotsEl?.querySelectorAll("i").forEach((d, k) => d.classList.toggle("on", k === idx));
   };
   track.addEventListener("scroll", sync, { passive: true }); addEventListener("resize", sync); sync();
 }
