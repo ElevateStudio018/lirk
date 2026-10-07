@@ -11,7 +11,7 @@
 :root{
   --white:#ffffff;--beige:#efe8db;--sand:#e2d6c1;--green:#1f4d3a;--green-2:#2e6a51;--sage:#a9c3a0;--ink:#1d2420;--muted:#5d665f;--line:#dcd5c7;
   --display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;--body:"Source Sans 3","Helvetica Neue",Arial,sans-serif;
-  --max:1200px;--r:14px;color-scheme:light;
+  --max:1200px;--r:6px;color-scheme:light;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -25,14 +25,13 @@ h3{font-size:1.2rem;font-weight:700}
 p{margin:0}
 .in{max-width:var(--max);margin:0 auto;padding-inline:20px}
 section{padding-block:clamp(56px,8vw,104px)}
-.eyebrow{font:700 12.5px var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--green-2)}
+.eyebrow{font:600 15px var(--body);color:var(--green-2)}
 .lead{font-size:1.15rem;color:var(--muted);max-width:60ch}
 .btn{display:inline-flex;align-items:center;gap:8px;font:700 15px var(--body);padding:13px 22px;border-radius:999px;text-decoration:none;border:0;cursor:pointer}
 .btn-g{background:var(--green);color:var(--white)}
 .btn-w{background:var(--white);color:var(--green)}
 .btn-o{border:1.5px solid currentColor;background:transparent}
-.btn:focus-visible,a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--sage);outline-offset:3px}
-.arrow{font-weight:700;color:var(--green);text-decoration:none;display:inline-flex;gap:6px}
+.btn:focus-visible,a:focus-visible,button:focus-visible,.arrow{font-weight:700;color:var(--green);text-decoration:none;display:inline-flex;gap:6px}
 .arrow::after{content:"→";transition:transform .2s}
 .arrow:hover::after{transform:translateX(4px)}
 /* bildplatser (Pexels) */
@@ -68,13 +67,6 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rg
 .dots button{width:34px;height:4px;border:0;border-radius:2px;background:rgb(255 255 255/.4);cursor:pointer;padding:0}
 .dots button[aria-current="true"]{background:var(--white)}
 /* tjänster – dörrar */
-.doors{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:34px}
-.door{background:var(--green);color:var(--white);border-radius:var(--r);padding:22px 18px;min-height:150px;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;transition:background .2s,transform .2s}
-.door:hover{background:var(--green-2);transform:translateY(-3px)}
-.door svg{width:30px;height:30px;stroke:var(--sage)}
-.door b{font:700 1.08rem var(--display)}
-.door span{font-size:14px;color:rgb(255 255 255/.75)}
-@media (max-width:860px){.doors{grid-template-columns:1fr 1fr}}
 .center{text-align:center}.center .lead{margin:12px auto 0}
 /* om oss */
 .about{background:var(--beige)}
@@ -108,15 +100,6 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rg
 .ocard div.txt{padding:30px;display:flex;flex-direction:column;gap:12px;justify-content:center}
 @media (max-width:760px){.ocard{grid-template-columns:1fr}.overlap{margin-top:-50px}}
 /* hållbarhet */
-.sust{display:grid;grid-template-columns:1fr 1.15fr;gap:14px}
-.sust .box{background:var(--green);color:var(--white);border-radius:var(--r);padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:16px;justify-content:center}
-.sust .box p{color:rgb(255 255 255/.85)}
-.mosaic{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:14px}
-.mosaic .t{border-radius:var(--r);padding:20px;display:flex;flex-direction:column;justify-content:flex-end;min-height:180px}
-.t.sand{background:var(--beige)}.t.sage{background:var(--sage)}
-.t b{font:800 2.1rem var(--display);color:var(--green);line-height:1}
-.t span{font-weight:600;font-size:15px}
-@media (max-width:860px){.sust{grid-template-columns:1fr}}
 /* nyheter */
 .newsgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px 20px;margin-top:30px}
 .news{display:flex;flex-direction:column;gap:8px}
@@ -138,15 +121,6 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rg
 .jobgrid .side .card2{background:var(--white);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;gap:10px}
 @media (max-width:860px){.jobgrid{grid-template-columns:1fr}}
 /* bolag + genvägar */
-.cos{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:30px}
-.co{position:relative;grid-column:span 2;min-height:230px;border-radius:var(--r);overflow:hidden;color:var(--white);display:flex;align-items:flex-end}
-.co.wide{grid-column:span 3;min-height:300px}
-.co .ph{position:absolute;inset:0;border-radius:0}
-.co .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgb(16 33 25/.82),transparent 65%)}
-.co .ph .tag{top:10px;bottom:auto}
-.co div.txt{position:relative;padding:18px;display:flex;flex-direction:column;gap:2px}
-.co small{font:700 11px var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--sage)}
-@media (max-width:760px){.cos{grid-template-columns:1fr}.co,.co.wide{grid-column:auto}}
 .shortcuts{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px}
 .sc{position:relative;min-height:150px;border-radius:var(--r);overflow:hidden;display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--white)}
 .sc .ph{position:absolute;inset:0;border-radius:0}
@@ -155,14 +129,6 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rg
 .sc b{position:relative;font:800 1.35rem var(--display)}
 @media (max-width:760px){.shortcuts{grid-template-columns:1fr 1fr}}
 /* faq */
-.faq{display:grid;grid-template-columns:1fr 1.4fr;gap:40px}
-details{border-bottom:1px solid var(--line)}
-summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;padding:18px 0;font:700 1.05rem var(--display)}
-summary::-webkit-details-marker{display:none}
-summary::after{content:"+";color:var(--green);font-size:1.5rem;line-height:1}
-details[open] summary::after{content:"−"}
-details p{padding-bottom:18px;color:var(--muted);max-width:62ch}
-@media (max-width:860px){.faq{grid-template-columns:1fr}}
 /* kundtjänst */
 .cs{background:var(--sage);padding-block:46px}
 .cs .in{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center}
@@ -175,7 +141,7 @@ details p{padding-bottom:18px;color:var(--muted);max-width:62ch}
 /* footer */
 footer{background:var(--green);color:rgb(255 255 255/.85);padding-block:64px 30px;font-size:15px}
 .fgrid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:30px}
-footer h4{font:700 13px var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--sage);margin:0 0 12px}
+footer h4{font:700 15px var(--body);color:var(--sage);margin:0 0 12px}
 footer ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
 footer a{text-decoration:none}
 footer a:hover{color:var(--white);text-decoration:underline}
@@ -185,6 +151,38 @@ footer .logo{color:var(--white)}
 .demo{background:var(--ink);color:var(--white);text-align:center;font-size:13px;padding:8px 16px}
 .demo a{color:var(--sage)}
 html,body{overflow-x:clip}
+/* tjänster som lista med foton */
+.services{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.3fr);gap:clamp(28px,5vw,72px);align-items:start}
+.svc-intro{position:sticky;top:110px}
+.svc-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.svc{display:grid;grid-template-columns:132px minmax(0,1fr) auto;gap:20px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.svc img{width:132px;height:96px;object-fit:cover;border-radius:4px;display:block}
+.svc-t{display:flex;flex-direction:column;gap:4px;min-width:0}
+.svc-t b{font:700 1.25rem var(--display);color:var(--ink)}
+.svc-t span{font-size:15px;color:var(--muted);line-height:1.5}
+.svc-a{color:var(--green);font-size:1.3rem;transition:transform .25s}
+.svc:hover .svc-a,.svc:focus-visible .svc-a{transform:translateX(5px)}
+.svc:hover b{color:var(--green)}
+@media (max-width:860px){.services{grid-template-columns:1fr}.svc-intro{position:static}}
+@media (max-width:520px){.svc{grid-template-columns:88px minmax(0,1fr);gap:14px}.svc img{width:88px;height:72px}.svc-a{display:none}}
+/* hållbarhet */
+.sust{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:center}
+.sust-img{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:var(--r)}
+.sust-img .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.figs{display:flex;gap:32px;flex-wrap:wrap;margin:26px 0;padding:20px 0;border-block:1px solid var(--line)}
+.figs .t{display:flex;flex-direction:column;gap:4px;max-width:200px}
+.figs dt,.figs dd{margin:0}
+.figs b{display:inline-block;font:800 2.6rem/1 var(--display);color:var(--green);transform-origin:50% 50% -20px}
+.figs b.flip{animation:flipnum .9s cubic-bezier(.2,.8,.2,1)}
+.figs dd{font-size:15px;color:var(--muted)}
+@media (max-width:860px){.sust{grid-template-columns:1fr}.sust-img{aspect-ratio:16/10}}
+/* våra bolag: enkel lista */
+.colist{list-style:none;margin:28px 0 0;padding:0;border-top:1px solid var(--sand)}
+.colist a{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr) auto;gap:8px 24px;align-items:baseline;padding:18px 0;border-bottom:1px solid var(--sand);text-decoration:none}
+.colist b{font:700 1.15rem var(--display);color:var(--green)}
+.colist span{color:var(--muted)}
+.colist em{font-style:normal;font-weight:700;color:var(--green);white-space:nowrap}
+@media (max-width:640px){.colist a{grid-template-columns:1fr}}
 /* ---------- hamburgermeny ---------- */
 .burger{margin-left:auto;width:48px;height:48px;border-radius:50%;border:1.5px solid var(--line);background:var(--white);display:grid;place-content:center;gap:5px;cursor:pointer;position:relative;z-index:31;transition:background .3s,border-color .3s}
 .burger span{display:block;width:20px;height:2px;border-radius:2px;background:var(--green);transition:transform .45s cubic-bezier(.7,0,.2,1),opacity .3s,background .3s}
@@ -221,49 +219,19 @@ body.menu-open{overflow:hidden}
 .hero .row{animation:rise 1.1s .3s cubic-bezier(.2,.8,.2,1) both}
 @keyframes rise{from{transform:perspective(800px) rotateX(35deg) translateY(40px)}to{transform:none}}
 /* ---------- dörrar som öppnas ---------- */
-.doors{perspective:1200px}
-.door{position:relative;background:var(--beige);color:var(--green);padding:0;overflow:visible;transform-style:preserve-3d}
-.door:hover{background:var(--beige)}
-.door .inside{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:flex-end;padding:18px;font:700 15px var(--body);border-radius:var(--r);box-shadow:inset 0 0 0 1px var(--sand),inset 14px 0 24px -12px rgb(0 0 0/.18)}
-.door .leaf{position:relative;z-index:1;min-height:150px;height:100%;background:var(--green);color:var(--white);border-radius:var(--r);padding:22px 18px;display:flex;flex-direction:column;justify-content:space-between;transform-origin:0 50%;transition:transform .8s cubic-bezier(.2,.8,.2,1),box-shadow .8s;backface-visibility:hidden;box-shadow:0 0 0 rgb(0 0 0/0)}
-.door .leaf::after{content:"";position:absolute;right:14px;top:50%;width:6px;height:22px;border-radius:3px;background:var(--sage)}
-.door:hover .leaf,.door:focus-visible .leaf,.door.peek .leaf{transform:rotateY(-62deg);box-shadow:18px 0 30px rgb(0 0 0/.18)}
 /* ---------- lutande kort ---------- */
 [data-tilt]{transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.8,.2,1);will-change:transform}
 [data-tilt].tilting{transition:transform .08s linear}
 [data-tilt] .ph{position:relative}
 [data-tilt] .ph::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgb(255 255 255/.35),transparent 55%);opacity:0;transition:opacity .3s}
 [data-tilt].tilting .ph::after{opacity:1}
-.co[data-tilt] .ph::after{background:linear-gradient(0deg,rgb(16 33 25/.82),transparent 65%)}
 /* ---------- delar som fälls upp ---------- */
 .pre{opacity:0;transform:perspective(1000px) rotateX(18deg) translateY(60px);transform-origin:50% 100%}
 .rv{transition:opacity 1s cubic-bezier(.2,.8,.2,1),transform 1.1s cubic-bezier(.2,.8,.2,1)}
 /* ---------- siffror som vänds ---------- */
-.t b{display:inline-block;transform-origin:50% 50% -20px}
-.t b.flip{animation:flipnum .9s cubic-bezier(.2,.8,.2,1)}
 @keyframes flipnum{from{transform:perspective(400px) rotateX(-100deg);opacity:0}to{transform:none;opacity:1}}
-/* ---------- huset som byggs ---------- */
-.build{height:330vh;padding:0;background:linear-gradient(180deg,var(--white),var(--beige) 30%,var(--beige) 70%,var(--white))}
-.build-sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
-#house3d{position:absolute;inset:0;width:100%;height:100%;display:block}
-.build-text{position:relative;height:100%;display:flex;flex-direction:column;justify-content:center;pointer-events:none;z-index:1}
-.build-card{max-width:380px;background:rgb(255 255 255/.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:var(--r);padding:26px;box-shadow:0 20px 50px rgb(29 36 32/.12);pointer-events:auto}
-.build-card h2{font-size:clamp(1.6rem,3.2vw,2.3rem);margin-top:6px}
-.steps{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:4px;counter-reset:s}
-.steps li{counter-increment:s;display:grid;grid-template-columns:30px 1fr;gap:2px 10px;padding:8px 0;opacity:.38;transition:opacity .4s}
-.steps li::before{content:counter(s);grid-row:span 2;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font:700 13px var(--body);background:var(--sand);color:var(--green);transition:background .4s,color .4s}
-.steps li.on{opacity:1}
-.steps li.on::before{background:var(--green);color:var(--white)}
-.steps b{font:700 1rem var(--display)}
-.steps span{font-size:14px;color:var(--muted)}
-.bprog{height:4px;border-radius:2px;background:var(--sand);margin-top:14px;overflow:hidden}
-.bprog i{display:block;height:100%;width:0;background:var(--green)}
-.build-hint{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);font:600 13px var(--body);color:var(--green);background:rgb(255 255 255/.8);padding:8px 14px;border-radius:999px;z-index:1;transition:opacity .4s}
-@media (max-width:760px){.build-text{justify-content:flex-end;padding-bottom:20px}.build-card{padding:18px;max-width:none}.steps{grid-template-columns:repeat(5,1fr);gap:4px}.steps li{grid-template-columns:1fr;text-align:center;justify-items:center;padding:4px 0}.steps li::before{grid-row:auto}.steps span{display:none}.steps b{font-size:11.5px}.build-card .lead{display:none}.build-hint{top:84px;bottom:auto}}
 @media (prefers-reduced-motion:reduce){
-  .logo .cube,.slide.on .photo,.hero h1,.hero p,.hero .row,.t b.flip{animation:none}
-  .overlay,.overlay li,.door .leaf,[data-tilt],.rv{transition:none}
-  .pre{opacity:1;transform:none}
+  .logo .cube,.slide.on .photo,.hero h1,.hero p,.hero .row,  .overlay,.overlay li,  .pre{opacity:1;transform:none}
 }
 </style>
 </head>
@@ -281,7 +249,6 @@ body.menu-open{overflow:hidden}
   <nav aria-label="Huvudmeny"><ul>
     <li><a href="#tjanster">Vårt erbjudande</a></li>
     <li><a href="#projekt">Projekt</a></li>
-    <li><a href="#sa-bygger-vi">Så bygger vi</a></li>
     <li><a href="#hallbarhet">Hållbarhet</a></li>
     <li><a href="#nyheter">Nyheter</a></li>
     <li><a href="#jobb">Jobba hos oss</a></li>
@@ -304,22 +271,24 @@ body.menu-open{overflow:hidden}
     </div>
   </section>
 
-  <!-- Tjänster: Granitor (dörrar) + GBJ/Brixly/Contractor/ByggPartner -->
+  <!-- Tjänster: lista med riktiga foton -->
   <section id="tjanster">
-    <div class="in center">
-      <p class="eyebrow">Vårt erbjudande</p>
-      <h2 style="margin-top:8px">Åtta dörrar. Vilken vill du öppna?</h2>
-      <p class="lead">Från första skissen till nyckelöverlämning – och servicen efteråt. Allt under ett tak.</p>
-    </div>
-    <div class="in doors">
-      <a class="door" href="#projekt"><span class="inside">Öppna bostäder →</span><div class="leaf"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M3 21h18M5 21V9l7-5 7 5v12M10 21v-6h4v6"/></svg><div><b>Bostäder</b><br><span>Villor, radhus, flerbostadshus</span></div></div></a>
-      <a class="door" href="#projekt"><span class="inside">Öppna skolor &amp; förskolor →</span><div class="leaf"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M3 21h18M4 21V7h16v14M8 11h2M14 11h2M8 15h2M14 15h2"/></svg><div><b>Skolor &amp; förskolor</b><br><span>Trygga miljöer för barn</span></div></div></a>
-      <a class="door" href="#projekt"><span class="inside">Öppna mark &amp; anläggning →</span><div class="leaf"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M2 18h20M5 18l3-8h8l3 8M9 10V6h6v4"/></svg><div><b>Mark &amp; anläggning</b><br><span>Grund, vatten och avlopp</span></div></div></a>
-      <a class="door" href="#erbjudande"><span class="inside">Öppna träbyggnation →</span><div class="leaf"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M4 20 20 4M7 4h13v13"/></svg><div><b>Träbyggnation</b><br><span>KL-trä och limträ</span></div></div></a>
-      <a class="door" href="#kontakt"><span class="inside">Öppna byggservice →</span><div class="leaf"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M14 7a4 4 0 1 0-5 5l-6 6 2 2 6-6a4 4 0 0 0 3-7z"/></svg><div><b>Byggservice</b><br><span>Snabb hjälp med det lilla</span></div></div></a>
-      <a class="door" href="#kontakt"><span class="inside">Öppna renovering →</span><div class="leaf"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M4 20V10l8-6 8 6v10H4zM9 20v-5h6v5"/></svg><div><b>Renovering</b><br><span>Om- och tillbyggnad</span></div></div></a>
-      <a class="door" href="#projekt"><span class="inside">Öppna projektutveckling →</span><div class="leaf"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M3 20h18M6 20V4h12v16M9 8h6M9 12h6"/></svg><div><b>Projektutveckling</b><br><span>Från tomt till färdigt kvarter</span></div></div></a>
-      <a class="door" href="#jobb"><span class="inside">Öppna lediga jobb →</span><div class="leaf"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg><div><b>Lediga jobb</b><br><span>14 tjänster just nu</span></div></div></a>
+    <div class="in services">
+      <div class="svc-intro">
+        <p class="eyebrow">Vårt erbjudande</p>
+        <h2 style="margin-top:6px">Det här bygger vi</h2>
+        <p class="lead" style="margin-top:14px">Från första skissen till nyckelöverlämning, och servicen efteråt. Sju områden, en kontakt.</p>
+        <a class="btn btn-g" style="margin-top:22px" href="#kontakt">Berätta om ditt projekt</a>
+      </div>
+      <ul class="svc-list">
+        <li><a class="svc" href="#projekt"><img src="img/foto-06.jpg" alt="" loading="lazy"><span class="svc-t"><b>Bostäder</b><span>Villor, radhus och flerbostadshus. Just nu bygger vi 212 lägenheter i Sjuhärad.</span></span><span class="svc-a" aria-hidden="true">→</span></a></li>
+        <li><a class="svc" href="#projekt"><img src="img/foto-05.jpg" alt="" loading="lazy"><span class="svc-t"><b>Skolor och förskolor</b><span>Lugna, ljusa miljöer i trä. Vi har byggt elva förskolor sedan 2018.</span></span><span class="svc-a" aria-hidden="true">→</span></a></li>
+        <li><a class="svc" href="#projekt"><img src="img/foto-20.jpg" alt="" loading="lazy"><span class="svc-t"><b>Mark och anläggning</b><span>Grund, vatten, avlopp och vägar. Egna maskiner och egna förare.</span></span><span class="svc-a" aria-hidden="true">→</span></a></li>
+        <li><a class="svc" href="#erbjudande"><img src="img/foto-09.jpg" alt="" loading="lazy"><span class="svc-t"><b>Träbyggnation</b><span>Stommar i KL-trä och limträ från vår egen fabrik i Viskafors. Massivt trä förkolnar på ytan och skyddar kärnan, så husen klarar Boverkets brandkrav.</span></span><span class="svc-a" aria-hidden="true">→</span></a></li>
+        <li><a class="svc" href="#kontakt"><img src="img/foto-22.jpg" alt="" loading="lazy"><span class="svc-t"><b>Byggservice</b><span>Vi hjälper även privatpersoner med badrum, tillbyggnader och mindre reparationer.</span></span><span class="svc-a" aria-hidden="true">→</span></a></li>
+        <li><a class="svc" href="#kontakt"><img src="img/foto-17.jpg" alt="" loading="lazy"><span class="svc-t"><b>Renovering</b><span>Om- och tillbyggnad av skolor, kontor och bostadshus medan folk bor kvar.</span></span><span class="svc-a" aria-hidden="true">→</span></a></li>
+        <li><a class="svc" href="#projekt"><img src="img/foto-18.jpg" alt="" loading="lazy"><span class="svc-t"><b>Projektutveckling</b><span>Från tomt till färdigt kvarter, tillsammans med kommunen och framtida grannar.</span></span><span class="svc-a" aria-hidden="true">→</span></a></li>
+      </ul>
     </div>
   </section>
 
@@ -329,7 +298,7 @@ body.menu-open{overflow:hidden}
       <div>
         <p class="eyebrow">Om Lindvik Bygg</p>
         <h2 style="margin-top:8px">Ett lokalt byggföretag med 240 egna medarbetare</h2>
-        <p class="lead" style="margin-top:16px">Vi är ett familjeägt bygg- och anläggningsföretag från Borås. Vi tror på samverkan: när beställare, arkitekt och hantverkare sitter vid samma bord från början blir husen bättre, billigare och klara i tid.</p>
+        <p class="lead" style="margin-top:16px">Vi är ett familjeägt bygg- och anläggningsföretag från Borås. Vi tror på samverkan. När beställare, arkitekt och hantverkare sitter vid samma bord från början, med öppna kostnader, blir husen bättre, billigare och klara i tid. Ett hus med 40 lägenheter tar oss ungefär 14 månader.</p>
         <div class="cols3">
           <div><h3>Tjänster och projekt</h3><p>Bostäder, skolor och mark i hela Sjuhärad och Göteborgsregionen.</p><a class="arrow" href="#tjanster">Våra tjänster</a></div>
           <div><h3>Detta är Lindvik</h3><p>Grundat 1987 i ett garage i Viskafors. Idag fyra kontor.</p><a class="arrow" href="#om">Vår historia</a></div>
@@ -351,34 +320,11 @@ body.menu-open{overflow:hidden}
         <a class="btn btn-g" style="margin-top:22px" href="#projekt">Alla projekt</a>
       </div>
       <div class="track" id="track" tabindex="0" aria-label="Projekt, svep i sidled">
-        <div class="pcard" data-tilt><div class="ph wood"><img class="photo" src="img/foto-05.jpg" alt="" style="object-position:50% 50%"></div><div class="meta"><h3>Förskolan Ekbacken</h3><small>Borås · 2026</small></div></div>
-        <div class="pcard" data-tilt><div class="ph house"><img class="photo" src="img/foto-06.jpg" alt="" style="object-position:50% 50%"></div><div class="meta"><h3>Kv. Sjöglimten</h3><small>Ulricehamn · 2025</small></div></div>
-        <div class="pcard" data-tilt><div class="ph site"><img class="photo" src="img/foto-07.jpg" alt="" style="object-position:50% 50%"></div><div class="meta"><h3>Viskahallen</h3><small>Viskafors · 2025</small></div></div>
-        <div class="pcard" data-tilt><div class="ph road"><img class="photo" src="img/foto-08.jpg" alt="" style="object-position:50% 50%"></div><div class="meta"><h3>Rondell Hultafors</h3><small>Bollebygd · 2024</small></div></div>
+        <div class="pcard"><div class="ph wood"><img class="photo" src="img/foto-05.jpg" alt="" style="object-position:50% 50%"></div><div class="meta"><h3>Förskolan Ekbacken</h3><small>Borås · 2026</small></div></div>
+        <div class="pcard"><div class="ph house"><img class="photo" src="img/foto-06.jpg" alt="" style="object-position:50% 50%"></div><div class="meta"><h3>Kv. Sjöglimten</h3><small>Ulricehamn · 2025</small></div></div>
+        <div class="pcard"><div class="ph site"><img class="photo" src="img/foto-07.jpg" alt="" style="object-position:50% 50%"></div><div class="meta"><h3>Viskahallen</h3><small>Viskafors · 2025</small></div></div>
+        <div class="pcard"><div class="ph road"><img class="photo" src="img/foto-08.jpg" alt="" style="object-position:50% 50%"></div><div class="meta"><h3>Rondell Hultafors</h3><small>Bollebygd · 2024</small></div></div>
       </div>
-    </div>
-  </section>
-
-  <!-- 3D: huset byggs när man scrollar -->
-  <section class="build" id="sa-bygger-vi" aria-label="Så bygger vi ett hus">
-    <div class="build-sticky">
-      <canvas id="house3d" aria-hidden="true"></canvas>
-      <div class="in build-text">
-        <div class="build-card">
-          <p class="eyebrow">Så bygger vi</p>
-          <h2>Från grund till nyckel på 14 månader</h2>
-          <p class="lead" style="font-size:1rem;margin-top:8px">Scrolla så bygger vi huset framför dig, steg för steg.</p>
-          <ol class="steps">
-            <li><b>Grunden</b><span>Platta på mark, isolerad underifrån</span></li>
-            <li><b>Stommen</b><span>Limträ från vår egen fabrik</span></li>
-            <li><b>Väggar</b><span>Färdiga element lyfts på plats</span></li>
-            <li><b>Taket</b><span>Tätt hus på sex veckor</span></li>
-            <li><b>Klart</b><span>Fönster, dörr och trädgård</span></li>
-          </ol>
-          <div class="bprog" aria-hidden="true"><i></i></div>
-        </div>
-      </div>
-      <div class="build-hint" aria-hidden="true">↓ Scrolla för att bygga</div>
     </div>
   </section>
 
@@ -402,17 +348,16 @@ body.menu-open{overflow:hidden}
   <!-- Hållbarhet: Contractor -->
   <section id="hallbarhet">
     <div class="in sust">
-      <div class="box">
-        <p class="eyebrow" style="color:var(--sage)">Hållbarhetsredovisning 2026</p>
-        <h2>Vi mäter det vi bygger</h2>
-        <p>Varje år redovisar vi hur vi påverkar miljön, människorna och ekonomin omkring oss. I år nådde vi målet för återvunnet material ett år tidigare än planerat.</p>
-        <div><a class="btn btn-w" href="#hallbarhet">Läs redovisningen</a></div>
-      </div>
-      <div class="mosaic">
-        <div class="ph forest" style="min-height:180px"><img class="photo" src="img/foto-11.jpg" alt="" style="object-position:50% 50%"></div>
-        <div class="t sand"><b>−38 %</b><span>koldioxid per m² sedan 2020</span></div>
-        <div class="t sage"><b>92 %</b><span>av byggavfallet sorteras</span></div>
-        <div class="ph people" style="min-height:180px"><img class="photo" src="img/foto-12.jpg" alt="" style="object-position:50% 30%"></div>
+      <div class="sust-img"><img class="photo" src="img/foto-11.jpg" alt="Granskog vid en sjö" loading="lazy"></div>
+      <div class="sust-txt">
+        <p class="eyebrow">Hållbarhetsredovisning 2026</p>
+        <h2 style="margin-top:6px">Vi mäter det vi bygger</h2>
+        <p class="lead" style="margin-top:14px">Varje år redovisar vi hur vi påverkar miljön, människorna och ekonomin omkring oss. I år nådde vi målet för återvunnet material ett år tidigare än planerat.</p>
+        <dl class="figs">
+          <div class="t"><dt><b>−38 %</b></dt><dd>koldioxid per kvadratmeter sedan 2020</dd></div>
+          <div class="t"><dt><b>92 %</b></dt><dd>av byggavfallet sorteras</dd></div>
+        </dl>
+        <a class="btn btn-g" href="#hallbarhet">Läs redovisningen</a>
       </div>
     </div>
   </section>
@@ -448,32 +393,18 @@ body.menu-open{overflow:hidden}
   <section style="background:var(--beige)">
     <div class="in">
       <div class="center"><p class="eyebrow">Koncernen</p><h2 style="margin-top:8px">Våra bolag</h2></div>
-      <div class="cos">
-        <div class="co wide" data-tilt><div class="ph house"><img class="photo" src="img/foto-18.jpg" alt="" style="object-position:50% 50%"></div><div class="txt"><small>Lindvik Bostad</small><h3>Hem för framtidens Sjuhärad</h3><span class="arrow" style="color:#fff">Sök bostad</span></div></div>
-        <div class="co wide" data-tilt><div class="ph site"><img class="photo" src="img/foto-19.jpg" alt="" style="object-position:50% 50%"></div><div class="txt"><small>Lindvik Fastighet</small><h3>Lokaler som inspirerar</h3><span class="arrow" style="color:#fff">Sök lokal</span></div></div>
-        <div class="co" data-tilt><div class="ph road"><img class="photo" src="img/foto-20.jpg" alt="" style="object-position:50% 50%"></div><div class="txt"><small>Lindvik Mark</small><h3>Mark &amp; anläggning</h3></div></div>
-        <div class="co" data-tilt><div class="ph wood"><img class="photo" src="img/foto-21.jpg" alt="" style="object-position:50% 50%"></div><div class="txt"><small>Lindvik Trä</small><h3>Egen husfabrik</h3></div></div>
-        <div class="co" data-tilt><div class="ph night"><img class="photo" src="img/foto-22.jpg" alt="" style="object-position:50% 50%"></div><div class="txt"><small>Lindvik Service</small><h3>Byggservice</h3></div></div>
-      </div>
+      <ul class="colist">
+        <li><a href="#kontakt"><b>Lindvik Bostad</b><span>Säljer och hyr ut bostäderna vi bygger.</span><em>Sök bostad →</em></a></li>
+        <li><a href="#kontakt"><b>Lindvik Fastighet</b><span>Äger och förvaltar 40 000 kvadratmeter lokaler.</span><em>Sök lokal →</em></a></li>
+        <li><a href="#kontakt"><b>Lindvik Mark</b><span>Mark, väg och ledningar i hela Västsverige.</span><em>Läs mer →</em></a></li>
+        <li><a href="#kontakt"><b>Lindvik Trä</b><span>Husfabriken i Viskafors som tillverkar våra stommar.</span><em>Läs mer →</em></a></li>
+        <li><a href="#kontakt"><b>Lindvik Service</b><span>Byggservice och underhåll, även för privatpersoner.</span><em>Boka service →</em></a></li>
+      </ul>
       <div class="shortcuts" aria-label="Genvägar">
         <a class="sc" href="#om"><div class="ph"><img class="photo" src="img/foto-04.jpg" alt="" style="object-position:50% 50%"></div><b>Kultur</b></a>
         <a class="sc" href="#kontakt"><div class="ph"><img class="photo" src="img/foto-23.jpg" alt="" style="object-position:50% 50%"></div><b>Regioner</b></a>
         <a class="sc" href="#hallbarhet"><div class="ph"><img class="photo" src="img/foto-11.jpg" alt="" style="object-position:50% 50%"></div><b>Hållbarhet</b></a>
         <a class="sc" href="#projekt"><div class="ph"><img class="photo" src="img/foto-24.jpg" alt="" style="object-position:50% 50%"></div><b>Byggnader</b></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Vanliga frågor: GBJ -->
-  <section id="faq">
-    <div class="in faq">
-      <div><p class="eyebrow">Vanliga frågor</p><h2 style="margin-top:8px">Undrar du något?</h2><p class="lead" style="margin-top:14px">Här är svaren på det vi får frågor om oftast. Hittar du inte svaret? Ring oss.</p><a class="arrow" style="margin-top:18px" href="#kontakt">Fler frågor och svar</a></div>
-      <div>
-        <details><summary>Hur lång tid tar det att bygga ett flerbostadshus i trä?</summary><p>Ett hus med 40 lägenheter tar ungefär 14 månader från byggstart till inflyttning. Stommen monteras på sex veckor.</p></details>
-        <details><summary>Bygger ni åt privatpersoner?</summary><p>Ja, via Lindvik Service gör vi om- och tillbyggnader, badrum och mindre renoveringar i hela Sjuhärad.</p></details>
-        <details><summary>Vad är samverkan, eller partnering?</summary><p>Beställare, arkitekt och byggare jobbar som ett lag från dag ett, med öppna kostnader och gemensamma mål.</p></details>
-        <details><summary>Är trä lika brandsäkert som betong?</summary><p>Ja, när det är rätt dimensionerat. Massivt trä förkolnar på ytan och skyddar då kärnan, och alla våra hus uppfyller Boverkets brandkrav.</p></details>
-        <details><summary>Hur söker jag jobb hos er?</summary><p>Alla lediga tjänster finns under Jobba hos oss. Du kan också skicka en spontanansökan.</p></details>
       </div>
     </div>
   </section>
@@ -494,13 +425,12 @@ body.menu-open{overflow:hidden}
       <div><a class="logo" href="#top"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#a9c3a0"/><path d="M7 23V12l9-5 9 5v11" fill="none" stroke="#1f4d3a" stroke-width="2.6" stroke-linejoin="round"/><path d="M13 23v-6h6v6" fill="none" stroke="#fff" stroke-width="2.6"/></svg>Lindvik Bygg</a><p style="margin-top:14px;max-width:34ch">Ett familjeägt bygg- och anläggningsföretag i Västsverige. 240 medarbetare, fyra kontor, sedan 1987.</p><p style="margin-top:12px">Allégatan 12, 503 32 Borås</p></div>
       <div><h4>Om oss</h4><ul><li><a href="#om">Kultur och värderingar</a></li><li><a href="#om">Historik</a></li><li><a href="#om">Ledning</a></li><li><a href="#nyheter">Nyheter &amp; press</a></li></ul></div>
       <div><h4>Vårt erbjudande</h4><ul><li><a href="#tjanster">Bostäder</a></li><li><a href="#tjanster">Skolor</a></li><li><a href="#tjanster">Mark &amp; anläggning</a></li><li><a href="#tjanster">Byggservice</a></li></ul></div>
-      <div><h4>Kontakt</h4><ul><li><a href="#kontakt">Kontakta oss</a></li><li><a href="#jobb">Lediga jobb</a></li><li><a href="#hallbarhet">Hållbarhet</a></li><li><a href="#faq">Vanliga frågor</a></li></ul></div>
+      <div><h4>Kontakt</h4><ul><li><a href="#kontakt">Kontakta oss</a></li><li><a href="#jobb">Lediga jobb</a></li><li><a href="#hallbarhet">Hållbarhet</a></li><li><a href="#om">Så samverkar vi</a></li></ul></div>
     </div>
     <div class="fbottom"><span>© 2026 Lindvik Bygg AB · Påhittat testföretag · Foton: Pexels</span><span>Integritetspolicy · Cookies · Tillgänglighet</span></div>
   </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const fine = matchMedia("(pointer: fine)").matches;
@@ -555,24 +485,22 @@ if (!reduce) document.querySelectorAll("[data-tilt]").forEach((el) => {
 
 /* ---------- delar fälls upp när de syns, dörrar glipar, siffror vänds ---------- */
 if (!reduce && "IntersectionObserver" in window) {
-  const targets = [...document.querySelectorAll("main > section:not(.hero):not(.build) > .in, .overlap .ocard, .newsgrid > *, .cos > *, .doors > .door")];
+  const targets = [...document.querySelectorAll("main > section:not(.hero):not(.build) > .in, .overlap .ocard, .newsgrid > *, .svc-list > li")];
   const below = targets.filter((el) => el.getBoundingClientRect().top > innerHeight * 0.9);
   below.forEach((el) => el.classList.add("pre", "rv"));
   const io = new IntersectionObserver((es) => es.forEach((e) => {
     if (!e.isIntersecting) return;
     const el = e.target, i = [...(el.parentElement?.children || [])].indexOf(el);
-    el.style.transitionDelay = el.matches(".newsgrid > *, .cos > *, .doors > .door") ? Math.min(i, 7) * 70 + "ms" : "0ms";
+    el.style.transitionDelay = el.matches(".newsgrid > *, .svc-list > li") ? Math.min(i, 7) * 70 + "ms" : "0ms";
     el.classList.remove("pre"); io.unobserve(el);
     setTimeout(() => (el.style.transitionDelay = ""), 1400);
   }), { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
   below.forEach((el) => io.observe(el));
+  // Säkerhetsnät: allt som scrollats förbi visas alltid, även vid snabba hopp.
+  let sweep = 0;
+  const reveal = () => { sweep = 0; document.querySelectorAll(".pre").forEach((el) => { if (el.getBoundingClientRect().top < innerHeight) { el.classList.remove("pre"); io.unobserve(el); } }); };
+  addEventListener("scroll", () => { if (!sweep) sweep = setTimeout(reveal, 250); }, { passive: true });
 
-  const doors = document.querySelector(".doors");
-  const dio = new IntersectionObserver(([e]) => {
-    if (!e.isIntersecting) return; dio.disconnect();
-    [...doors.children].forEach((d, i) => { setTimeout(() => d.classList.add("peek"), 500 + i * 110); setTimeout(() => d.classList.remove("peek"), 1500 + i * 110); });
-  }, { threshold: 0.4 });
-  dio.observe(doors);
 
   const nio = new IntersectionObserver((es) => es.forEach((e) => {
     if (!e.isIntersecting) return; nio.unobserve(e.target);
@@ -585,98 +513,6 @@ if (!reduce && "IntersectionObserver" in window) {
   document.querySelectorAll(".t b").forEach((b) => nio.observe(b));
 }
 
-/* ---------- huset som byggs i 3D när man scrollar ---------- */
-(function house() {
-  const sec = document.getElementById("sa-bygger-vi"), cv = document.getElementById("house3d");
-  if (!sec || !cv) return;
-  const stepsEl = [...sec.querySelectorAll(".steps li")], bar = sec.querySelector(".bprog i"), hint = sec.querySelector(".build-hint");
-  const progress = () => { const r = sec.getBoundingClientRect(); return Math.min(1, Math.max(0, -r.top / (r.height - innerHeight))); };
-  const ui = (P) => { const s = Math.min(4, Math.floor(P * 5)); stepsEl.forEach((li, i) => li.classList.toggle("on", i <= s)); bar.style.width = P * 100 + "%"; hint.style.opacity = P > 0.04 ? 0 : 1; };
-  if (!window.THREE) { addEventListener("scroll", () => ui(progress()), { passive: true }); ui(progress()); return; }
-  const T = THREE;
-  const renderer = new T.WebGLRenderer({ canvas: cv, antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(2, devicePixelRatio || 1)); renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;
-  const scene = new T.Scene(), camera = new T.PerspectiveCamera(35, 1, 0.1, 200);
-  scene.add(new T.HemisphereLight(0xffffff, 0xcfc4ae, 0.6));
-  const sun = new T.DirectionalLight(0xfff4e0, 0.75); sun.position.set(8, 14, 6); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024);
-  Object.assign(sun.shadow.camera, { left: -12, right: 12, top: 12, bottom: -12 }); scene.add(sun);
-  const M = (c, o = {}) => new T.MeshStandardMaterial({ color: c, roughness: 0.75, metalness: 0, transparent: true, ...o });
-  const C = { slab: 0xcfc8bb, wood: 0xc99a62, wall: 0xf4eee3, roof: 0x24493a, door: 0x2e6a51, glass: 0x9fc0c9, frame: 0xffffff, ground: 0xa9c3a0, trunk: 0x7a5a3a, leaf: 0x3f7a55, stone: 0xddd5c6 };
-  const ground = new T.Mesh(new T.CircleGeometry(30, 72), M(C.ground, { transparent: false })); ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
-  const parts = [];
-  const add = (stage, geo, mat, pos, rot = [0, 0, 0], from = null) => {
-    const m = new T.Mesh(geo, mat); m.castShadow = m.receiveShadow = true;
-    const target = { p: new T.Vector3(...pos), r: new T.Euler(...rot) };
-    const n = parts.filter((x) => x.stage === stage).length;
-    const start = from ? new T.Vector3(...from) : target.p.clone().add(new T.Vector3((Math.random() - 0.5) * 4, 7 + Math.random() * 3, (Math.random() - 0.5) * 4));
-    parts.push({ m, stage, n, target, start, spin: [(Math.random() - 0.5) * 2, (Math.random() - 0.5) * 3, (Math.random() - 0.5) * 2] });
-    scene.add(m); return m;
-  };
-  const W = 6, D = 4.4, H = 2.7, t = 0.16;
-  // 1 Grunden
-  add(0, new T.BoxGeometry(W + 0.6, 0.35, D + 0.6), M(C.slab), [0, 0.175, 0], [0, 0, 0], [0, -2, 0]);
-  for (let i = 0; i < 7; i++) add(0, new T.BoxGeometry(0.5, 0.06, 0.4), M(C.stone), [W / 2 + 0.7 + i * 0.55, 0.03, 0.9 - (i % 2) * 0.15], [0, 0.2 * (i % 3), 0], [W / 2 + 0.7 + i * 0.55, -1, 0.9]);
-  // 2 Stommen (trä)
-  const post = (x, z) => add(1, new T.BoxGeometry(0.14, H, 0.14), M(C.wood), [x, 0.35 + H / 2, z]);
-  for (const x of [-W / 2, -W / 6, W / 6, W / 2]) { post(x + (x > 0 ? -0.07 : 0.07), D / 2 - 0.07); post(x + (x > 0 ? -0.07 : 0.07), -D / 2 + 0.07); }
-  for (const z of [-D / 2 + 0.07, D / 2 - 0.07]) add(1, new T.BoxGeometry(W, 0.16, 0.16), M(C.wood), [0, 0.35 + H, z]);
-  for (const x of [-W / 2 + 0.07, W / 2 - 0.07]) add(1, new T.BoxGeometry(0.16, 0.16, D), M(C.wood), [x, 0.35 + H, 0]);
-  // 3 Väggar och fönster
-  const wallY = 0.35 + H / 2;
-  add(2, new T.BoxGeometry(W, H, t), M(C.wall), [0, wallY, D / 2 + t / 2]);
-  add(2, new T.BoxGeometry(W, H, t), M(C.wall), [0, wallY, -D / 2 - t / 2]);
-  add(2, new T.BoxGeometry(t, H, D + 2 * t), M(C.wall), [W / 2 + t / 2, wallY, 0]);
-  add(2, new T.BoxGeometry(t, H, D + 2 * t), M(C.wall), [-W / 2 - t / 2, wallY, 0]);
-  const gable = new T.Shape(); gable.moveTo(-D / 2 - t, 0); gable.lineTo(D / 2 + t, 0); gable.lineTo(0, 1.7); gable.closePath();
-  const gGeo = new T.ExtrudeGeometry(gable, { depth: t, bevelEnabled: false });
-  add(2, gGeo, M(C.wall), [W / 2, 0.35 + H, 0], [0, -Math.PI / 2, 0]);
-  add(2, gGeo, M(C.wall), [-W / 2 - t, 0.35 + H, 0], [0, -Math.PI / 2, 0]);
-  const win = (x, y, z, ry = 0, w = 1, h = 1.2) => {
-    add(2, new T.BoxGeometry(w + 0.16, h + 0.16, 0.06), M(C.frame), [x, y, z], [0, ry, 0]);
-    add(4, new T.BoxGeometry(w, h, 0.07), M(C.glass, { roughness: 0.1, metalness: 0.3 }), [x, y, z], [0, ry, 0]);
-  };
-  const fz = D / 2 + t + 0.02;
-  win(-1.9, 1.85, fz); win(1.9, 1.85, fz); win(-1.9, 1.85, -fz); win(0.4, 1.85, -fz); win(2.2, 1.85, -fz, 0, 0.8);
-  win(W / 2 + t + 0.02, 1.85, 0, Math.PI / 2, 1.4);
-  // 4 Taket
-  const slope = Math.atan2(1.7, D / 2 + t), len = Math.hypot(1.7, D / 2 + t) + 0.45;
-  for (const s of [1, -1]) add(3, new T.BoxGeometry(W + 0.8, 0.14, len), M(C.roof), [0, 0.35 + H + 0.85 + 0.06, s * (D / 2 + t) / 2 + s * 0.1], [s * slope, 0, 0]);
-  add(3, new T.BoxGeometry(0.5, 1.3, 0.5), M(C.slab), [1.6, 0.35 + H + 1.5, -0.7]);
-  // 5 Klart: dörr, trappa, träd
-  add(4, new T.BoxGeometry(0.95, 2.05, 0.08), M(C.door), [0.1, 0.35 + 1.03, fz]);
-  add(4, new T.BoxGeometry(1.5, 0.12, 0.7), M(C.slab), [0.1, 0.06, D / 2 + 0.6]);
-  const tree = (x, z, s) => {
-    add(4, new T.CylinderGeometry(0.09 * s, 0.13 * s, 1 * s, 8), M(C.trunk), [x, 0.5 * s, z], [0, 0, 0], [x, -2, z]);
-    add(4, new T.ConeGeometry(0.75 * s, 2.2 * s, 9), M(C.leaf), [x, 1.9 * s, z], [0, 0, 0], [x, -1, z]);
-    add(4, new T.ConeGeometry(0.55 * s, 1.6 * s, 9), M(C.leaf), [x, 2.7 * s, z], [0, 0, 0], [x, -1, z]);
-  };
-  tree(-5.6, -2.2, 1.25); tree(-4.6, 2.8, 0.9); tree(5.8, -3.2, 1.1); tree(6.6, 1.6, 0.8); tree(-6.8, 0.4, 0.95);
-  for (const [x, z] of [[-3.8, 3.2], [3.6, 3.4], [-1.2, 3.5]]) add(4, new T.SphereGeometry(0.42, 14, 10), M(0x5b8f63), [x, 0.3, z], [0, 0, 0], [x, -1, z]);
-
-  const ease = (k) => (k <= 0 ? 0 : k >= 1 ? 1 : reduce ? k : 1 + 2.2 * Math.pow(k - 1, 3) + 1.2 * Math.pow(k - 1, 2));
-  let P = progress(), shown = -1, visible = false, raf = 0, idle = 0, last = performance.now();
-  const resize = () => { const w = cv.clientWidth, h = cv.clientHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); };
-  const frame = (now) => {
-    raf = visible ? requestAnimationFrame(frame) : 0;
-    const dt = Math.min(0.05, (now - last) / 1000); last = now;
-    const target = progress(); P += (target - P) * (reduce ? 1 : Math.min(1, dt * 6));
-    if (!reduce) idle += dt * 0.05;
-    for (const x of parts) {
-      const k = ease(Math.min(1, Math.max(0, (P * 5 - x.stage) * 1.25 - x.n * 0.035)));
-      x.m.position.lerpVectors(x.start, x.target.p, k);
-      x.m.rotation.set(x.target.r.x + x.spin[0] * (1 - k), x.target.r.y + x.spin[1] * (1 - k), x.target.r.z + x.spin[2] * (1 - k));
-      x.m.material.opacity = Math.min(1, k * 2.2); x.m.visible = k > 0.001;
-    }
-    const narrow = cv.clientWidth < 760, a = 0.75 + P * 1.9 + idle, R = narrow ? Math.min(40, 15.5 / camera.aspect) : 21;
-    camera.position.set(Math.sin(a) * R, (narrow ? 13 : 9) - P * 2.5, Math.cos(a) * R);
-    const off = narrow ? 0 : -3.2; camera.lookAt(Math.cos(a) * off, narrow ? -2.2 : 1.8, -Math.sin(a) * off);
-    renderer.render(scene, camera);
-    if (Math.abs(target - shown) > 0.001) { shown = target; ui(target); }
-  };
-  new ResizeObserver(resize).observe(cv); resize();
-  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible && !raf) { last = performance.now(); raf = requestAnimationFrame(frame); } }).observe(sec);
-  ui(P);
-})();
 </script>
 
 </body>

@@ -26,15 +26,14 @@ All fakta är påhittad. Fotona kommer från [Pexels](https://www.pexels.com).
 | Del | Inspirerad av |
 | --- | --- |
 | Toppen med bildspel | Svevia, Granitor |
-| Åtta "dörrar" (tjänster) | Granitor, GBJ Bygg, Brixly, Contractor, ByggPartner |
+| Tjänster som lista med foton | GBJ Bygg, Brixly, Granitor, Contractor, ByggPartner |
 | Om oss med tre spalter | Brixly, BDX, ByggPartner |
 | Projekt att svepa | GBJ Bygg, Brixly, Granitor, Contractor |
 | Helhetserbjudande med överlappande kort | Svevia, GBJ Bygg |
-| Hållbarhet med mosaik | Contractor |
+| Hållbarhet med foto och nyckeltal | Contractor |
 | Nyheter | Svevia, Myresjöhus, BDX |
 | Jobba hos oss | Svevia, Contractor |
-| Våra bolag och genvägar | Granitor, ByggPartner |
-| Vanliga frågor | GBJ Bygg |
+| Våra bolag (lista) och genvägar | Granitor, ByggPartner |
 | Kundtjänst | Svevia |
 | Botten | Granitor, ByggPartner |
 
