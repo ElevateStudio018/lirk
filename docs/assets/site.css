@@ -388,3 +388,18 @@ footer{padding-top:56px}
 @media (hover:hover){.tile:hover,.tile:focus-visible{color:var(--ink)}.tile:hover small,.tile:focus-visible small{color:var(--muted)}.tile:hover .arr,.tile:focus-visible .arr{stroke:var(--white);transform:translate(3px,-3px)}}
 @media (max-width:860px){.tile{aspect-ratio:auto;padding:10px 10px 16px;gap:12px}.tile .arr{top:16px;right:16px;width:32px;height:32px;padding:7px}.tile > span{padding-inline:4px}}
 .ctrl button{display:grid;place-items:center}
+
+/* inga versala etiketter */
+footer h4{text-transform:none;letter-spacing:0;font:700 16px var(--body);color:var(--white)}
+/* projektpilar */
+.ctrl{display:flex;align-items:center;gap:10px;margin-top:26px}
+.ctrl .pbtn{width:64px;height:48px;border-radius:6px;border:1.5px solid var(--green);background:var(--white);color:var(--green);display:grid;place-items:center;cursor:pointer;transition:background .2s,color .2s,opacity .2s}
+.ctrl .pbtn:hover:not(:disabled){background:var(--green);color:var(--white)}
+.ctrl .pbtn:disabled{opacity:.3;cursor:default}
+.pcount{margin-left:8px;font:500 15px var(--body);color:var(--muted);font-variant-numeric:tabular-nums}
+.pcount b{color:var(--ink);font-weight:700}
+.pbar{height:2px;background:var(--line);margin-top:16px;max-width:220px;overflow:hidden}
+.pbar i{display:block;height:100%;width:25%;background:var(--green);transition:width .3s}
+
+a.pcard{text-decoration:none;color:inherit;display:block}
+a.pcard:hover h3{color:var(--green)}
