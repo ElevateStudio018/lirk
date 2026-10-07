@@ -40,4 +40,4 @@ All fakta är påhittad. Fotona kommer från [Pexels](https://www.pexels.com).
 
 ## Öppna sidan
 
-Allt ligger i mappen [`site/`](site/). Öppna `site/index.html` i en webbläsare. Sidan behöver inga verktyg eller installationer.
+Sidan ligger i mappen [`docs/`](docs/) och visas på **https://elevatestudio018.github.io/lirk/** när GitHub Pages är påslaget. Du kan också öppna `docs/index.html` i en webbläsare. Sidan behöver inga verktyg eller installationer.
