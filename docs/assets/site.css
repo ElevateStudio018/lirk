@@ -395,13 +395,13 @@ footer h4{text-transform:none;letter-spacing:0;font:700 16px var(--body);color:v
 a.pcard{text-decoration:none;color:inherit;display:block}
 a.pcard:hover h3{color:var(--green)}
 
-/* projektkarusell: runda knappar på bilderna */
+/* projektkarusell: två tydliga pilar */
 .tw{position:relative;min-width:0}
-.cnav{position:absolute;top:calc(50% - 40px);z-index:2;width:52px;height:52px;border-radius:50%;border:0;background:var(--white);color:var(--ink);display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 20px rgb(29 36 32/.18);transition:opacity .25s,transform .25s,color .2s}
-.cnav-l{left:-18px}.cnav-r{right:-18px}
-.cnav:hover{color:var(--green);transform:scale(1.06)}
-.cnav.off{opacity:0;pointer-events:none}
-.pdots{display:none;justify-content:center;gap:6px;margin-top:14px}
+.parrows{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-top:14px}
+.parr{width:56px;height:56px;border:0;background:transparent;color:var(--green);display:grid;place-items:center;cursor:pointer;border-radius:8px;transition:color .2s,opacity .2s,transform .2s}
+.parr:hover:not(.off){color:var(--ink);transform:translateX(var(--nudge,0))}
+#prev{--nudge:-3px}#next{--nudge:3px}
+.parr.off{opacity:.25;cursor:default}
+.pdots{display:flex;gap:6px;margin-right:auto}
 .pdots i{width:6px;height:6px;border-radius:50%;background:var(--line);transition:background .2s,width .2s}
 .pdots i.on{background:var(--green);width:18px;border-radius:3px}
-@media (max-width:860px){.cnav{display:none}.pdots{display:flex}}
